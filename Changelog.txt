@@ -1,0 +1,18 @@
+v 0.2
+
+Added: marble, that comes in 6 colours (white, pink, red, green, blue, black)
+Added: Decorative blocks, craftable out of marble
+Added: Slimes, slimeballs and slime blocks (green, blue, red, yellow, purple, brown)
+Added: Gemstone bricks and blocks
+Added: Coal, Rich iron, Poor gold, sulfur, saltpeter ores, lapis lazuli, that generate in deserts
+Added: Decorative blocks for lapis lazuli
+Added: 5 Achievements for awards mod
+Added: ores, aswell as items craftable of them, of Tier:6
+Added: Accessories, and now, the unused 6th armor slot is for them 
+Added: few more gems to Tier:5
+Added: Tier:6 crates, with 1 mele and 1 ranged weapon, only obtainable from it
+Added: 1 mele weapon for tier:5 crates
+Changed: Loot Crates can now also generate in desertstone 
+Changed: Amethyst ore had a texture change, and topaz ore is now in a form of cubic crystal cluster
+Changed: topaz moved to tier 6
+support: Now healing potions and pills, still restore HP, if HBhunger or Hunger mod is present
