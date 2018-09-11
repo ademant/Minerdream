@@ -139,6 +139,7 @@ local function dust_register(element)
 minetest.register_node("minerdream:"..element.."_dust, {
 	description = element.." dust",
 	tiles = {"minerdream_dust.png"},
+	inventory_image = {"minerdream_dust.png"},
 	groups = {cracky = 3},
 	sounds = default.node_sound_stone_defaults(),
 })
