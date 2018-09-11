@@ -101,14 +101,6 @@ minetest.register_node("minerdream:stone_with_topaz", {
 })
 
 
-minetest.register_node("minerdream:stone_with_calcium", {
-	description = "Calcium Ore",
-	tiles = {"default_stone.png^minerdream_calcium_ore.png"},
-	groups = {cracky = 3, cheapore = 1},
-	drop = 'minerdream:calcium_lump',
-	sounds = default.node_sound_stone_defaults(),
-})
-
 local function dust_register(element)
 minetest.register_node("minerdream:"..element.."_dust", {
 	description = element.." dust",
@@ -204,178 +196,22 @@ minetest.register_node("minerdream:desertstone_with_poorgold", {
 
 
 --------------marble---------------
-
-minetest.register_node("minerdream:marble_white", {
-	description = "White marble",
-	tiles = {"minerdream_marble_white.png"},
+local function register_marble_intern(color,crack)
+minetest.register_node("minerdream:marble_"..color, {
+	description = color.." marble",
+	tiles = {"minerdream_marble_"..color..".png"},
 	groups = {cracky = 3},
 	sounds = default.node_sound_stone_defaults(),
 })
-
-minetest.register_node("minerdream:marble_pink", {
-	description = "Pink marble",
-	tiles = {"minerdream_marble_pink.png"},
-	groups = {cracky = 3},
-	sounds = default.node_sound_stone_defaults(),
-})
-
-minetest.register_node("minerdream:marble_red", {
-	description = "Red marble",
-	tiles = {"minerdream_marble_red.png"},
-	groups = {cracky = 3},
-	sounds = default.node_sound_stone_defaults(),
-})
-
-minetest.register_node("minerdream:marble_blue", {
-	description = "Blue marble",
-	tiles = {"minerdream_marble_blue.png"},
-	groups = {cracky = 3},
-	sounds = default.node_sound_stone_defaults(),
-})
-
-minetest.register_node("minerdream:marble_green", {
-	description = "Green marble",
-	tiles = {"minerdream_marble_green.png"},
-	groups = {cracky = 3},
-	sounds = default.node_sound_stone_defaults(),
-})
-
-minetest.register_node("minerdream:marble_black", {
-	description = "Black marble",
-	tiles = {"minerdream_marble_black.png"},
-	groups = {cracky = 3},
-	sounds = default.node_sound_stone_defaults(),
-})
-
-minetest.register_node("minerdream:marble_white_polished", {
-	description = "Polished white marble",
-	tiles = {"minerdream_marble_white_polished.png"},
-	groups = {cracky = 3},
-	sounds = default.node_sound_stone_defaults(),
-})
-
-minetest.register_node("minerdream:marble_pink_polished", {
-	description = "Polished pink marble",
-	tiles = {"minerdream_marble_pink_polished.png"},
-	groups = {cracky = 3},
-	sounds = default.node_sound_stone_defaults(),
-})
-
-minetest.register_node("minerdream:marble_red_polished", {
-	description = "Polished red marble",
-	tiles = {"minerdream_marble_red_polished.png"},
-	groups = {cracky = 3},
-	sounds = default.node_sound_stone_defaults(),
-})
-
-minetest.register_node("minerdream:marble_blue_polished", {
-	description = "Polished blue marble",
-	tiles = {"minerdream_marble_blue_polished.png"},
-	groups = {cracky = 3},
-	sounds = default.node_sound_stone_defaults(),
-})
-
-minetest.register_node("minerdream:marble_green_polished", {
-	description = "Polished green marble",
-	tiles = {"minerdream_marble_green_polished.png"},
-	groups = {cracky = 3},
-	sounds = default.node_sound_stone_defaults(),
-})
-
-minetest.register_node("minerdream:marble_black_polished", {
-	description = "Polished black marble",
-	tiles = {"minerdream_marble_black_polished.png"},
-	groups = {cracky = 3},
-	sounds = default.node_sound_stone_defaults(),
-})
-
-minetest.register_node("minerdream:marble_white_brick", {
-	description = "White marble bricks",
-	tiles = {"minerdream_marble_white_brick.png"},
-	groups = {cracky = 3},
-	sounds = default.node_sound_stone_defaults(),
-})
-
-minetest.register_node("minerdream:marble_pink_brick", {
-	description = "Pink marble bricks",
-	tiles = {"minerdream_marble_pink_brick.png"},
-	groups = {cracky = 3},
-	sounds = default.node_sound_stone_defaults(),
-})
-
-minetest.register_node("minerdream:marble_red_brick", {
-	description = "Red marble bricks",
-	tiles = {"minerdream_marble_red_brick.png"},
-	groups = {cracky = 3},
-	sounds = default.node_sound_stone_defaults(),
-})
-
-minetest.register_node("minerdream:marble_blue_brick", {
-	description = "Blue marble bricks",
-	tiles = {"minerdream_marble_blue_brick.png"},
-	groups = {cracky = 3},
-	sounds = default.node_sound_stone_defaults(),
-})
-
-minetest.register_node("minerdream:marble_green_brick", {
-	description = "Green marble bricks",
-	tiles = {"minerdream_marble_green_brick.png"},
-	groups = {cracky = 3},
-	sounds = default.node_sound_stone_defaults(),
-})
-
-minetest.register_node("minerdream:marble_black_brick", {
-	description = "Black marble bricks",
-	tiles = {"minerdream_marble_black_brick.png"},
-	groups = {cracky = 3},
-	sounds = default.node_sound_stone_defaults(),
-})
-
-minetest.register_node("minerdream:marble_white_smallbrick", {
-	description = "White marble small-bricks",
-	tiles = {"minerdream_marble_white_smallbrick.png"},
-	groups = {cracky = 3},
-	sounds = default.node_sound_stone_defaults(),
-})
-
-minetest.register_node("minerdream:marble_pink_smallbrick", {
-	description = "Pink marble small-bricks",
-	tiles = {"minerdream_marble_pink_smallbrick.png"},
-	groups = {cracky = 3},
-	sounds = default.node_sound_stone_defaults(),
-})
-
-minetest.register_node("minerdream:marble_red_smallbrick", {
-	description = "Red marble small-bricks",
-	tiles = {"minerdream_marble_red_smallbrick.png"},
-	groups = {cracky = 3},
-	sounds = default.node_sound_stone_defaults(),
-})
-
-minetest.register_node("minerdream:marble_blue_smallbrick", {
-	description = "Blue marble small-bricks",
-	tiles = {"minerdream_marble_blue_smallbrick.png"},
-	groups = {cracky = 3},
-	sounds = default.node_sound_stone_defaults(),
-})
-
-minetest.register_node("minerdream:marble_green_smallbrick", {
-	description = "Green marble small-bricks",
-	tiles = {"minerdream_marble_green_smallbrick.png"},
-	groups = {cracky = 3},
-	sounds = default.node_sound_stone_defaults(),
-})
-
-minetest.register_node("minerdream:marble_black_smallbrick", {
-	description = "Black marble small-bricks",
-	tiles = {"minerdream_marble_black_smallbrick.png"},
-	groups = {cracky = 3},
-	sounds = default.node_sound_stone_defaults(),
-})
-
-minetest.register_node("minerdream:pillar_marble_white_middle", {
-	description = "White marble pillar middle",
-	tiles = {"minerdream_marble_white.png"},
+end
+local function register_marbel(color,crack)
+  register_marble(color,3)
+  register_marble(color.."_polished",3)
+  register_marble(color.."_brick",3)
+  register_marble(color.."_smallbrick",3)
+  minetest.register_node("minerdream:pillar_marble_"..color.."_middle", {
+	description = color.." marble pillar middle",
+	tiles = {"minerdream_marble_"..color..".png"},
 	groups = {cracky = 3},
 	sounds = default.node_sound_stone_defaults(),
 	drawtype = "nodebox",
@@ -388,11 +224,26 @@ minetest.register_node("minerdream:pillar_marble_white_middle", {
 			{-0.3125, -0.5, -0.3125, 0.3125, 0.5, 0.3125}, -- NodeBox3
 		}
 	}
-})
-
-minetest.register_node("minerdream:pillar_marble_white_bottom", {
-	description = "White marble pillar bottom",
-	tiles = {"minerdream_marble_white.png"},
+  })
+  minetest.register_node("minerdream:pillar_marble_"..color.."_middle", {
+	description = color.." marble pillar middle",
+	tiles = {"minerdream_marble_"..color..".png"},
+	groups = {cracky = 3},
+	sounds = default.node_sound_stone_defaults(),
+	drawtype = "nodebox",
+	paramtype = "light",
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.375, -0.5, -0.1875, 0.375, 0.5, 0.1875}, -- NodeBox1
+			{-0.1875, -0.5, -0.375, 0.1875, 0.5, 0.375}, -- NodeBox2
+			{-0.3125, -0.5, -0.3125, 0.3125, 0.5, 0.3125}, -- NodeBox3
+		}
+	}
+  })
+  minetest.register_node("minerdream:pillar_marble_"..color.."_bottom", {
+	description = color.." marble pillar bottom",
+	tiles = {"minerdream_marble_"..color..".png"},
 	groups = {cracky = 3},
 	sounds = default.node_sound_stone_defaults(),
 	drawtype = "nodebox",
@@ -408,11 +259,10 @@ minetest.register_node("minerdream:pillar_marble_white_bottom", {
 			{-0.5, -0.5, -0.3125, 0.5, -0.375, 0.3125}, -- NodeBox6
 		}
 	}
-})
-
-minetest.register_node("minerdream:pillar_marble_white_top", {
-	description = "White marble pillar top",
-	tiles = {"minerdream_marble_white.png"},
+  })
+  minetest.register_node("minerdream:pillar_marble_"..color.."_top", {
+	description = color.." marble pillar top",
+	tiles = {"minerdream_marble_"..color..".png"},
 	groups = {cracky = 3},
 	sounds = default.node_sound_stone_defaults(),
 	drawtype = "nodebox",
@@ -428,11 +278,10 @@ minetest.register_node("minerdream:pillar_marble_white_top", {
 			{-0.5, 0.375, -0.3125, 0.5, 0.5, 0.3125}, -- NodeBox6
 		}
 	}
-})
-
-minetest.register_node("minerdream:pillar_marble_white_both", {
-	description = "White marble pillar both-sided",
-	tiles = {"minerdream_marble_white.png"},
+  })
+  minetest.register_node("minerdream:pillar_marble_"..color.."_both", {
+	description = color.." marble pillar both-sided",
+	tiles = {"minerdream_marble_"..color..".png"},
 	groups = {cracky = 3},
 	sounds = default.node_sound_stone_defaults(),
 	drawtype = "nodebox",
@@ -451,407 +300,15 @@ minetest.register_node("minerdream:pillar_marble_white_both", {
 			{-0.5, -0.5, -0.3125, 0.5, -0.375, 0.3125}, -- NodeBox11
 		}
 	}
-})
+  })
+end
+register_marble("white",3)
+register_marble("pink",3)
+register_marble("red",3)
+register_marble("blue",3)
+register_marble("green",3)
+register_marble("black",3)
 
-minetest.register_node("minerdream:pillar_marble_pink_middle", {
-	description = "Pink marble pillar middle",
-	tiles = {"minerdream_marble_pink.png"},
-	groups = {cracky = 3},
-	sounds = default.node_sound_stone_defaults(),
-	drawtype = "nodebox",
-	paramtype = "light",
-	node_box = {
-		type = "fixed",
-		fixed = {
-			{-0.375, -0.5, -0.1875, 0.375, 0.5, 0.1875}, -- NodeBox1
-			{-0.1875, -0.5, -0.375, 0.1875, 0.5, 0.375}, -- NodeBox2
-			{-0.3125, -0.5, -0.3125, 0.3125, 0.5, 0.3125}, -- NodeBox3
-		}
-	}
-})
-
-minetest.register_node("minerdream:pillar_marble_pink_bottom", {
-	description = "Pink marble pillar bottom",
-	tiles = {"minerdream_marble_pink.png"},
-	groups = {cracky = 3},
-	sounds = default.node_sound_stone_defaults(),
-	drawtype = "nodebox",
-	paramtype = "light",
-	node_box = {
-		type = "fixed",
-		fixed = {
-			{-0.375, -0.5, -0.1875, 0.375, 0.5, 0.1875}, -- NodeBox1
-			{-0.1875, -0.5, -0.375, 0.1875, 0.5, 0.375}, -- NodeBox2
-			{-0.3125, -0.5, -0.3125, 0.3125, 0.5, 0.3125}, -- NodeBox3
-			{-0.4375, -0.5, -0.4375, 0.4375, -0.375, 0.4375}, -- NodeBox4
-			{-0.3125, -0.5, -0.5, 0.3125, -0.375, 0.5}, -- NodeBox5
-			{-0.5, -0.5, -0.3125, 0.5, -0.375, 0.3125}, -- NodeBox6
-		}
-	}
-})
-
-minetest.register_node("minerdream:pillar_marble_pink_top", {
-	description = "Pink marble pillar top",
-	tiles = {"minerdream_marble_pink.png"},
-	groups = {cracky = 3},
-	sounds = default.node_sound_stone_defaults(),
-	drawtype = "nodebox",
-	paramtype = "light",
-	node_box = {
-		type = "fixed",
-		fixed = {
-			{-0.375, -0.5, -0.1875, 0.375, 0.5, 0.1875}, -- NodeBox1
-			{-0.1875, -0.5, -0.375, 0.1875, 0.5, 0.375}, -- NodeBox2
-			{-0.3125, -0.5, -0.3125, 0.3125, 0.5, 0.3125}, -- NodeBox3
-			{-0.4375, 0.375, -0.4375, 0.4375, 0.5, 0.4375}, -- NodeBox4
-			{-0.3125, 0.375, -0.5, 0.3125, 0.5, 0.5}, -- NodeBox5
-			{-0.5, 0.375, -0.3125, 0.5, 0.5, 0.3125}, -- NodeBox6
-		}
-	}
-})
-
-minetest.register_node("minerdream:pillar_marble_pink_both", {
-	description = "Pink marble pillar both-sided",
-	tiles = {"minerdream_marble_pink.png"},
-	groups = {cracky = 3},
-	sounds = default.node_sound_stone_defaults(),
-	drawtype = "nodebox",
-	paramtype = "light",
-	node_box = {
-		type = "fixed",
-		fixed = {
-			{-0.375, -0.5, -0.1875, 0.375, 0.5, 0.1875}, -- NodeBox1
-			{-0.1875, -0.5, -0.375, 0.1875, 0.5, 0.375}, -- NodeBox2
-			{-0.3125, -0.5, -0.3125, 0.3125, 0.5, 0.3125}, -- NodeBox3
-			{-0.4375, 0.375, -0.4375, 0.4375, 0.5, 0.4375}, -- NodeBox4
-			{-0.3125, 0.375, -0.5, 0.3125, 0.5, 0.5}, -- NodeBox5
-			{-0.5, 0.375, -0.3125, 0.5, 0.5, 0.3125}, -- NodeBox6
-			{-0.4375, -0.5, -0.4375, 0.4375, -0.375, 0.4375}, -- NodeBox9
-			{-0.3125, -0.5, -0.5, 0.3125, -0.375, 0.5}, -- NodeBox10
-			{-0.5, -0.5, -0.3125, 0.5, -0.375, 0.3125}, -- NodeBox11
-		}
-	}
-})
-
-minetest.register_node("minerdream:pillar_marble_red_middle", {
-	description = "Red marble pillar middle",
-	tiles = {"minerdream_marble_red.png"},
-	groups = {cracky = 3},
-	sounds = default.node_sound_stone_defaults(),
-	drawtype = "nodebox",
-	paramtype = "light",
-	node_box = {
-		type = "fixed",
-		fixed = {
-			{-0.375, -0.5, -0.1875, 0.375, 0.5, 0.1875}, -- NodeBox1
-			{-0.1875, -0.5, -0.375, 0.1875, 0.5, 0.375}, -- NodeBox2
-			{-0.3125, -0.5, -0.3125, 0.3125, 0.5, 0.3125}, -- NodeBox3
-		}
-	}
-})
-
-minetest.register_node("minerdream:pillar_marble_red_bottom", {
-	description = "Red marble pillar bottom",
-	tiles = {"minerdream_marble_red.png"},
-	groups = {cracky = 3},
-	sounds = default.node_sound_stone_defaults(),
-	drawtype = "nodebox",
-	paramtype = "light",
-	node_box = {
-		type = "fixed",
-		fixed = {
-			{-0.375, -0.5, -0.1875, 0.375, 0.5, 0.1875}, -- NodeBox1
-			{-0.1875, -0.5, -0.375, 0.1875, 0.5, 0.375}, -- NodeBox2
-			{-0.3125, -0.5, -0.3125, 0.3125, 0.5, 0.3125}, -- NodeBox3
-			{-0.4375, -0.5, -0.4375, 0.4375, -0.375, 0.4375}, -- NodeBox4
-			{-0.3125, -0.5, -0.5, 0.3125, -0.375, 0.5}, -- NodeBox5
-			{-0.5, -0.5, -0.3125, 0.5, -0.375, 0.3125}, -- NodeBox6
-		}
-	}
-})
-
-minetest.register_node("minerdream:pillar_marble_red_top", {
-	description = "Red marble pillar top",
-	tiles = {"minerdream_marble_red.png"},
-	groups = {cracky = 3},
-	sounds = default.node_sound_stone_defaults(),
-	drawtype = "nodebox",
-	paramtype = "light",
-	node_box = {
-		type = "fixed",
-		fixed = {
-			{-0.375, -0.5, -0.1875, 0.375, 0.5, 0.1875}, -- NodeBox1
-			{-0.1875, -0.5, -0.375, 0.1875, 0.5, 0.375}, -- NodeBox2
-			{-0.3125, -0.5, -0.3125, 0.3125, 0.5, 0.3125}, -- NodeBox3
-			{-0.4375, 0.375, -0.4375, 0.4375, 0.5, 0.4375}, -- NodeBox4
-			{-0.3125, 0.375, -0.5, 0.3125, 0.5, 0.5}, -- NodeBox5
-			{-0.5, 0.375, -0.3125, 0.5, 0.5, 0.3125}, -- NodeBox6
-		}
-	}
-})
-
-minetest.register_node("minerdream:pillar_marble_red_both", {
-	description = "Red marble pillar both-sided",
-	tiles = {"minerdream_marble_red.png"},
-	groups = {cracky = 3},
-	sounds = default.node_sound_stone_defaults(),
-	drawtype = "nodebox",
-	paramtype = "light",
-	node_box = {
-		type = "fixed",
-		fixed = {
-			{-0.375, -0.5, -0.1875, 0.375, 0.5, 0.1875}, -- NodeBox1
-			{-0.1875, -0.5, -0.375, 0.1875, 0.5, 0.375}, -- NodeBox2
-			{-0.3125, -0.5, -0.3125, 0.3125, 0.5, 0.3125}, -- NodeBox3
-			{-0.4375, 0.375, -0.4375, 0.4375, 0.5, 0.4375}, -- NodeBox4
-			{-0.3125, 0.375, -0.5, 0.3125, 0.5, 0.5}, -- NodeBox5
-			{-0.5, 0.375, -0.3125, 0.5, 0.5, 0.3125}, -- NodeBox6
-			{-0.4375, -0.5, -0.4375, 0.4375, -0.375, 0.4375}, -- NodeBox9
-			{-0.3125, -0.5, -0.5, 0.3125, -0.375, 0.5}, -- NodeBox10
-			{-0.5, -0.5, -0.3125, 0.5, -0.375, 0.3125}, -- NodeBox11
-		}
-	}
-})
-
-minetest.register_node("minerdream:pillar_marble_blue_middle", {
-	description = "Blue marble pillar middle",
-	tiles = {"minerdream_marble_blue.png"},
-	groups = {cracky = 3},
-	sounds = default.node_sound_stone_defaults(),
-	drawtype = "nodebox",
-	paramtype = "light",
-	node_box = {
-		type = "fixed",
-		fixed = {
-			{-0.375, -0.5, -0.1875, 0.375, 0.5, 0.1875}, -- NodeBox1
-			{-0.1875, -0.5, -0.375, 0.1875, 0.5, 0.375}, -- NodeBox2
-			{-0.3125, -0.5, -0.3125, 0.3125, 0.5, 0.3125}, -- NodeBox3
-		}
-	}
-})
-
-minetest.register_node("minerdream:pillar_marble_blue_bottom", {
-	description = "Blue marble pillar bottom",
-	tiles = {"minerdream_marble_blue.png"},
-	groups = {cracky = 3},
-	sounds = default.node_sound_stone_defaults(),
-	drawtype = "nodebox",
-	paramtype = "light",
-	node_box = {
-		type = "fixed",
-		fixed = {
-			{-0.375, -0.5, -0.1875, 0.375, 0.5, 0.1875}, -- NodeBox1
-			{-0.1875, -0.5, -0.375, 0.1875, 0.5, 0.375}, -- NodeBox2
-			{-0.3125, -0.5, -0.3125, 0.3125, 0.5, 0.3125}, -- NodeBox3
-			{-0.4375, -0.5, -0.4375, 0.4375, -0.375, 0.4375}, -- NodeBox4
-			{-0.3125, -0.5, -0.5, 0.3125, -0.375, 0.5}, -- NodeBox5
-			{-0.5, -0.5, -0.3125, 0.5, -0.375, 0.3125}, -- NodeBox6
-		}
-	}
-})
-
-minetest.register_node("minerdream:pillar_marble_blue_top", {
-	description = "Blue marble pillar top",
-	tiles = {"minerdream_marble_blue.png"},
-	groups = {cracky = 3},
-	sounds = default.node_sound_stone_defaults(),
-	drawtype = "nodebox",
-	paramtype = "light",
-	node_box = {
-		type = "fixed",
-		fixed = {
-			{-0.375, -0.5, -0.1875, 0.375, 0.5, 0.1875}, -- NodeBox1
-			{-0.1875, -0.5, -0.375, 0.1875, 0.5, 0.375}, -- NodeBox2
-			{-0.3125, -0.5, -0.3125, 0.3125, 0.5, 0.3125}, -- NodeBox3
-			{-0.4375, 0.375, -0.4375, 0.4375, 0.5, 0.4375}, -- NodeBox4
-			{-0.3125, 0.375, -0.5, 0.3125, 0.5, 0.5}, -- NodeBox5
-			{-0.5, 0.375, -0.3125, 0.5, 0.5, 0.3125}, -- NodeBox6
-		}
-	}
-})
-
-minetest.register_node("minerdream:pillar_marble_blue_both", {
-	description = "Blue marble pillar both-sided",
-	tiles = {"minerdream_marble_blue.png"},
-	groups = {cracky = 3},
-	sounds = default.node_sound_stone_defaults(),
-	drawtype = "nodebox",
-	paramtype = "light",
-	node_box = {
-		type = "fixed",
-		fixed = {
-			{-0.375, -0.5, -0.1875, 0.375, 0.5, 0.1875}, -- NodeBox1
-			{-0.1875, -0.5, -0.375, 0.1875, 0.5, 0.375}, -- NodeBox2
-			{-0.3125, -0.5, -0.3125, 0.3125, 0.5, 0.3125}, -- NodeBox3
-			{-0.4375, 0.375, -0.4375, 0.4375, 0.5, 0.4375}, -- NodeBox4
-			{-0.3125, 0.375, -0.5, 0.3125, 0.5, 0.5}, -- NodeBox5
-			{-0.5, 0.375, -0.3125, 0.5, 0.5, 0.3125}, -- NodeBox6
-			{-0.4375, -0.5, -0.4375, 0.4375, -0.375, 0.4375}, -- NodeBox9
-			{-0.3125, -0.5, -0.5, 0.3125, -0.375, 0.5}, -- NodeBox10
-			{-0.5, -0.5, -0.3125, 0.5, -0.375, 0.3125}, -- NodeBox11
-		}
-	}
-})
-
-minetest.register_node("minerdream:pillar_marble_green_middle", {
-	description = "Green marble pillar middle",
-	tiles = {"minerdream_marble_green.png"},
-	groups = {cracky = 3},
-	sounds = default.node_sound_stone_defaults(),
-	drawtype = "nodebox",
-	paramtype = "light",
-	node_box = {
-		type = "fixed",
-		fixed = {
-			{-0.375, -0.5, -0.1875, 0.375, 0.5, 0.1875}, -- NodeBox1
-			{-0.1875, -0.5, -0.375, 0.1875, 0.5, 0.375}, -- NodeBox2
-			{-0.3125, -0.5, -0.3125, 0.3125, 0.5, 0.3125}, -- NodeBox3
-		}
-	}
-})
-
-minetest.register_node("minerdream:pillar_marble_green_bottom", {
-	description = "Green marble pillar bottom",
-	tiles = {"minerdream_marble_green.png"},
-	groups = {cracky = 3},
-	sounds = default.node_sound_stone_defaults(),
-	drawtype = "nodebox",
-	paramtype = "light",
-	node_box = {
-		type = "fixed",
-		fixed = {
-			{-0.375, -0.5, -0.1875, 0.375, 0.5, 0.1875}, -- NodeBox1
-			{-0.1875, -0.5, -0.375, 0.1875, 0.5, 0.375}, -- NodeBox2
-			{-0.3125, -0.5, -0.3125, 0.3125, 0.5, 0.3125}, -- NodeBox3
-			{-0.4375, -0.5, -0.4375, 0.4375, -0.375, 0.4375}, -- NodeBox4
-			{-0.3125, -0.5, -0.5, 0.3125, -0.375, 0.5}, -- NodeBox5
-			{-0.5, -0.5, -0.3125, 0.5, -0.375, 0.3125}, -- NodeBox6
-		}
-	}
-})
-
-minetest.register_node("minerdream:pillar_marble_green_top", {
-	description = "Green marble pillar top",
-	tiles = {"minerdream_marble_green.png"},
-	groups = {cracky = 3},
-	sounds = default.node_sound_stone_defaults(),
-	drawtype = "nodebox",
-	paramtype = "light",
-	node_box = {
-		type = "fixed",
-		fixed = {
-			{-0.375, -0.5, -0.1875, 0.375, 0.5, 0.1875}, -- NodeBox1
-			{-0.1875, -0.5, -0.375, 0.1875, 0.5, 0.375}, -- NodeBox2
-			{-0.3125, -0.5, -0.3125, 0.3125, 0.5, 0.3125}, -- NodeBox3
-			{-0.4375, 0.375, -0.4375, 0.4375, 0.5, 0.4375}, -- NodeBox4
-			{-0.3125, 0.375, -0.5, 0.3125, 0.5, 0.5}, -- NodeBox5
-			{-0.5, 0.375, -0.3125, 0.5, 0.5, 0.3125}, -- NodeBox6
-		}
-	}
-})
-
-minetest.register_node("minerdream:pillar_marble_green_both", {
-	description = "Green marble pillar both-sided",
-	tiles = {"minerdream_marble_green.png"},
-	groups = {cracky = 3},
-	sounds = default.node_sound_stone_defaults(),
-	drawtype = "nodebox",
-	paramtype = "light",
-	node_box = {
-		type = "fixed",
-		fixed = {
-			{-0.375, -0.5, -0.1875, 0.375, 0.5, 0.1875}, -- NodeBox1
-			{-0.1875, -0.5, -0.375, 0.1875, 0.5, 0.375}, -- NodeBox2
-			{-0.3125, -0.5, -0.3125, 0.3125, 0.5, 0.3125}, -- NodeBox3
-			{-0.4375, 0.375, -0.4375, 0.4375, 0.5, 0.4375}, -- NodeBox4
-			{-0.3125, 0.375, -0.5, 0.3125, 0.5, 0.5}, -- NodeBox5
-			{-0.5, 0.375, -0.3125, 0.5, 0.5, 0.3125}, -- NodeBox6
-			{-0.4375, -0.5, -0.4375, 0.4375, -0.375, 0.4375}, -- NodeBox9
-			{-0.3125, -0.5, -0.5, 0.3125, -0.375, 0.5}, -- NodeBox10
-			{-0.5, -0.5, -0.3125, 0.5, -0.375, 0.3125}, -- NodeBox11
-		}
-	}
-})
-
-minetest.register_node("minerdream:pillar_marble_black_middle", {
-	description = "Black marble pillar middle",
-	tiles = {"minerdream_marble_black.png"},
-	groups = {cracky = 3},
-	sounds = default.node_sound_stone_defaults(),
-	drawtype = "nodebox",
-	paramtype = "light",
-	node_box = {
-		type = "fixed",
-		fixed = {
-			{-0.375, -0.5, -0.1875, 0.375, 0.5, 0.1875}, -- NodeBox1
-			{-0.1875, -0.5, -0.375, 0.1875, 0.5, 0.375}, -- NodeBox2
-			{-0.3125, -0.5, -0.3125, 0.3125, 0.5, 0.3125}, -- NodeBox3
-		}
-	}
-})
-
-minetest.register_node("minerdream:pillar_marble_black_bottom", {
-	description = "Black marble pillar bottom",
-	tiles = {"minerdream_marble_black.png"},
-	groups = {cracky = 3},
-	sounds = default.node_sound_stone_defaults(),
-	drawtype = "nodebox",
-	paramtype = "light",
-	node_box = {
-		type = "fixed",
-		fixed = {
-			{-0.375, -0.5, -0.1875, 0.375, 0.5, 0.1875}, -- NodeBox1
-			{-0.1875, -0.5, -0.375, 0.1875, 0.5, 0.375}, -- NodeBox2
-			{-0.3125, -0.5, -0.3125, 0.3125, 0.5, 0.3125}, -- NodeBox3
-			{-0.4375, -0.5, -0.4375, 0.4375, -0.375, 0.4375}, -- NodeBox4
-			{-0.3125, -0.5, -0.5, 0.3125, -0.375, 0.5}, -- NodeBox5
-			{-0.5, -0.5, -0.3125, 0.5, -0.375, 0.3125}, -- NodeBox6
-		}
-	}
-})
-
-minetest.register_node("minerdream:pillar_marble_black_top", {
-	description = "Black marble pillar top",
-	tiles = {"minerdream_marble_black.png"},
-	groups = {cracky = 3},
-	sounds = default.node_sound_stone_defaults(),
-	drawtype = "nodebox",
-	paramtype = "light",
-	node_box = {
-		type = "fixed",
-		fixed = {
-			{-0.375, -0.5, -0.1875, 0.375, 0.5, 0.1875}, -- NodeBox1
-			{-0.1875, -0.5, -0.375, 0.1875, 0.5, 0.375}, -- NodeBox2
-			{-0.3125, -0.5, -0.3125, 0.3125, 0.5, 0.3125}, -- NodeBox3
-			{-0.4375, 0.375, -0.4375, 0.4375, 0.5, 0.4375}, -- NodeBox4
-			{-0.3125, 0.375, -0.5, 0.3125, 0.5, 0.5}, -- NodeBox5
-			{-0.5, 0.375, -0.3125, 0.5, 0.5, 0.3125}, -- NodeBox6
-		}
-	}
-})
-
-minetest.register_node("minerdream:pillar_marble_black_both", {
-	description = "Black marble pillar both-sided",
-	tiles = {"minerdream_marble_black.png"},
-	groups = {cracky = 3},
-	sounds = default.node_sound_stone_defaults(),
-	drawtype = "nodebox",
-	paramtype = "light",
-	node_box = {
-		type = "fixed",
-		fixed = {
-			{-0.375, -0.5, -0.1875, 0.375, 0.5, 0.1875}, -- NodeBox1
-			{-0.1875, -0.5, -0.375, 0.1875, 0.5, 0.375}, -- NodeBox2
-			{-0.3125, -0.5, -0.3125, 0.3125, 0.5, 0.3125}, -- NodeBox3
-			{-0.4375, 0.375, -0.4375, 0.4375, 0.5, 0.4375}, -- NodeBox4
-			{-0.3125, 0.375, -0.5, 0.3125, 0.5, 0.5}, -- NodeBox5
-			{-0.5, 0.375, -0.3125, 0.5, 0.5, 0.3125}, -- NodeBox6
-			{-0.4375, -0.5, -0.4375, 0.4375, -0.375, 0.4375}, -- NodeBox9
-			{-0.3125, -0.5, -0.5, 0.3125, -0.375, 0.5}, -- NodeBox10
-			{-0.5, -0.5, -0.3125, 0.5, -0.375, 0.3125}, -- NodeBox11
-		}
-	}
-})
 ------------lapis-------------
 minetest.register_node("minerdream:lapislazuli_block", {
 	description = "Lapis lazuli block",
