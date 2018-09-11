@@ -117,7 +117,8 @@ if desert then
   stone_name = "desert_stone"
 end
 minetest.register_node("minerdream:"..stonename.."_with_"..element, {
-	description = S(element.." ore"),
+--	description = S(element.." ore"),
+	description = element.." ore",
 	tiles = {"default_"..stone_name..".png^minerdream_"..element.."_ore.png"},
 	groups = {cracky = crack},
 	drop = 'minerdream:'..element..'_lump',
@@ -126,7 +127,8 @@ minetest.register_node("minerdream:"..stonename.."_with_"..element, {
 end
 local function stone_register(element,crack)
 minetest.register_node("minerdream:stone_with_"..element, {
-	description = S(element.." ore"),
+--	description = S(element.." ore"),
+	description = element.." ore",
 	tiles = {"default_stone.png^minerdream_"..element.."_ore.png"},
 	groups = {cracky = crack},
 	drop = 'minerdream:'..element..'_lump',
@@ -147,10 +149,10 @@ ore_register("lead",2)
 ore_register("silver",2)
 ore_register("potassium",3)
 ore_register("nickel",2)
-ore_register("coal",3,desert=true)
-ore_register("sulfur",3,desert=true)
-ore_register("lapislazuli",3,desert=true)
-ore_register("salpeter",3,desert=true)
+ore_register("coal",3,true)
+ore_register("sulfur",3,true)
+ore_register("lapislazuli",3,true)
+ore_register("saltpeter",3,true)
 
 stone_register("spinel",5)
 stone_register("garnet",4)
@@ -1144,12 +1146,14 @@ minetest.register_node("minerdream:platinum_block", {
 	sounds = default.node_sound_stone_defaults(),
 })
 
+if not minetest.get_modpath("aluminium") then
 minetest.register_node("minerdream:aluminum_block", {
 	description = "Aluminum block",
 	tiles = {"minerdream_aluminum_block.png"},
 	groups = {cracky = 3},
 	sounds = default.node_sound_stone_defaults(),
 })
+end
 
 minetest.register_node("minerdream:brass_block", {
 	description = "Brass block",
@@ -1287,12 +1291,14 @@ minetest.register_node("minerdream:platinum_brick", {
 	sounds = default.node_sound_stone_defaults(),
 })
 
+if not minetest.get_modpath("aluminium") then
 minetest.register_node("minerdream:aluminum_brick", {
 	description = "Aluminum bricks",
 	tiles = {"minerdream_aluminum_brick.png"},
 	groups = {cracky = 3},
 	sounds = default.node_sound_stone_defaults(),
 })
+end
 
 minetest.register_node("minerdream:brass_brick", {
 	description = "Brass bricks",
@@ -1599,6 +1605,7 @@ minetest.register_node("minerdream:platinum_bar_block", {
 	groups = {snappy=3,dig_immediate=3},
 })
 
+if not minetest.get_modpath("aluminium") then
 minetest.register_node("minerdream:aluminum_bar_block", {
 	description = "Aluminum bar stack",
 	drawtype = "mesh",
@@ -1608,6 +1615,7 @@ minetest.register_node("minerdream:aluminum_bar_block", {
 	is_ground_content = true,
 	groups = {snappy=3,dig_immediate=3},
 })
+end
 
 minetest.register_node("minerdream:brass_bar_block", {
 	description = "Brass bar stack",
