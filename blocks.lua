@@ -100,6 +100,73 @@ minetest.register_node("minerdream:stone_with_topaz", {
 	},
 })
 
+
+minetest.register_node("minerdream:stone_with_calcium", {
+	description = "Calcium Ore",
+	tiles = {"default_stone.png^minerdream_calcium_ore.png"},
+	groups = {cracky = 3, cheapore = 1},
+	drop = 'minerdream:calcium_lump',
+	sounds = default.node_sound_stone_defaults(),
+})
+
+local function ore_register(element,crack,desert)
+local stonename = "stone"
+local stone_name = "stone"
+if desert then
+  stonename = "desertstone"
+  stone_name = "desert_stone"
+end
+minetest.register_node("minerdream:"..stonename.."_with_"..element, {
+	description = S(element.." ore"),
+	tiles = {"default_"..stone_name..".png^minerdream_"..element.."_ore.png"},
+	groups = {cracky = crack},
+	drop = 'minerdream:'..element..'_lump',
+	sounds = default.node_sound_stone_defaults(),
+})
+end
+local function stone_register(element,crack)
+minetest.register_node("minerdream:stone_with_"..element, {
+	description = S(element.." ore"),
+	tiles = {"default_stone.png^minerdream_"..element.."_ore.png"},
+	groups = {cracky = crack},
+	drop = 'minerdream:'..element..'_lump',
+	sounds = default.node_sound_stone_defaults(),
+})
+end
+
+ore_register("rhodium",5)
+ore_register("tantalum",5)
+ore_register("ruthenium",4)
+ore_register("cobalt",4)
+ore_register("platinum",1)
+if not minetest.get_modpath("aluminium") then
+  ore_register("aluminium",1)
+end
+ore_register("zinc",1)
+ore_register("lead",2)
+ore_register("silver",2)
+ore_register("potassium",3)
+ore_register("nickel",2)
+ore_register("coal",3,desert=true)
+ore_register("sulfur",3,desert=true)
+ore_register("lapislazuli",3,desert=true)
+ore_register("salpeter",3,desert=true)
+
+stone_register("spinel",5)
+stone_register("garnet",4)
+stone_register("bituminous_coal",4)
+stone_register("jade",4)
+stone_register("amethyst",4)
+
+--[[
+minetest.register_node("minerdream:stone_with_bituminous_coal", {
+	description = "Bituminous coal ore",
+	tiles = {"default_stone.png^minerdream_bituminous_coal_ore.png"},
+	groups = {cracky = 4},
+	drop = 'minerdream:bituminous_coal',
+	sounds = default.node_sound_stone_defaults(),
+})
+
 minetest.register_node("minerdream:stone_with_rhodium", {
 	description = "Rhodium ore",
 	tiles = {"default_stone.png^minerdream_rhodium_ore.png"},
@@ -121,14 +188,6 @@ minetest.register_node("minerdream:stone_with_spinel", {
 	tiles = {"default_stone.png^minerdream_spinel_ore.png"},
 	groups = {cracky = 5},
 	drop = 'minerdream:spinel',
-	sounds = default.node_sound_stone_defaults(),
-})
-
-minetest.register_node("minerdream:stone_with_bituminous_coal", {
-	description = "Bituminous coal ore",
-	tiles = {"default_stone.png^minerdream_bituminous_coal_ore.png"},
-	groups = {cracky = 4},
-	drop = 'minerdream:bituminous_coal',
 	sounds = default.node_sound_stone_defaults(),
 })
 
@@ -212,14 +271,6 @@ minetest.register_node("minerdream:stone_with_silver", {
 	sounds = default.node_sound_stone_defaults(),
 })
 
-minetest.register_node("minerdream:stone_with_calcium", {
-	description = "Calcium Ore",
-	tiles = {"default_stone.png^minerdream_calcium_ore.png"},
-	groups = {cracky = 3, cheapore = 1},
-	drop = 'minerdream:calcium_lump',
-	sounds = default.node_sound_stone_defaults(),
-})
-
 minetest.register_node("minerdream:stone_with_potassium", {
 	description = "Potassium Ore",
 	tiles = {"default_stone.png^minerdream_potassium_ore.png"},
@@ -235,8 +286,9 @@ minetest.register_node("minerdream:stone_with_nickel", {
 	drop = 'minerdream:nickel_lump',
 	sounds = default.node_sound_stone_defaults(),
 })
+]]
 -----------------desert ores-----------------
-
+--[[
 minetest.register_node("minerdream:desertstone_with_coal", {
 	description = "Desert coal ore",
 	tiles = {"default_desert_stone.png^default_mineral_coal.png"},
@@ -268,7 +320,7 @@ minetest.register_node("minerdream:desertstone_with_saltpeter", {
 	drop = 'minerdream:saltpeter_lump 1',
 	sounds = default.node_sound_stone_defaults(),
 })
-
+]]
 minetest.register_node("minerdream:desertstone_with_richiron", {
 	description = "Rich desert iron ore",
 	tiles = {"default_desert_stone.png^minerdream_richiron_ore.png"},

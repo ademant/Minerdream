@@ -292,7 +292,40 @@ minetest.register_craft({
 
 -------------mineralsmelting----------
 
+local function smelt_register(element,cooktime)
+  minetest.register_craft({
+	type="cooking",
+	cooktime=cooktime,
+	output="minerdream:"..element.."_bar",
+	recipe="minerdream:"..element.."_lump",
+  })
+  if minetest.get_modpath("technic") then
+  	technic.register_grinder_recipe({input = {"minerdream:"..element.."_lump"}, output = "minerdream:"..element.."_dust 2"})
+  	technic.register_grinder_recipe({input = {"minerdream:"..element.."_bar"}, output = "minerdream:"..element.."_dust"})
+    minetest.register_craft({
+	  type="cooking",
+	  cooktime=cooktime,
+	  output="minerdream:"..element.."_bar",
+	  recipe="minerdream:"..element.."_dust",
+    })
+  end
+end
 
+smelt_register("potassium",2)
+smelt_register("calcium",2)
+smelt_register("nickel",4)
+smelt_register("lead",4)
+smelt_register("zinc",4)
+smelt_register("platinum",16)
+smelt_register("cobalt",32)
+smelt_register("ruthenium",32)
+smelt_register("tantalum",64)
+smelt_register("rhodium",64)
+if not minetest.get_modpath("aluminium") then
+  smelt_register("aluminium",32)
+end
+
+--[[
 minetest.register_craft({
 	type = "cooking",
 	cooktime = 2,
@@ -335,12 +368,13 @@ minetest.register_craft({
 	recipe = "minerdream:silver_lump",
 })
 
-minetest.register_craft({
-	type = "cooking",
-	cooktime = 8,
-	output = "minerdream:lead_bar",
-	recipe = "minerdream:lead_lump",
-})
+
+--minetest.register_craft({
+--	type = "cooking",
+--	cooktime = 8,
+--	output = "minerdream:lead_bar",
+--	recipe = "minerdream:lead_lump",
+--})
 
 minetest.register_craft({
 	type = "cooking",
@@ -383,7 +417,7 @@ minetest.register_craft({
 	output = "minerdream:rhodium_bar",
 	recipe = "minerdream:rhodium_lump",
 })
-
+]]
 --------------lapis----------------
 
 minetest.register_craft({
@@ -670,6 +704,7 @@ minetest.register_craft({
 	}
 })
 
+if not minetest.get_modpath("aluminium") then
 minetest.register_craft({
 	output = 'minerdream:aluminum_block',
 	recipe = {
@@ -685,6 +720,7 @@ minetest.register_craft({
 		{'minerdream:aluminum_block'},
 	}
 })
+end
 
 minetest.register_craft({
 	output = 'minerdream:zinc_block',
@@ -1570,12 +1606,13 @@ minetest.register_craft( {
 	recipe = {"minerdream:platinum_lump", "default:cobble"},
 })
 
+if not minetest.get_modpath("aluminium") then
 minetest.register_craft( {
 	type = "shapeless",
 	output = "minerdream:aluminum_brick",
 	recipe = {"minerdream:aluminum_lump", "default:cobble"},
 })
-
+end
 
 minetest.register_craft({
 	output = 'minerdream:brass_brick',
@@ -1738,6 +1775,7 @@ minetest.register_craft({
 	}
 })
 
+if not minetest.get_modpath("aluminium") then
 minetest.register_craft({
 	output = 'minerdream:spear_aluminum',
 	recipe = {
@@ -1746,6 +1784,7 @@ minetest.register_craft({
 		{'group:stick', '', ''},
 	}
 })
+end
 
 minetest.register_craft({
 	output = 'minerdream:spear_platinum',
@@ -1903,6 +1942,7 @@ minetest.register_craft({
 	}
 })
 
+if not minetest.get_modpath("aluminium") then
 minetest.register_craft({
 	output = 'minerdream:bow_aluminum',
 	recipe = {
@@ -1911,6 +1951,7 @@ minetest.register_craft({
 		{'minerdream:aluminum_bar', 'farming:cotton', ''},
 	}
 })
+end
 
 minetest.register_craft({
 	output = 'minerdream:bow_platinum',
@@ -2293,6 +2334,7 @@ minetest.register_craft({
 	}
 })
 
+if not minetest.get_modpath("aluminium") then
 minetest.register_craft({
 	output = 'minerdream:pick_aluminum',
 	recipe = {
@@ -2337,6 +2379,7 @@ minetest.register_craft({
 		{'', 'group:stick', ''},
 	}
 })
+end
 
 minetest.register_craft({
 	output = 'minerdream:pick_platinum',
@@ -2754,6 +2797,7 @@ minetest.register_craft({
 	}
 })
 
+if not minetest.get_modpath("aluminium") then
 minetest.register_craft({
 	output = 'minerdream:helmet_aluminum',
 	recipe = {
@@ -2801,6 +2845,7 @@ minetest.register_craft({
 
 	}
 })
+end
 
 minetest.register_craft({
 	output = 'minerdream:helmet_stainlesssteel',
