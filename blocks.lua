@@ -109,7 +109,25 @@ minetest.register_node("minerdream:stone_with_calcium", {
 	sounds = default.node_sound_stone_defaults(),
 })
 
-local function ore_register(element,crack,desert)
+local function dust_register(element)
+minetest.register_node("minerdream:"..element.."_dust", {
+	description = element.." dust",
+	tiles = {"minerdream_dust.png"},
+	inventory_image = {"minerdream_dust.png"},
+	groups = {cracky = 3},
+	sounds = default.node_sound_stone_defaults(),
+})
+end
+local function block_register(element,crack)
+minetest.register_node("minerdream:"..element.."_block", {
+	description = element.." block",
+	tiles = {"minerdream_"..element.."_block.png"},
+	groups = {cracky = crack},
+	sounds = default.node_sound_stone_defaults(),
+})
+end
+
+local function ore_register(element,crack,bdust,bblock,desert)
 local stonename = "stone"
 local stone_name = "stone"
 if desert then
@@ -124,6 +142,12 @@ minetest.register_node("minerdream:"..stonename.."_with_"..element, {
 	drop = 'minerdream:'..element..'_lump',
 	sounds = default.node_sound_stone_defaults(),
 })
+if bdust then
+  dust_register(element)
+end
+if bblock then
+  block_register(element,crack)
+end
 end
 local function stone_register(element,crack)
 minetest.register_node("minerdream:stone_with_"..element, {
@@ -135,46 +159,25 @@ minetest.register_node("minerdream:stone_with_"..element, {
 	sounds = default.node_sound_stone_defaults(),
 })
 end
-local function dust_register(element)
-minetest.register_node("minerdream:"..element.."_dust", {
-	description = element.." dust",
-	tiles = {"minerdream_dust.png"},
-	inventory_image = {"minerdream_dust.png"},
-	groups = {cracky = 3},
-	sounds = default.node_sound_stone_defaults(),
-})
-end
 
-ore_register("rhodium",5)
-ore_register("tantalum",5)
-ore_register("ruthenium",4)
-ore_register("cobalt",4)
-ore_register("platinum",1)
+ore_register("rhodium",5,true,true)
+ore_register("calcium",5,true,true)
+ore_register("tantalum",5,true,true)
+ore_register("ruthenium",4,true,true)
+ore_register("cobalt",4,true,true)
+ore_register("platinum",1,true,true)
 if not minetest.get_modpath("aluminium") then
-  ore_register("aluminium",1)
-  dust_register("aluminium")
+  ore_register("aluminium",1,true,true)
 end
-ore_register("zinc",1)
-ore_register("lead",2)
-ore_register("silver",2)
-ore_register("potassium",3)
-ore_register("nickel",2)
-ore_register("coal",3,true)
-ore_register("sulfur",3,true)
-ore_register("lapislazuli",3,true)
-ore_register("saltpeter",3,true)
-dust_register("rhodium")
-dust_register("tantalum")
-dust_register("ruthenium")
-dust_register("cobalt")
-dust_register("platinum")
-dust_register("zinc")
-dust_register("lead")
-dust_register("silver")
-dust_register("potassium")
-dust_register("nickel")
-dust_register("sulfur")
-dust_register("saltpeter")
+ore_register("zinc",1,true,true)
+ore_register("lead",2,true,true)
+ore_register("silver",2,true,true)
+ore_register("potassium",3,true,true)
+ore_register("nickel",2,true,true)
+ore_register("coal",3,false,false,true)
+ore_register("sulfur",3,true,false,true)
+ore_register("lapislazuli",3,false,false,true)
+ore_register("saltpeter",3,true,true,true)
 
 stone_register("spinel",5)
 stone_register("garnet",4)
@@ -182,169 +185,7 @@ stone_register("bituminous_coal",4)
 stone_register("jade",4)
 stone_register("amethyst",4)
 
---[[
-minetest.register_node("minerdream:stone_with_bituminous_coal", {
-	description = "Bituminous coal ore",
-	tiles = {"default_stone.png^minerdream_bituminous_coal_ore.png"},
-	groups = {cracky = 4},
-	drop = 'minerdream:bituminous_coal',
-	sounds = default.node_sound_stone_defaults(),
-})
-
-minetest.register_node("minerdream:stone_with_rhodium", {
-	description = "Rhodium ore",
-	tiles = {"default_stone.png^minerdream_rhodium_ore.png"},
-	groups = {cracky = 5},
-	drop = 'minerdream:rhodium_lump',
-	sounds = default.node_sound_stone_defaults(),
-})
-
-minetest.register_node("minerdream:stone_with_tantalum", {
-	description = "Tantalum ore",
-	tiles = {"default_stone.png^minerdream_tantalum_ore.png"},
-	groups = {cracky = 5},
-	drop = 'minerdream:tantalum_lump',
-	sounds = default.node_sound_stone_defaults(),
-})
-
-minetest.register_node("minerdream:stone_with_spinel", {
-	description = "Spinel ore",
-	tiles = {"default_stone.png^minerdream_spinel_ore.png"},
-	groups = {cracky = 5},
-	drop = 'minerdream:spinel',
-	sounds = default.node_sound_stone_defaults(),
-})
-
-minetest.register_node("minerdream:stone_with_garnet", {
-	description = "Garnet ore",
-	tiles = {"default_stone.png^minerdream_garnet_ore.png"},
-	groups = {cracky = 4},
-	drop = 'minerdream:garnet',
-	sounds = default.node_sound_stone_defaults(),
-})
-
-minetest.register_node("minerdream:stone_with_jade", {
-	description = "Jade ore",
-	tiles = {"default_stone.png^minerdream_jade_ore.png"},
-	groups = {cracky = 4},
-	drop = 'minerdream:jade',
-	sounds = default.node_sound_stone_defaults(),
-})
-
-minetest.register_node("minerdream:stone_with_amethyst", {
-	description = "amethyst ore",
-	tiles = {"default_stone.png^minerdream_amethyst_ore.png"},
-	groups = {cracky = 4},
-	drop = 'minerdream:amethyst',
-	sounds = default.node_sound_stone_defaults(),
-})
-
-minetest.register_node("minerdream:stone_with_ruthenium", {
-	description = "Ruthenium ore",
-	tiles = {"default_stone.png^minerdream_ruthenium_ore.png"},
-	groups = {cracky = 4},
-	drop = 'minerdream:ruthenium_lump',
-	sounds = default.node_sound_stone_defaults(),
-})
-
-minetest.register_node("minerdream:stone_with_cobalt", {
-	description = "Cobalt ore",
-	tiles = {"default_stone.png^minerdream_cobalt_ore.png"},
-	groups = {cracky = 4},
-	drop = 'minerdream:cobalt_lump',
-	sounds = default.node_sound_stone_defaults(),
-})
-
-minetest.register_node("minerdream:stone_with_platinum", {
-	description = "Platinum ore",
-	tiles = {"default_stone.png^minerdream_platinum_ore.png"},
-	groups = {cracky = 1},
-	drop = 'minerdream:platinum_lump',
-	sounds = default.node_sound_stone_defaults(),
-})
-
-minetest.register_node("minerdream:stone_with_aluminum", {
-	description = "Aluminum ore",
-	tiles = {"default_stone.png^minerdream_aluminum_ore.png"},
-	groups = {cracky = 1},
-	drop = 'minerdream:aluminum_lump',
-	sounds = default.node_sound_stone_defaults(),
-})
-
-minetest.register_node("minerdream:stone_with_zinc", {
-	description = "Zinc Ore",
-	tiles = {"default_stone.png^minerdream_zinc_ore.png"},
-	groups = {cracky = 1},
-	drop = 'minerdream:zinc_lump',
-	sounds = default.node_sound_stone_defaults(),
-})
-
-minetest.register_node("minerdream:stone_with_lead", {
-	description = "Lead Ore",
-	tiles = {"default_stone.png^minerdream_lead_ore.png"},
-	groups = {cracky = 2},
-	drop = 'minerdream:lead_lump',
-	sounds = default.node_sound_stone_defaults(),
-})
-
-minetest.register_node("minerdream:stone_with_silver", {
-	description = "Silver Ore",
-	tiles = {"default_stone.png^minerdream_silver_ore.png"},
-	groups = {cracky = 2},
-	drop = 'minerdream:silver_lump',
-	sounds = default.node_sound_stone_defaults(),
-})
-
-minetest.register_node("minerdream:stone_with_potassium", {
-	description = "Potassium Ore",
-	tiles = {"default_stone.png^minerdream_potassium_ore.png"},
-	groups = {cracky = 3},
-	drop = 'minerdream:potassium_lump',
-	sounds = default.node_sound_stone_defaults(),
-})
-
-minetest.register_node("minerdream:stone_with_nickel", {
-	description = "Nickel Ore",
-	tiles = {"default_stone.png^minerdream_nickel_ore.png"},
-	groups = {cracky = 2},
-	drop = 'minerdream:nickel_lump',
-	sounds = default.node_sound_stone_defaults(),
-})
-]]
 -----------------desert ores-----------------
---[[
-minetest.register_node("minerdream:desertstone_with_coal", {
-	description = "Desert coal ore",
-	tiles = {"default_desert_stone.png^default_mineral_coal.png"},
-	groups = {cracky = 3},
-	drop = 'default:coal_lump 1',
-	sounds = default.node_sound_stone_defaults(),
-})
-
-minetest.register_node("minerdream:desertstone_with_sulfur", {
-	description = "Desert sulfur ore",
-	tiles = {"default_desert_stone.png^minerdream_sulfur_ore.png"},
-	groups = {cracky = 3},
-	drop = 'minerdream:sulfur_lump 1',
-	sounds = default.node_sound_stone_defaults(),
-})
-
-minetest.register_node("minerdream:desertstone_with_lapislazuli", {
-	description = "Desert lapis lazuli ore",
-	tiles = {"default_desert_stone.png^minerdream_lapislazuli_ore.png"},
-	groups = {cracky = 3},
-	drop = 'minerdream:lapislazuli_lump 1',
-	sounds = default.node_sound_stone_defaults(),
-})
-
-minetest.register_node("minerdream:desertstone_with_saltpeter", {
-	description = "Desert saltpeter ore",
-	tiles = {"default_desert_stone.png^minerdream_saltpeter_ore.png"},
-	groups = {cracky = 3},
-	drop = 'minerdream:saltpeter_lump 1',
-	sounds = default.node_sound_stone_defaults(),
-})
-]]
 minetest.register_node("minerdream:desertstone_with_richiron", {
 	description = "Rich desert iron ore",
 	tiles = {"default_desert_stone.png^minerdream_richiron_ore.png"},
@@ -1133,50 +974,6 @@ minetest.register_node("minerdream:topaz_block", {
 	sounds = default.node_sound_stone_defaults(),
 })
 
-minetest.register_node("minerdream:rhodium_block", {
-	description = "Rhodium block",
-	tiles = {"minerdream_rhodium_block.png"},
-	groups = {cracky = 3},
-	sounds = default.node_sound_stone_defaults(),
-})
-
-minetest.register_node("minerdream:tantalum_block", {
-	description = "Tantalum block",
-	tiles = {"minerdream_tantalum_block.png"},
-	groups = {cracky = 3},
-	sounds = default.node_sound_stone_defaults(),
-})
-
-minetest.register_node("minerdream:ruthenium_block", {
-	description = "Ruthenium block",
-	tiles = {"minerdream_ruthenium_block.png"},
-	groups = {cracky = 3},
-	sounds = default.node_sound_stone_defaults(),
-})
-
-minetest.register_node("minerdream:cobalt_block", {
-	description = "Cobalt block",
-	tiles = {"minerdream_cobalt_block.png"},
-	groups = {cracky = 3},
-	sounds = default.node_sound_stone_defaults(),
-})
-
-minetest.register_node("minerdream:platinum_block", {
-	description = "Platinum block",
-	tiles = {"minerdream_platinum_block.png"},
-	groups = {cracky = 3},
-	sounds = default.node_sound_stone_defaults(),
-})
-
-if not minetest.get_modpath("aluminium") then
-minetest.register_node("minerdream:aluminum_block", {
-	description = "Aluminum block",
-	tiles = {"minerdream_aluminum_block.png"},
-	groups = {cracky = 3},
-	sounds = default.node_sound_stone_defaults(),
-})
-end
-
 minetest.register_node("minerdream:brass_block", {
 	description = "Brass block",
 	tiles = {"minerdream_brass_block.png"},
@@ -1184,48 +981,6 @@ minetest.register_node("minerdream:brass_block", {
 	sounds = default.node_sound_stone_defaults(),
 })
 
-minetest.register_node("minerdream:lead_block", {
-	description = "Lead block",
-	tiles = {"minerdream_lead_block.png"},
-	groups = {cracky = 3},
-	sounds = default.node_sound_stone_defaults(),
-})
-
-minetest.register_node("minerdream:zinc_block", {
-	description = "Zinc block",
-	tiles = {"minerdream_zinc_block.png"},
-	groups = {cracky = 3},
-	sounds = default.node_sound_stone_defaults(),
-})
-
-minetest.register_node("minerdream:calcium_block", {
-	description = "Calcium block",
-	tiles = {"minerdream_calcium_block.png"},
-	groups = {cracky = 3},
-	sounds = default.node_sound_stone_defaults(),
-})
-
-minetest.register_node("minerdream:potassium_block", {
-	description = "Potassium block",
-	tiles = {"minerdream_potassium_block.png"},
-	groups = {cracky = 3},
-	sounds = default.node_sound_stone_defaults(),
-})
-
-
-minetest.register_node("minerdream:nickel_block", {
-	description = "Nickel block",
-	tiles = {"minerdream_nickel_block.png"},
-	groups = {cracky = 2},
-	sounds = default.node_sound_stone_defaults(),
-})
-
-minetest.register_node("minerdream:silver_block", {
-	description = "Silver block",
-	tiles = {"minerdream_silver_block.png"},
-	groups = {cracky = 2},
-	sounds = default.node_sound_stone_defaults(),
-})
 
 ---------------brix----------
 
