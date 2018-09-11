@@ -150,7 +150,7 @@ ore_register("nickel",2)
 ore_register("coal",3,desert=true)
 ore_register("sulfur",3,desert=true)
 ore_register("lapislazuli",3,desert=true)
-ore_register("salpeter",3,desert=true)
+ore_register("saltpeter",3,desert=true)
 
 stone_register("spinel",5)
 stone_register("garnet",4)
