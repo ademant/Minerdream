@@ -135,6 +135,14 @@ minetest.register_node("minerdream:stone_with_"..element, {
 	sounds = default.node_sound_stone_defaults(),
 })
 end
+local function dust_register(element)
+minetest.register_node("minerdream:"..element.."_dust, {
+	description = element.." dust",
+	tiles = {"minerdream_dust.png"},
+	groups = {cracky = 3},
+	sounds = default.node_sound_stone_defaults(),
+})
+end
 
 ore_register("rhodium",5)
 ore_register("tantalum",5)
@@ -143,6 +151,7 @@ ore_register("cobalt",4)
 ore_register("platinum",1)
 if not minetest.get_modpath("aluminium") then
   ore_register("aluminium",1)
+  dust_register("aluminium")
 end
 ore_register("zinc",1)
 ore_register("lead",2)
@@ -153,6 +162,18 @@ ore_register("coal",3,true)
 ore_register("sulfur",3,true)
 ore_register("lapislazuli",3,true)
 ore_register("saltpeter",3,true)
+dust_register("rhodium")
+dust_register("tantalum")
+dust_register("ruthenium")
+dust_register("cobalt")
+dust_register("platinum")
+dust_register("zinc")
+dust_register("lead")
+dust_register("silver")
+dust_register("potassium")
+dust_register("nickel")
+dust_register("sulfur")
+dust_register("saltpeter")
 
 stone_register("spinel",5)
 stone_register("garnet",4)
