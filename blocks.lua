@@ -136,7 +136,7 @@ minetest.register_node("minerdream:stone_with_"..element, {
 })
 end
 local function dust_register(element)
-minetest.register_node("minerdream:"..element.."_dust, {
+minetest.register_node("minerdream:"..element.."_dust", {
 	description = element.." dust",
 	tiles = {"minerdream_dust.png"},
 	inventory_image = {"minerdream_dust.png"},
