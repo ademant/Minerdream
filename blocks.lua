@@ -204,11 +204,11 @@ minetest.register_node("minerdream:marble_"..color, {
 	sounds = default.node_sound_stone_defaults(),
 })
 end
-local function register_marbel(color,crack)
-  register_marble(color,3)
-  register_marble(color.."_polished",3)
-  register_marble(color.."_brick",3)
-  register_marble(color.."_smallbrick",3)
+local function register_marble(color,crack)
+  register_marble_intern(color,3)
+  register_marble_intern(color.."_polished",3)
+  register_marble_intern(color.."_brick",3)
+  register_marble_intern(color.."_smallbrick",3)
   minetest.register_node("minerdream:pillar_marble_"..color.."_middle", {
 	description = color.." marble pillar middle",
 	tiles = {"minerdream_marble_"..color..".png"},

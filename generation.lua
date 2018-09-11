@@ -20,12 +20,12 @@ local function mg_reg_ore(iore,ymin,ymax,clust)
 	})
 end
 
-mg_reg_or("minderdream:marble_white",-5000,-50,5)
-mg_reg_or("minderdream:marble_pink",-5000,-125,5)
-mg_reg_or("minderdream:marble_red",-5000,-200,5)
-mg_reg_or("minderdream:marble_red",-5000,-300,5)
-mg_reg_or("minderdream:marble_blue",-5000,-425,5)
-mg_reg_or("minderdream:marble_black",-5000,-600,5)
+mg_reg_ore("minerdream:marble_white",-5000,-50,5)
+mg_reg_ore("minerdream:marble_pink",-5000,-125,5)
+mg_reg_ore("minerdream:marble_red",-5000,-200,5)
+mg_reg_ore("minerdream:marble_red",-5000,-300,5)
+mg_reg_ore("minerdream:marble_blue",-5000,-425,5)
+mg_reg_ore("minerdream:marble_black",-5000,-600,5)
 
 ---treasure---
 
@@ -119,6 +119,7 @@ local function mg_reg_ore_scat(iore,numores,clust,ymin,ymax,scarcity)
 		y_min          = ymin,
 		y_max          = ymax,
 	})
+end
 
 mg_reg_ore_scat("minerdream:stone_with_calcium",5,2,-31000,420,12 * 12 * 12)
 mg_reg_ore_scat("minerdream:stone_with_potassium",7,3,-31000,420,13 * 13 * 13)
