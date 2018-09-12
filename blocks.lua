@@ -162,14 +162,44 @@ if not minetest.get_modpath("aluminium") then
   ore_register("aluminium",1,true,true)
 end
 ore_register("zinc",1,true,true)
-ore_register("lead",2,true,true)
-ore_register("silver",2,true,true)
+--ore_register("lead",2,true,true)
+--ore_register("silver",2,true,true)
 ore_register("potassium",3,true,true)
 ore_register("nickel",2,true,true)
 ore_register("coal",3,false,false,true)
 ore_register("sulfur",3,true,false,true)
 ore_register("lapislazuli",3,false,false,true)
 ore_register("saltpeter",3,true,true,true)
+if not minetest.get_modpath("moreores") then
+minetest.override_item("moreores:mineral_silver", {
+	description = "Silver ore",
+	tiles = {"default_stone.png^minerdream_silver_ore.png"},
+	groups = {cracky = 3},
+	drop = 'moreores:mineral_silver_lump',
+	sounds = default.node_sound_stone_defaults(),
+})
+minetest.override_item("moreores:mineral_silver_lump", {
+	description = "Silver lump",
+	inventory_image = {"default_stone.png^minerdream_silver_lump.png"},
+	groups = {cracky = 3},
+	sounds = default.node_sound_stone_defaults(),
+})
+end
+if not minetest.get_modpath("technic") then
+minetest.override_item("moreores:mineral_lead", {
+	description = "Lead ore",
+	tiles = {"default_stone.png^minerdream_lead_ore.png"},
+	groups = {cracky = 2},
+	drop = 'moreores:mineral_lead_lump',
+	sounds = default.node_sound_stone_defaults(),
+})
+minetest.override_item("moreores:mineral_lead_lump", {
+	description = "Lead lump",
+	inventory_image = {"default_stone.png^minerdream_lead_lump.png"},
+	groups = {cracky = 3},
+	sounds = default.node_sound_stone_defaults(),
+})
+end
 
 stone_register("spinel",5)
 stone_register("garnet",4)
