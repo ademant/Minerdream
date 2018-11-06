@@ -2,6 +2,7 @@ minerdream  = {}
 minerdream.path = minetest.get_modpath("minerdream")
 
 dofile(minerdream.path .. "/functions.lua")
+dofile(minerdream.path .. "/api.lua")
 dofile(minerdream.path .. "/config.lua")
 dofile(minerdream.path .. "/items.lua")
 dofile(minerdream.path .. "/tools.lua")
