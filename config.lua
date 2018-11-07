@@ -15,7 +15,7 @@ end
 local ores_cols={
 	col_num={"clust_num_ores","clust_size","ymin","ymax","clust_scarcity",
 		"cooktime","tier","heal","use","jump","speed","gravity",
-		"helmet_fleshy","chest_fleshy","legging_fleshy","boot_fleshy","shield_fleshy"},
+		"helmet_fleshy","chestplate_fleshy","leggings_fleshy","boots_fleshy","shield_fleshy"},
 	groups_num={"crack","dust","block","desert"}
 }
 local ores_definition = minerdream.import_csv(minerdream.path.."/config.txt",ores_cols)
@@ -33,4 +33,5 @@ for _,line in pairs(ores_definition) do
 			minerdream.register_armor(line,tier_definition)
 		end
 	end
+	minerdream.register_tool(line,tier_definition)
 end
