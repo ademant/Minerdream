@@ -38,9 +38,9 @@ minerdream.register_armor = function(adef,tier_definition)
 	local modname=minetest.get_current_modname()
 	local arm_trans={helmet="armor_head",chestplate="armor_torso",leggings="armor_legs",
 		boots="armor_feet",shield="armor_shield"}
-	print(dump(adef))
+--	print(dump(adef))
 	for _,arm in ipairs({"helmet","chestplate","leggings","boots","shield"}) do
-		print(arm.."_fleshy")
+--		print(arm.."_fleshy")
 		if adef[arm.."_fleshy"] then
 			local armdef={name=modname..":"..arm.."_"..adef.name,
 			desc_name=adef.name.." "..arm,
@@ -51,50 +51,58 @@ minerdream.register_armor = function(adef,tier_definition)
 			damage_groups=damage_groups,
 			}
 			armdef.groups[arm_trans[arm]] = 1
-			print(dump(armdef))
+--			print(dump(armdef))
 			local hdesc=""..core.colorize(tdef.color,adef.name.." "..arm.."\n")..desc
-			print(hdesc)
+--			print(hdesc)
 			local_register_armor(hdesc,armdef)
 		end
 	end
 end
 
 local time_scaled={[1]=1,[2]=0.4,[3]=0.16,[4]=2.4,[5]=3.2,[6]=4.8}
-local tool_punch_intervall={
+local tool_punch_interval={
 	pick = 1, sword = 0.75, shovel = 1, axe = 1}
 local tool_damage_groups = {
 	pick = 1, sword = 1.2, shovel = 0.7, axe = 1.1}
 	
 minerdream.register_tool = function(tdef,tier_definition)
 	local trdef=tier_definition[tdef.tier]
-	local modname=minetest.get_current_modname()
+	local modname=tdef.modname
 
 	for _,tool in pairs({"pick","sword","shovel","axe"}) do
-		print(tool)
-		if tdef[tool] then
-			print("pong")
+		if tdef.groups[tool] then
+			print(dump(tdef))
+			local lpi=tdef.full_punch_intervall * tool_punch_interval[tool]
+			local ldg = tdef.tool_fleshy * tool_damage_groups[tool]
 			tool_def={name=modname..":"..tool.."_"..tdef.name,
 			desc_name=tdef.name.." "..tool,
-			inventory_image=modname.."_"..arm.."_"..tdef.name..".png",
+			description = "".. core.colorize("#00FF00", tdef.name.." "..tool.."\n")
+				..core.colorize("#A0A0A0", "tier: "..tdef.tier.." ("..trdef.desc..")\n")
+				..core.colorize("#A0A0A0", "mele damage: "..ldg.."\n")
+				..core.colorize("#A0A0A0", "range: "..tdef.tool_range.."\n")
+				..core.colorize("#A0A0A0", "attack interval: "..lpi),
+
+			inventory_image=modname.."_"..tool.."_"..tdef.name..".png",
 			wield_scale = {x=tdef.wield_scale,y=tdef.wield_scale,z=tdef.wield_scale},
 			range = tdef.tool_range,
 			tool_capabilities = {
-				full_punch_interval = tdef.full_punch_intervall * tool_punch_interval[tool],
+				full_punch_interval = lpi,
 				max_drop_level = 1,
 				groupcaps = {
 				},
-				damage_goups = {fleshy = tdef.tool_fleshy * tool_damage_groups[tool]},
+				damage_goups = {fleshy = ldg},
 			}
 			}
 			for tg in pairs({"cracky","crumbly","choppy","snappy"}) do
-				if line[tool.."_"..tg.."_times"] then
+				if tdef[tool.."_"..tg.."_times"] then
 					tool_def.tool_capabilities.groupcaps[tg]={}
-					for ind=1,tdef[tool] do
-						tool_def.tool_capabilities.groupcaps[tg][ind]=line[tool.."_"..tg.."_times"] * time_scaled[ind]
+					for ind=1,tdef.groups[tool] do
+						tool_def.tool_capabilities.groupcaps[tg][ind]=tdef[tool.."_"..tg.."_times"] * time_scaled[ind]
 					end
 				end
 			end
-			print(dump(tool_def))
+--			print(dump(tool_def))
+			minetest.register_tool(tool_def.name,tool_def)
 		end
 	end
 end

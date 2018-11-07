@@ -159,7 +159,7 @@ ore_register("ruthenium",4,true,true)
 ore_register("cobalt",4,true,true)
 ore_register("platinum",1,true,true)
 if not minetest.get_modpath("aluminium") then
-  ore_register("aluminium",1,true,true)
+  ore_register("aluminum",1,true,true)
 end
 ore_register("zinc",1,true,true)
 --ore_register("lead",2,true,true)
