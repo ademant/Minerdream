@@ -38,11 +38,13 @@ for _,line in pairs(ores_definition) do
 			if line.bar then
 				minerdream.register_item(line,tier_definition,"bar")
 			end
+			minerdream.ore_register(line.name,line.crack,line.dust,line.block)
 		else
 			modname=line.check_mods
 			line.modname=line.check_mods
 		end
 	end
+	minerdream.register_barblock(line.name)
 	if minetest.global_exists("armor") and armor.elements then
 		if line.heal then
 			minerdream.register_armor(line,tier_definition)

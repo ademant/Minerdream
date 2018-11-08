@@ -107,3 +107,64 @@ minerdream.register_tool = function(tdef,tier_definition)
 	end
 end
 
+
+local function dust_register(element)
+minetest.register_node("minerdream:"..element.."_dust", {
+	description = element.." dust",
+	tiles = {"minerdream_dust.png"},
+	inventory_image = {"minerdream_dust.png"},
+	groups = {cracky = 3},
+	sounds = default.node_sound_stone_defaults(),
+})
+end
+local function block_register(element,crack)
+minetest.register_node("minerdream:"..element.."_block", {
+	description = element.." block",
+	tiles = {"minerdream_"..element.."_block.png"},
+	groups = {cracky = crack},
+	sounds = default.node_sound_stone_defaults(),
+})
+end
+
+function minerdream.ore_register(element,crack,bdust,bblock,desert)
+local stonename = "stone"
+local stone_name = "stone"
+if desert then
+  stonename = "desertstone"
+  stone_name = "desert_stone"
+end
+minetest.register_node("minerdream:"..stonename.."_with_"..element, {
+	description = element.." ore",
+	tiles = {"default_"..stone_name..".png^minerdream_"..element.."_ore.png"},
+	groups = {cracky = crack},
+	drop = 'minerdream:'..element..'_lump',
+	sounds = default.node_sound_stone_defaults(),
+})
+if bdust then
+  dust_register(element)
+end
+if bblock then
+  block_register(element,crack)
+end
+end
+function minerdream.stone_register(element,crack)
+minetest.register_node("minerdream:stone_with_"..element, {
+	description = element.." ore",
+	tiles = {"default_stone.png^minerdream_"..element.."_ore.png"},
+	groups = {cracky = crack},
+	drop = 'minerdream:'..element..'_lump',
+	sounds = default.node_sound_stone_defaults(),
+})
+end
+
+minerdream.register_barblock(element)
+	minetest.register_node("minerdream:"..element.."_bar_block", {
+		description = element.." bar stack",
+		drawtype = "mesh",
+		mesh = "bars.obj",
+		tiles = {"minerdream_"..element.."_bar_block.png"},
+		paramtype = "light",
+		is_ground_content = true,
+		groups = {snappy=3,dig_immediate=3},
+	})
+end

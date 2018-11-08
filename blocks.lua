@@ -101,75 +101,7 @@ minetest.register_node("minerdream:stone_with_topaz", {
 })
 
 
-local function dust_register(element)
-minetest.register_node("minerdream:"..element.."_dust", {
-	description = element.." dust",
-	tiles = {"minerdream_dust.png"},
-	inventory_image = {"minerdream_dust.png"},
-	groups = {cracky = 3},
-	sounds = default.node_sound_stone_defaults(),
-})
-end
-local function block_register(element,crack)
-minetest.register_node("minerdream:"..element.."_block", {
-	description = element.." block",
-	tiles = {"minerdream_"..element.."_block.png"},
-	groups = {cracky = crack},
-	sounds = default.node_sound_stone_defaults(),
-})
-end
 
-local function ore_register(element,crack,bdust,bblock,desert)
-local stonename = "stone"
-local stone_name = "stone"
-if desert then
-  stonename = "desertstone"
-  stone_name = "desert_stone"
-end
-minetest.register_node("minerdream:"..stonename.."_with_"..element, {
---	description = S(element.." ore"),
-	description = element.." ore",
-	tiles = {"default_"..stone_name..".png^minerdream_"..element.."_ore.png"},
-	groups = {cracky = crack},
-	drop = 'minerdream:'..element..'_lump',
-	sounds = default.node_sound_stone_defaults(),
-})
-if bdust then
-  dust_register(element)
-end
-if bblock then
-  block_register(element,crack)
-end
-end
-local function stone_register(element,crack)
-minetest.register_node("minerdream:stone_with_"..element, {
---	description = S(element.." ore"),
-	description = element.." ore",
-	tiles = {"default_stone.png^minerdream_"..element.."_ore.png"},
-	groups = {cracky = crack},
-	drop = 'minerdream:'..element..'_lump',
-	sounds = default.node_sound_stone_defaults(),
-})
-end
-
-ore_register("rhodium",5,true,true)
-ore_register("calcium",5,true,true)
-ore_register("tantalum",5,true,true)
-ore_register("ruthenium",4,true,true)
-ore_register("cobalt",4,true,true)
-ore_register("platinum",1,true,true)
-if not minetest.get_modpath("aluminium") then
-  ore_register("aluminum",1,true,true)
-end
-ore_register("zinc",1,true,true)
---ore_register("lead",2,true,true)
---ore_register("silver",2,true,true)
-ore_register("potassium",3,true,true)
-ore_register("nickel",2,true,true)
-ore_register("coal",3,false,false,true)
-ore_register("sulfur",3,true,false,true)
-ore_register("lapislazuli",3,false,false,true)
-ore_register("saltpeter",3,true,true,true)
 if minetest.get_modpath("moreores") then
 minetest.override_item("moreores:mineral_silver", {
 	description = "Silver ore",
@@ -819,56 +751,6 @@ minetest.register_node("minerdream:garnet", {
 
 -------------bars---------------------
 
-minetest.register_node("minerdream:rhodium_bar_block", {
-	description = "Rhodium bar stack",
-	drawtype = "mesh",
-	mesh = "bars.obj",
-	tiles = {"minerdream_rhodium_bar_block.png"},
-	paramtype = "light",
-	is_ground_content = true,
-	groups = {snappy=3,dig_immediate=3},
-})
-
-minetest.register_node("minerdream:tantalum_bar_block", {
-	description = "Tantalum bar stack",
-	drawtype = "mesh",
-	mesh = "bars.obj",
-	tiles = {"minerdream_tantalum_bar_block.png"},
-	paramtype = "light",
-	is_ground_content = true,
-	groups = {snappy=3,dig_immediate=3},
-})
-
-minetest.register_node("minerdream:ruthenium_bar_block", {
-	description = "Ruthenium bar stack",
-	drawtype = "mesh",
-	mesh = "bars.obj",
-	tiles = {"minerdream_ruthenium_bar_block.png"},
-	paramtype = "light",
-	is_ground_content = true,
-	groups = {snappy=3,dig_immediate=3},
-})
-
-minetest.register_node("minerdream:cobalt_bar_block", {
-	description = "Cobalt bar stack",
-	drawtype = "mesh",
-	mesh = "bars.obj",
-	tiles = {"minerdream_cobalt_bar_block.png"},
-	paramtype = "light",
-	is_ground_content = true,
-	groups = {snappy=3,dig_immediate=3},
-})
-
-minetest.register_node("minerdream:platinum_bar_block", {
-	description = "Platinum bar stack",
-	drawtype = "mesh",
-	mesh = "bars.obj",
-	tiles = {"minerdream_platinum_bar_block.png"},
-	paramtype = "light",
-	is_ground_content = true,
-	groups = {snappy=3,dig_immediate=3},
-})
-
 if not minetest.get_modpath("aluminium") then
 minetest.register_node("minerdream:aluminum_bar_block", {
 	description = "Aluminum bar stack",
@@ -891,35 +773,6 @@ minetest.register_node("minerdream:brass_bar_block", {
 	groups = {snappy=3,dig_immediate=3},
 })
 
-minetest.register_node("minerdream:zinc_bar_block", {
-	description = "Zinc bar stack",
-	drawtype = "mesh",
-	mesh = "bars.obj",
-	tiles = {"minerdream_zinc_bar_block.png"},
-	paramtype = "light",
-	is_ground_content = true,
-	groups = {snappy=3,dig_immediate=3},
-})
-
-minetest.register_node("minerdream:lead_bar_block", {
-	description = "Lead bar stack",
-	drawtype = "mesh",
-	mesh = "bars.obj",
-	tiles = {"minerdream_lead_bar_block.png"},
-	paramtype = "light",
-	is_ground_content = true,
-	groups = {snappy=3,dig_immediate=3},
-})
-
-minetest.register_node("minerdream:gold_bar_block", {
-	description = "Gold bar stack",
-	drawtype = "mesh",
-	mesh = "bars.obj",
-	tiles = {"minerdream_gold_bar_block.png"},
-	paramtype = "light",
-	is_ground_content = true,
-	groups = {snappy=3,dig_immediate=3},
-})
 
 minetest.register_node("minerdream:copper_bar_block", {
 	description = "Copper bar stack",
@@ -961,42 +814,3 @@ minetest.register_node("minerdream:bronze_bar_block", {
 	groups = {snappy=3,dig_immediate=3},
 })
 
-minetest.register_node("minerdream:potassium_bar_block", {
-	description = "Potassium bar stack",
-	drawtype = "mesh",
-	mesh = "bars.obj",
-	tiles = {"minerdream_potassium_bar_block.png"},
-	paramtype = "light",
-	is_ground_content = true,
-	groups = {snappy=3,dig_immediate=3},
-})
-
-minetest.register_node("minerdream:calcium_bar_block", {
-	description = "calcium bar stack",
-	drawtype = "mesh",
-	mesh = "bars.obj",
-	tiles = {"minerdream_calcium_bar_block.png"},
-	paramtype = "light",
-	is_ground_content = true,
-	groups = {snappy=3,dig_immediate=3},
-})
-
-minetest.register_node("minerdream:nickel_bar_block", {
-	description = "nickel bar stack",
-	drawtype = "mesh",
-	mesh = "bars.obj",
-	tiles = {"minerdream_nickel_bar_block.png"},
-	paramtype = "light",
-	is_ground_content = true,
-	groups = {snappy=3,dig_immediate=3},
-})
-
-minetest.register_node("minerdream:silver_bar_block", {
-	description = "silver bar stack",
-	drawtype = "mesh",
-	mesh = "bars.obj",
-	tiles = {"minerdream_silver_bar_block.png"},
-	paramtype = "light",
-	is_ground_content = true,
-	groups = {snappy=3,dig_immediate=3},
-})
