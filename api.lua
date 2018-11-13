@@ -4,6 +4,7 @@ if itemname == nil then
 	itemname = modname..":"..stonename.."_with_"..element
 end
 print(itemname)
+print(modname:gsub(":","")..':'..element..'_lump')
 minetest.register_node(itemname, {
 --	description = S(element.." ore"),
 	description = element.." ore",

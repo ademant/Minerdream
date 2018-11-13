@@ -151,7 +151,7 @@ minetest.register_node("minerdream:stone_with_"..element, {
 	sounds = default.node_sound_stone_defaults(),
 })
 end
-..[[
+--[[
 ore_register("rhodium",5,true,true)
 ore_register("calcium",5,true,true)
 ore_register("tantalum",5,true,true)
