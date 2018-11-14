@@ -121,7 +121,22 @@ for i,tdef in pairs(miner_definition) do
 				minerdream.items[i].bar_block_def=bar_def
 			end
 			minetest.register_node(minerdream.modname..":"..i.."_bar_block",bar_def)
-			print(dump2(bar_def))
+		end
+
+		if tdef.groups.has_dust then
+			local dust_def={description=i.." dust",
+				tiles={minerdream.modname.."_dust.png"},
+				inventory_image={minerdream.modname.."_dust.png"},
+				groups={cracky=tdef.groups.has_dust},
+				sounds = default.node_sound_stone_defaults(),
+				}
+			if minerdream.items[i] == nil then
+				minerdream.items[i] = {dust_def = dust_def}
+			else
+				minerdream.items[i].dust_def=dust_def
+			end
+			minetest.register_node(minerdream.modname..":"..i.."_dust",dust_def)
+			
 		end
 
 	end
