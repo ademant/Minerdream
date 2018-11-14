@@ -20,7 +20,7 @@ steel,,default,,,,,,,,,3
 brass,,,,,,,,,3,3,3
 coal,,,2,1,1,,,1,,,
 sulfur,,,3,1,,,,1,,,
-lapislazuli,,,3,,,,,1,3,,
+lapislazuli,,,3,,,,,1,3,3,
 saltpeter,,,3,1,1,,,1,,,
 spinel,,,5,,,,,,3,3,
 garnet,,,4,,,,,,3,3,
