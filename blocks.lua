@@ -408,7 +408,7 @@ minetest.register_node("minerdream:lapislazuligold_brick_a", {
 })
 
 ---------------blox-----------
-
+--[[
 minetest.register_node("minerdream:onyx_block", {
 	description = "Onyx block",
 	tiles = {"minerdream_onyx_block.png"},
@@ -460,7 +460,7 @@ minetest.register_node("minerdream:topaz_block", {
 	groups = {cracky = 3},
 	sounds = default.node_sound_stone_defaults(),
 })
-
+]]
 minetest.register_node("minerdream:brass_block", {
 	description = "Brass block",
 	tiles = {"minerdream_brass_block.png"},
@@ -470,7 +470,7 @@ minetest.register_node("minerdream:brass_block", {
 
 
 ---------------brix----------
-
+--[[
 minetest.register_node("minerdream:onyx_brick", {
 	description = "Onyx bricks",
 	tiles = {"minerdream_onyx_brick.png"},
@@ -640,6 +640,7 @@ minetest.register_node("minerdream:silver_brick", {
 	groups = {cracky = 3},
 	sounds = default.node_sound_stone_defaults(),
 })
+]]
 -------------gemstones---------------
 
 minetest.register_node("minerdream:onyx", {
@@ -818,7 +819,7 @@ minetest.register_node("minerdream:garnet", {
 })
 
 -------------bars---------------------
-
+--[[
 minetest.register_node("minerdream:rhodium_bar_block", {
 	description = "Rhodium bar stack",
 	drawtype = "mesh",
@@ -1000,3 +1001,4 @@ minetest.register_node("minerdream:silver_bar_block", {
 	is_ground_content = true,
 	groups = {snappy=3,dig_immediate=3},
 })
+]]

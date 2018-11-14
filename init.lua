@@ -19,4 +19,4 @@ dofile(minerdream.path .. "/experiments.lua")
 --dofile(minerdream.path .. "/mobs.lua")
 dofile(minerdream.path .. "/awards.lua")
 
-print(dump(minerdream.items))
+--print(dump(minerdream.items))
