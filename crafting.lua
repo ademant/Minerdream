@@ -310,7 +310,7 @@ local function smelt_register(element,cooktime)
     })
   end
 end
-
+--[[
 smelt_register("potassium",2)
 smelt_register("calcium",2)
 smelt_register("nickel",4)
@@ -325,7 +325,7 @@ smelt_register("rhodium",64)
 if not minetest.get_modpath("aluminium") then
   smelt_register("aluminium",32)
 end
-
+]]
 --[[
 minetest.register_craft({
 	type = "cooking",
