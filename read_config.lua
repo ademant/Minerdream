@@ -83,6 +83,8 @@ for i,tdef in pairs(miner_definition) do
 				tdef.ingot_name=output.item:get_name()
 				minetest.override_item(ore_name,ore_def)
 				minetest.override_item(lump_name,lump_def)
+				lump_def.name=lump_name
+				ore_def.name=ore_name
 			else
 				minetest.register_node(ore_def.name,ore_def)
 				minetest.register_craftitem(lump_def.name,lump_def)
