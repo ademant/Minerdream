@@ -1,7 +1,7 @@
 
 local has_value = minerdream.has_value 
 local ore_cols={
-	col_num={"crack","scarcity","num_ores","clust_size","y_min","y_max","tier"},
+	col_num={"crack","scarcity","num_ores","clust_size","y_min","y_max","tier","lump_cooking_time"},
 	groups_num={"has_dust","has_block","in_desert","has_block","has_brick","has_bar","has_lump","has_bar_block","has_dust"}}
 local miner_definition = minerdream.import_csv(minerdream.path.."/ores.txt",ore_cols)
 
@@ -113,6 +113,50 @@ for i,tdef in pairs(miner_definition) do
 			end
 		end
 		
+		-- define ore dust
+		if tdef.groups.has_dust then
+			local dust_def=local_create_def(i,"dust",tdef.groups.has_dust)
+			dust_def.tiles={minerdream.modname.."_dust.png"}
+			dust_def.inventory_image={minerdream.modname.."_dust.png"}
+			minetest.register_node(minerdream.modname..":"..i.."_dust",dust_def)
+			if minerdream.items[i].lump_def then
+			  if minetest.get_modpath("technic") then
+				technic.register_grinder_recipe({input = {lump_def.name}, output = dust_def.name.." 2"})
+				dust_def.grind_source=lump_def.name
+			  end
+			end
+			local_item_insert(i,"dust_def",dust_def)
+		end
+		
+		-- define ingot
+		if tdef.groups.has_bar then
+			local ingot_def=local_create_def(i,"ingot",tdef.groups.has_bar)
+			ingot_def.inventory_image=minerdream.modname.."_"..i.."_bar.png"
+			ingot_def.stack_max = minerdream.ingot_max_stack
+			if tdef.ingot_name then
+				ingot_def.name=nil
+				minetest.override_item(tdef.ingot_name,ingot_def)
+				ingot_def.name=tdef.ingot_name
+			else
+				ingot_def.name=minerdream.modname..":"..i.."_ingot"
+				minetest.register_craftitem(ingot_def.name,ingot_def)
+			end
+			
+			if minerdream.items[i].lump_def and tdef.lump_cooking_time then
+				local lump_def=table.copy(minerdream.items[i].lump_def)
+				lump_def.ingot_name=ingot_def.name
+				ingot_def.lump_name=lump_def.name
+				lump_def.cooking_time=tdef.lump_cooking_time
+				  minetest.register_craft({type="cooking",
+					cooktime=tdef.lump_cooking_time,
+					output=ingot_def.name,
+					recipe=lump_def.name,
+				  })
+				minerdream.items[i].lump_def=lump_def
+			end
+			local_item_insert(i,"ingot_def",ingot_def)
+		end
+
 		-- define ore bricks (4 ores)
 		if tdef.groups.has_brick then
 			local brick_def=local_create_def(i,"brick",tdef.groups.has_brick)
@@ -137,31 +181,6 @@ for i,tdef in pairs(miner_definition) do
 			minetest.register_node(minerdream.modname..":"..i.."_bar_stack",bar_def)
 		end
 		
-		-- define ore dust
-		if tdef.groups.has_dust then
-			local dust_def=local_create_def(i,"dust",tdef.groups.has_dust)
-			dust_def.tiles={minerdream.modname.."_dust.png"}
-			dust_def.inventory_image={minerdream.modname.."_dust.png"}
-			local_item_insert(i,"dust_def",dust_def)
-			minetest.register_node(minerdream.modname..":"..i.."_dust",dust_def)
-		end
-		
-		-- define ingot
-		if tdef.groups.has_bar then
-			local ingot_def={description=i.." ingot",
-				name=minerdream.modname..":"..i.."_ingot",
-				inventory_image=minerdream.modname.."_"..i.."_bar.png",
-				stack_max = minerdream.ingot_max_stack,
-			}
-			if tdef.ingot_name then
-				ingot_def.name=nil
-				minetest.override_item(tdef.ingot_name,ingot_def)
-				ingot_def.name=tdef.ingot_name
-			else
-				minetest.register_craftitem(ingot_def.name,ingot_def)
-			end
-			local_item_insert(i,"ingot_def",ingot_def)
-		end
 	end
 end
 

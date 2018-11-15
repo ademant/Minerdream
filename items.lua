@@ -75,7 +75,7 @@ minetest.register_craftitem('minerdream:gold_nugget', {
 	stack_max= 1000,
 })
 ---------------refined goods-----------------
-
+--[[
 minetest.register_craftitem('minerdream:rhodium_bar', {
 		description = "".. core.colorize("#00FF00", "Rhodium bar\n")..core.colorize("#A0A0A0", "tier: 6 (epic)"),
 	inventory_image = "minerdream_rhodium_bar.png",
@@ -111,7 +111,7 @@ minetest.register_craftitem('minerdream:aluminum_bar', {
 	inventory_image = "minerdream_aluminum_bar.png",
 	stack_max= 250,
 })
-
+]]
 minetest.register_craftitem('minerdream:stainlesssteel_bar', {
 		description = "".. core.colorize("#BFFFFF", "Stainless steel bar\n")..core.colorize("#A0A0A0", "tier: 2 (uncommon)"),
 	inventory_image = "minerdream_stainlesssteel_bar.png",
@@ -124,7 +124,7 @@ minetest.register_craftitem('minerdream:brass_bar', {
 	inventory_image = "minerdream_brass_bar.png",
 	stack_max= 250,
 })
-
+--[[
 minetest.register_craftitem('minerdream:zinc_bar', {
 		description = "".. core.colorize("#BFFFFF", "zinc bar\n")..core.colorize("#A0A0A0", "tier: 2 (uncommon)"),
 	inventory_image = "minerdream_zinc_bar.png",
@@ -160,7 +160,7 @@ minetest.register_craftitem('minerdream:silver_bar', {
 	inventory_image = "minerdream_silver_bar.png",
 	stack_max= 250,
 })
-
+]]
 ------------------consumables----------------
 
 minetest.register_craftitem("minerdream:vitamin", {
