@@ -1,0 +1,2 @@
+minerdream.ingot_stack_max (Max stack for ingots) int 250 99 1000
+minerdream.lump_stack_max (Max stack for lumps) int 999 99 1000

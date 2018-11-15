@@ -4,6 +4,7 @@ minerdream.modname = minetest.get_current_modname()
 minerdream.items={}
 
 dofile(minerdream.path .. "/functions.lua")
+dofile(minerdream.path .. "/config.lua")
 dofile(minerdream.path .. "/api.lua")
 dofile(minerdream.path .. "/read_config.lua")
 dofile(minerdream.path .. "/items.lua")
