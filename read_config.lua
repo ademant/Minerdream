@@ -42,6 +42,30 @@ local local_item_insert=function(name,ttype,def)
 	minerdream.items[name][ttype]=def
 end
 
+local local_craft_block=function(input,output)
+minetest.register_craft({
+	output = output,
+	recipe = {
+		{input, input, input},
+		{input, input, input},
+		{input, input, input},
+	} })
+minetest.register_craft({
+	output = input.." 9",
+	recipe = {{output}} })
+end
+local local_craft_stack=function(input,output)
+minetest.register_craft({
+	output = output,
+	recipe = {
+		{input, input, },
+		{input, input, },
+	} })
+minetest.register_craft({
+	output = input.." 4",
+	recipe = {{output}} })
+end
+
 for i,tdef in pairs(miner_definition) do
 	if i ~= "default" then
 		-- register ores within stone
@@ -194,6 +218,11 @@ for i,tdef in pairs(miner_definition) do
 			local block_def=local_create_def(i,"block",tdef.groups.has_block)
 			local_item_insert(i,"block_def",block_def)
 			minetest.register_node(minerdream.modname..":"..i.."_block",block_def)
+			print(i)
+			local ingot_def=minerdream.items[i].ingot_def
+			if ingot_def ~= nil then
+				local_craft_block(ingot_def.name,minerdream.modname..":"..i.."_block")
+			end
 		end
 		
 		-- define bar stack
@@ -204,6 +233,10 @@ for i,tdef in pairs(miner_definition) do
 			bar_def.groups={snappy=tdef.groups.has_bar,dig_immediate=3}
 			local_item_insert(i,"bar_stack_def",bar_def)
 			minetest.register_node(minerdream.modname..":"..i.."_bar_stack",bar_def)
+			local ingot_def=minerdream.items[i].ingot_def
+			if ingot_def ~= nil then
+				local_craft_stack(ingot_def.name,minerdream.modname..":"..i.."_bar_stack")
+			end
 		end
 		
 	end
