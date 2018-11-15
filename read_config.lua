@@ -1,8 +1,8 @@
 
 local has_value = minerdream.has_value 
 local ore_cols={
-	col_num={"crack","scarcity","num_ores","clust_size","y_min","y_max"},
-	groups_num={"has_dust","has_block","in_desert","has_block","has_brick","has_bar","has_bar_block","has_dust"}}
+	col_num={"crack","scarcity","num_ores","clust_size","y_min","y_max","tier"},
+	groups_num={"has_dust","has_block","in_desert","has_block","has_brick","has_bar","has_lump","has_bar_block","has_dust"}}
 local miner_definition = minerdream.import_csv(minerdream.path.."/ores.txt",ore_cols)
 
 if miner_definition["default"] ~= nil then
@@ -46,7 +46,7 @@ for i,tdef in pairs(miner_definition) do
 	if i ~= "default" then
 		-- register ores within stone
 		if tdef.crack ~= nil then
-		print(dump2(tdef))
+--		print(dump2(tdef))
 			-- base config
 			ore_def={description=i.." ore",
 				name=minerdream.modname..":stone_with_"..i,
@@ -55,7 +55,11 @@ for i,tdef in pairs(miner_definition) do
 				drop=minerdream.modname..":"..i.."_lump",
 				sound=default.node_sound_stone_defaults(),
 				}
-				
+			lump_def={description=i.." lump",
+				name=minerdream.modname..":"..i.."_lump",
+				inventory_image=minerdream.modname.."_"..i.."_lump.png",
+				stack_max=minerdream.lump_max_stack,
+				}
 			-- override existing ore?
 			local to_override = false
 			if tdef.overrides ~= nil then
@@ -63,16 +67,25 @@ for i,tdef in pairs(miner_definition) do
 					temp_def=minetest.registered_nodes[tdef.overrides]
 					ore_def.name=tdef.overrides
 					ore_def.drop=temp_def.drop
+					lump_def.name=temp_def.drop
 					to_override = true
 				end
 			end
 			local_item_insert(i,"ore_def",ore_def)
+			local_item_insert(i,"lump_def",lump_def)
 			local ore_name=ore_def.name
+			local lump_name=lump_def.name
 			if to_override then
 				ore_def.name=nil
+				lump_def.name=nil
+				local output, decremented_input = minetest.get_craft_result({ method = "cooking", width = 1, items = { ItemStack(lump_name) }})
+				lump_def.ingot_name=output.item:get_name()
+				tdef.ingot_name=output.item:get_name()
 				minetest.override_item(ore_name,ore_def)
+				minetest.override_item(lump_name,lump_def)
 			else
 				minetest.register_node(ore_def.name,ore_def)
+				minetest.register_craftitem(lump_def.name,lump_def)
 				
 				-- if not already defined, then add mapgen parameter
 				if tdef.scarcity ~= nil then
@@ -131,6 +144,23 @@ for i,tdef in pairs(miner_definition) do
 			dust_def.inventory_image={minerdream.modname.."_dust.png"}
 			local_item_insert(i,"dust_def",dust_def)
 			minetest.register_node(minerdream.modname..":"..i.."_dust",dust_def)
+		end
+		
+		-- define ingot
+		if tdef.groups.has_bar then
+			local ingot_def={description=i.." ingot",
+				name=minerdream.modname..":"..i.."_ingot",
+				inventory_image=minerdream.modname.."_"..i.."_bar.png",
+				stack_max = minerdream.ingot_max_stack,
+			}
+			if tdef.ingot_name then
+				ingot_def.name=nil
+				minetest.override_item(tdef.ingot_name,ingot_def)
+				ingot_def.name=tdef.ingot_name
+			else
+				minetest.register_craftitem(ingot_def.name,ingot_def)
+			end
+			local_item_insert(i,"ingot_def",ingot_def)
 		end
 	end
 end

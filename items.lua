@@ -62,6 +62,7 @@ minetest.register_craftitem('minerdream:saltpeter_powder', {
 })
 
 -----------------ores----------------
+
 minetest.register_craftitem('minerdream:brass_nugget', {
 		description = "".. core.colorize("#FFFFFF", "brass nugget\n")..core.colorize("#A0A0A0", "4 of those, can be combined into a bar"),
 	inventory_image = "minerdream_brass_nugget.png",
@@ -73,104 +74,6 @@ minetest.register_craftitem('minerdream:gold_nugget', {
 	inventory_image = "minerdream_gold_nugget.png",
 	stack_max= 1000,
 })
-
-minetest.register_craftitem('minerdream:rhodium_lump', {
-		description = "".. core.colorize("#00FF00", "Rhodium lump\n")..core.colorize("#A0A0A0", "tier: 6 (epic)"),
-	inventory_image = "minerdream_rhodium_lump.png",
-	stack_max= 1000,
-})
-
-minetest.register_craftitem('minerdream:tantalum_lump', {
-		description = "".. core.colorize("#00FF00", "Tantalum lump\n")..core.colorize("#A0A0A0", "tier: 6 (epic)"),
-	inventory_image = "minerdream_tantalum_lump.png",
-	stack_max= 1000,
-})
-
-minetest.register_craftitem('minerdream:bituminous_coal', {
-		description = "".. core.colorize("#0040FF", "Bituminous coal lump\n")..core.colorize("#A0A0A0", "tier: 5 (extra rare)"),
-	inventory_image = "minerdream_bituminous_coal.png",
-	stack_max= 1000,
-})
-
-
-minetest.register_craftitem('minerdream:ruthenium_lump', {
-		description = "".. core.colorize("#0040FF", "Ruthenium lump\n")..core.colorize("#A0A0A0", "tier: 5 (extra rare)"),
-	inventory_image = "minerdream_ruthenium_lump.png",
-	stack_max= 1000,
-})
-
-minetest.register_craftitem('minerdream:cobalt_lump', {
-		description = "".. core.colorize("#0040FF", "Cobalt lump\n")..core.colorize("#A0A0A0", "tier: 5 (extra rare)"),
-	inventory_image = "minerdream_cobalt_lump.png",
-	stack_max= 1000,
-})
-
-minetest.register_craftitem('minerdream:platinum_lump', {
-		description = "".. core.colorize("#40FF80", "Platinum lump\n")..core.colorize("#A0A0A0", "tier: 4 (rare)"),
-	inventory_image = "minerdream_platinum_lump.png",
-	stack_max= 1000,
-})
-
-minetest.register_craftitem('minerdream:aluminum_lump', {
-		description = "".. core.colorize("#40FF80", "Aluminum lump\n")..core.colorize("#A0A0A0", "tier: 4 (rare)"),
-	inventory_image = "minerdream_aluminum_lump.png",
-	stack_max= 1000,
-})
-
-minetest.register_craftitem('minerdream:lead_lump', {
-		description = "".. core.colorize("#00FFFF", "lead lump\n")..core.colorize("#A0A0A0", "tier: 3 (almost rare)"),
-	inventory_image = "minerdream_lead_lump.png",
-	stack_max= 1000,
-})
-
-minetest.register_craftitem('minerdream:lapislazuli_lump', {
-		description = "".. core.colorize("#BFFFFF", "Lapis lazuli lump\n")..core.colorize("#A0A0A0", "tier: 2 (uncommon)"),
-	inventory_image = "minerdream_lapislazuli_lump.png",
-	stack_max= 1000,
-})
-
-minetest.register_craftitem('minerdream:sulfur_lump', {
-		description = "".. core.colorize("#BFFFFF", "Sulfur lump\n")..core.colorize("#A0A0A0", "tier: 2 (uncommon)"),
-	inventory_image = "minerdream_sulfur_lump.png",
-	stack_max= 1000,
-})
-
-minetest.register_craftitem('minerdream:saltpeter_lump', {
-		description = "".. core.colorize("#BFFFFF", "Saltpeter lump\n")..core.colorize("#A0A0A0", "tier: 2 (uncommon)"),
-	inventory_image = "minerdream_saltpeter_lump.png",
-	stack_max= 1000,
-})
-
-minetest.register_craftitem('minerdream:zinc_lump', {
-		description = "".. core.colorize("#BFFFFF", "zinc lump\n")..core.colorize("#A0A0A0", "tier: 2 (uncommon)"),
-	inventory_image = "minerdream_zinc_lump.png",
-	stack_max= 1000,
-})
-
-minetest.register_craftitem('minerdream:silver_lump', {
-		description = "".. core.colorize("#00FFFF", "Silver lump\n")..core.colorize("#A0A0A0", "tier: 3 (almost rare)"),
-	inventory_image = "minerdream_silver_lump.png",
-	stack_max= 1000,
-})
-
-minetest.register_craftitem('minerdream:calcium_lump', {
-		description = "".. core.colorize("#FFFFFF", "Calcium lump\n")..core.colorize("#A0A0A0", "tier: 1 (common)"),
-	inventory_image = "minerdream_calcium_lump.png",
-	stack_max= 1000,
-})
-
-minetest.register_craftitem('minerdream:potassium_lump', {
-		description = "".. core.colorize("#FFFFFF", "Potassium lump\n")..core.colorize("#A0A0A0", "tier: 1 (common)"),
-	inventory_image = "minerdream_potassium_lump.png",
-	stack_max= 1000,
-})
-
-minetest.register_craftitem('minerdream:nickel_lump', {
-		description = "".. core.colorize("#BFFFFF", "Nickel lump\n")..core.colorize("#A0A0A0", "tier: 2 (uncommon)"),
-	inventory_image = "minerdream_nickel_lump.png",
-	stack_max= 1000,
-})
-
 ---------------refined goods-----------------
 
 minetest.register_craftitem('minerdream:rhodium_bar', {
