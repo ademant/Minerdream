@@ -84,6 +84,30 @@ local local_get_recipe=function(tool,material,stick)
 		{material, '', stick},
 		{material, stick, ''},}
 	end
+	if tool == "pick" then
+		out_recipe = {
+		{material, material, material},
+		{'', stick, ''},
+		{'', stick, ''},}
+	end
+	if tool == "axe" then
+		out_recipe = {
+		{material, material, ''},
+		{material, stick, ''},
+		{'', stick, ''},}
+	end
+	if tool == "shovel" then
+		out_recipe = {
+		{'', material, ''},
+		{'', stick, ''},
+		{'', stick, ''},}
+	end
+	if tool == "sword" then
+		out_recipe = {
+		{'', material, ''},
+		{'', material, ''},
+		{'', stick, ''},}
+	end
 	return out_recipe
 end
 
@@ -265,7 +289,7 @@ for i,tdef in pairs(miner_definition) do
 		
 		if minerdream.items[i].ingot_def then
 			local ingot_name=minerdream.items[i].ingot_def.name
-			for _,tool in ipairs({"spear"}) do
+			for _,tool in ipairs({"spear","pick","axe","sword","shovel"}) do
 				print(tool)
 				if tdef.groups["has_"..tool] ~= nil then
 					local stick = "default:stick"

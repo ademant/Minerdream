@@ -2108,7 +2108,7 @@ minetest.register_craft({
 })
 
 -----------------------tools------------------
-
+--[[
 minetest.register_craft({
 	output = 'minerdream:pick_nickel',
 	recipe = {
@@ -2651,7 +2651,7 @@ minetest.register_craft({
 		{'', 'minerdream:expensivestick', ''},
 	}
 })
-
+]]
 -------------------armor-------------
 
 minetest.register_craft({
