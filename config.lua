@@ -9,7 +9,7 @@ minerdream.lump_stack_max =  minetest.settings:get("minerdream.lump_stack_max") 
 minerdream.dust_cooking_time_reduce =  minetest.settings:get("minerdream.dust_cooking_time_reduce") or 2
 
 minerdream.steel_wire="minerdream:steel_wire"
-if minetest.modpath("basic_materials") == nil then
+if minetest.get_modpath("basic_materials") == nil then
 	dofile(minerdream.path .. "/steel_wire.lua")
 else
 	minerdream.steel_wire="basic_materials:steel_wire"

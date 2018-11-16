@@ -4,7 +4,7 @@ local ore_cols={
 	col_num={"crack","scarcity","num_ores","clust_size","y_min","y_max","tier","lump_cooking_time"},
 	groups_num={"has_dust","has_block","in_desert","has_block","has_brick",
 		"has_bar","has_lump","has_bar_block","has_dust","has_spear","has_bow","has_arrow","has_pick",
-		"has_axe","has_shovel","has_sword"}}
+		"has_axe","has_shovel","has_sword","has_helmet","has_chestplate","has_shield","has_leggings","has_boots"}}
 local miner_definition = minerdream.import_csv(minerdream.path.."/ores.txt",ore_cols)
 
 if miner_definition["default"] ~= nil then
@@ -107,6 +107,34 @@ local local_get_recipe=function(tool,material,stick)
 		{'', material, ''},
 		{'', material, ''},
 		{'', stick, ''},}
+	end
+	if tool == "helmet" then
+		out_recipe = {
+		{material, material, material},
+		{material, '', material},}
+	end
+	if tool == "chestplate" then
+		out_recipe = {
+		{material, '', material},
+		{material, material, material},
+		{material, material, material},}
+	end
+	if tool == "leggings" then
+	out_recipe = {
+		{material, material, material},
+		{material, '', material},
+		{material, '', material},}
+	end
+	if tool == "boots" then
+	out_recipe = {
+		{material, '', material},
+		{material, '', material},}
+	end
+	if tool == "shield" then
+	out_recipe = {
+		{material, material, material},
+		{material, material, material},
+		{'', material, ''},}
 	end
 	return out_recipe
 end
@@ -289,7 +317,7 @@ for i,tdef in pairs(miner_definition) do
 		
 		if minerdream.items[i].ingot_def then
 			local ingot_name=minerdream.items[i].ingot_def.name
-			for _,tool in ipairs({"spear","pick","axe","sword","shovel"}) do
+			for _,tool in ipairs({"spear","pick","axe","sword","shovel","helmet","chestplate","leggings","boots","shield"}) do
 				print(tool)
 				if tdef.groups["has_"..tool] ~= nil then
 					local stick = "group:stick"
