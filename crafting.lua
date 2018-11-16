@@ -420,7 +420,7 @@ minetest.register_craft({
 })
 ]]
 --------------lapis----------------
-
+--[[
 minetest.register_craft({
 	output = 'minerdream:lapislazuli_block',
 	recipe = {
@@ -436,7 +436,7 @@ minetest.register_craft({
 		{'minerdream:lapislazuli_block'},
 	}
 })
-
+]]
 minetest.register_craft({
 	output = 'minerdream:lapislazuli_smallbrick 4',
 	recipe = {
@@ -510,7 +510,7 @@ minetest.register_craft( {
 })
 
 -------------mineral blocks-------
-
+--[[
 minetest.register_craft({
 	output = 'minerdream:onyx_block',
 	recipe = {
@@ -834,7 +834,7 @@ minetest.register_craft({
 		{'minerdream:nickel_block'},
 	}
 })
-
+]]
 ----------bar stacks---------------
 
 minetest.register_craft({
@@ -1703,7 +1703,7 @@ minetest.register_craft({
 		{'group:stick', '', ''},
 	}
 })
-
+--[[
 minetest.register_craft({
 	output = 'minerdream:spear_steel',
 	recipe = {
@@ -1840,7 +1840,7 @@ minetest.register_craft({
 		{'minerdream:expensivestick', '', ''},
 	}
 })
-
+]]
 --------------------bows----------------
 
 
@@ -1852,7 +1852,7 @@ minetest.register_craft({
 		{'default:copper_ingot', 'farming:cotton', ''},
 	}
 })
-
+--[[
 minetest.register_craft({
 	output = 'minerdream:bow_tin',
 	recipe = {
@@ -1861,7 +1861,7 @@ minetest.register_craft({
 		{'default:tin_ingot', 'farming:cotton', ''},
 	}
 })
-
+]]
 minetest.register_craft({
 	output = 'minerdream:bow_bronze',
 	recipe = {
@@ -1870,7 +1870,7 @@ minetest.register_craft({
 		{'default:bronze_ingot', 'farming:cotton', ''},
 	}
 })
-
+--[[
 minetest.register_craft({
 	output = 'minerdream:bow_steel',
 	recipe = {
@@ -1999,7 +1999,7 @@ minetest.register_craft({
 		{'minerdream:rhodium_bar', 'farming:cotton', ''},
 	}
 })
-
+]]
 ------------unusualweapons and ammo------------
 
 minetest.register_craft({

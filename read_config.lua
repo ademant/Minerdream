@@ -2,7 +2,9 @@
 local has_value = minerdream.has_value 
 local ore_cols={
 	col_num={"crack","scarcity","num_ores","clust_size","y_min","y_max","tier","lump_cooking_time"},
-	groups_num={"has_dust","has_block","in_desert","has_block","has_brick","has_bar","has_lump","has_bar_block","has_dust"}}
+	groups_num={"has_dust","has_block","in_desert","has_block","has_brick",
+		"has_bar","has_lump","has_bar_block","has_dust","has_spear","has_bow","has_arrow","has_pick",
+		"has_axe","has_shovel","has_sword"}}
 local miner_definition = minerdream.import_csv(minerdream.path.."/ores.txt",ore_cols)
 
 if miner_definition["default"] ~= nil then
@@ -64,6 +66,25 @@ minetest.register_craft({
 minetest.register_craft({
 	output = input.." 4",
 	recipe = {{output}} })
+end
+
+local local_get_recipe=function(tool,material,stick)
+	if stick == nil then
+		stick="group:stick"
+	end
+	if tool == "spear" then
+	out_recipe={
+		{'', material, material},
+		{'', stick, material},
+		{stick, '', ''},}
+	end
+	if tool == "bow" then
+		out_recipe = {
+		{'', material, material},
+		{material, '', stick},
+		{material, stick, ''},}
+	end
+	return out_recipe
 end
 
 for i,tdef in pairs(miner_definition) do
@@ -219,9 +240,12 @@ for i,tdef in pairs(miner_definition) do
 			local_item_insert(i,"block_def",block_def)
 			minetest.register_node(minerdream.modname..":"..i.."_block",block_def)
 			print(i)
-			local ingot_def=minerdream.items[i].ingot_def
-			if ingot_def ~= nil then
-				local_craft_block(ingot_def.name,minerdream.modname..":"..i.."_block")
+			local in_def=minerdream.items[i].ingot_def
+			if ingot_def == nil and minerdream.items[i].lump_def ~= nil then
+				local in_def=minerdream.items[i].lump_def
+			end
+			if in_def ~= nil then
+				local_craft_block(in_def.name,minerdream.modname..":"..i.."_block")
 			end
 		end
 		
@@ -236,6 +260,36 @@ for i,tdef in pairs(miner_definition) do
 			local ingot_def=minerdream.items[i].ingot_def
 			if ingot_def ~= nil then
 				local_craft_stack(ingot_def.name,minerdream.modname..":"..i.."_bar_stack")
+			end
+		end
+		
+		if minerdream.items[i].ingot_def then
+			local ingot_name=minerdream.items[i].ingot_def.name
+			for _,tool in ipairs({"spear"}) do
+				print(tool)
+				if tdef.groups["has_"..tool] ~= nil then
+					local stick = "default:stick"
+					if tdef.tool_stick ~= nil then
+						stick=tdef.tool_stick
+					end
+					minetest.register_craft({
+						output=minerdream.modname..":"..tool.."_"..i,
+						recipe=local_get_recipe(tool,ingot_name,stick)
+					})
+				end
+			end
+			for _,tool in ipairs({"bow"}) do
+				print(tool)
+				if tdef.groups["has_"..tool] ~= nil then
+					local stick = "farming:cotton"
+					if tdef.tool_cotton ~= nil then
+						stick=tdef.tool_cotton
+					end
+					minetest.register_craft({
+						output=minerdream.modname..":"..tool.."_"..i,
+						recipe=local_get_recipe(tool,ingot_name,stick)
+					})
+				end
 			end
 		end
 		
