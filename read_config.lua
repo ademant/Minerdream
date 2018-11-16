@@ -4,7 +4,8 @@ local ore_cols={
 	col_num={"crack","scarcity","num_ores","clust_size","y_min","y_max","tier","lump_cooking_time"},
 	groups_num={"has_dust","has_block","in_desert","has_block","has_brick",
 		"has_bar","has_lump","has_bar_block","has_dust","has_spear","has_bow","has_arrow","has_pick",
-		"has_axe","has_shovel","has_sword","has_helmet","has_chestplate","has_shield","has_leggings","has_boots"}}
+		"has_axe","has_shovel","has_sword","has_helmet","has_chestplate","has_shield","has_leggings",
+		"has_boots","drop_as_lump"}}
 local miner_definition = minerdream.import_csv(minerdream.path.."/ores.txt",ore_cols)
 
 if miner_definition["default"] ~= nil then
@@ -57,15 +58,23 @@ minetest.register_craft({
 	recipe = {{output}} })
 end
 local local_craft_stack=function(input,output)
+
 minetest.register_craft({
 	output = output,
 	recipe = {
 		{input, input, },
 		{input, input, },
 	} })
+
 minetest.register_craft({
 	output = input.." 4",
 	recipe = {{output}} })
+end
+
+local local_craft_brick = function(input,output)
+	minetest.register_craft( {type = "shapeless",
+		output = output,
+		recipe = {input, "default:cobble"},})
 end
 
 local local_get_recipe=function(tool,material,stick)
@@ -144,18 +153,23 @@ for i,tdef in pairs(miner_definition) do
 		-- register ores within stone
 		if tdef.crack ~= nil then
 			-- base config of ore found in normal stone
+			local lump_name=minerdream.modname..":"..i
+			if tdef.groups.drop_as_lump ~= nil then
+				lump_name=minerdream.modname..":"..i.."_lump"
+			end
 			ore_def={description=i.." ore",
 				name=minerdream.modname..":stone_with_"..i,
 				groups={cracky=tdef.crack},
 				tiles={"default_stone.png^"..minerdream.modname.."_"..i.."_ore.png"},
-				drop=minerdream.modname..":"..i.."_lump",
+				drop=lump_name,
 				sound=default.node_sound_stone_defaults(),
 				}
 			lump_def={description=i.." lump",
-				name=minerdream.modname..":"..i.."_lump",
+				name=lump_name,
 				inventory_image=minerdream.modname.."_"..i.."_lump.png",
 				stack_max=minerdream.lump_max_stack,
 				}
+			print(lump_name)
 			-- override existing ore?
 			local to_override = false
 			if tdef.overrides ~= nil then
@@ -225,8 +239,6 @@ for i,tdef in pairs(miner_definition) do
 				local grind_time=math.ceil((tdef.lump_cooking_time or 64)/minerdream.dust_cooking_time_reduce)
 				lump_def.grind_time=grind_time
 				local_item_insert(i,"lump_def",lump_def)
-				print(grind_time)
-				print(lump_def.name,dust_def.name)
 				technic.register_grinder_recipe({input = {lump_def.name}, output = dust_def.name.." 2",time=grind_time})
 				dust_def.grind_source=lump_def.name
 			end
@@ -279,11 +291,16 @@ for i,tdef in pairs(miner_definition) do
 			local_item_insert(i,"ingot_def",ingot_def)
 		end
 
-		-- define ore bricks (4 ores)
+		-- define ore bricks (ore + cobble)
 		if tdef.groups.has_brick then
 			local brick_def=local_create_def(i,"brick",tdef.groups.has_brick)
-			local_item_insert(i,"brick_def",brick_def)
 			minetest.register_node(minerdream.modname..":"..i.."_brick",brick_def)
+			brick_def.name=minerdream.modname..":"..i.."_brick"
+			local_item_insert(i,"brick_def",brick_def)
+			if minerdream.items[i].lump_def ~= nil then
+				local lump_def=table.copy(minerdream.items[i].lump_def)
+				local_craft_brick(lump_def.name,brick_def.name)
+			end
 		end
 		
 		-- define ore blocks (9 ores)
@@ -291,7 +308,6 @@ for i,tdef in pairs(miner_definition) do
 			local block_def=local_create_def(i,"block",tdef.groups.has_block)
 			local_item_insert(i,"block_def",block_def)
 			minetest.register_node(minerdream.modname..":"..i.."_block",block_def)
-			print(i)
 			local in_def=minerdream.items[i].ingot_def
 			if ingot_def == nil and minerdream.items[i].lump_def ~= nil then
 				local in_def=minerdream.items[i].lump_def
@@ -303,22 +319,21 @@ for i,tdef in pairs(miner_definition) do
 		
 		-- define bar stack
 		if tdef.groups.has_bar_block then
-			local bar_def=local_create_def(i,"bar_stack",tdef.groups.has_bar_block)
+			local bar_def=local_create_def(i,"bar_block",tdef.groups.has_bar_block)
 			bar_def.paramtype="light"
 			bar_def.is_ground_content=true
 			bar_def.groups={snappy=tdef.groups.has_bar,dig_immediate=3}
-			local_item_insert(i,"bar_stack_def",bar_def)
-			minetest.register_node(minerdream.modname..":"..i.."_bar_stack",bar_def)
+			local_item_insert(i,"bar_block_def",bar_def)
+			minetest.register_node(minerdream.modname..":"..i.."_bar_block",bar_def)
 			local ingot_def=minerdream.items[i].ingot_def
 			if ingot_def ~= nil then
-				local_craft_stack(ingot_def.name,minerdream.modname..":"..i.."_bar_stack")
+				local_craft_stack(ingot_def.name,minerdream.modname..":"..i.."_bar_block")
 			end
 		end
 		
 		if minerdream.items[i].ingot_def then
 			local ingot_name=minerdream.items[i].ingot_def.name
 			for _,tool in ipairs({"spear","pick","axe","sword","shovel","helmet","chestplate","leggings","boots","shield"}) do
-				print(tool)
 				if tdef.groups["has_"..tool] ~= nil then
 					local stick = "group:stick"
 					if tdef.tool_stick ~= nil then
@@ -331,7 +346,6 @@ for i,tdef in pairs(miner_definition) do
 				end
 			end
 			for _,tool in ipairs({"bow"}) do
-				print(tool)
 				if tdef.groups["has_"..tool] ~= nil then
 					local stick = "farming:cotton"
 					if tdef.tool_cotton ~= nil then
