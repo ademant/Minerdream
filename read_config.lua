@@ -292,7 +292,7 @@ for i,tdef in pairs(miner_definition) do
 			for _,tool in ipairs({"spear","pick","axe","sword","shovel"}) do
 				print(tool)
 				if tdef.groups["has_"..tool] ~= nil then
-					local stick = "default:stick"
+					local stick = "group:stick"
 					if tdef.tool_stick ~= nil then
 						stick=tdef.tool_stick
 					end
@@ -307,7 +307,11 @@ for i,tdef in pairs(miner_definition) do
 				if tdef.groups["has_"..tool] ~= nil then
 					local stick = "farming:cotton"
 					if tdef.tool_cotton ~= nil then
-						stick=tdef.tool_cotton
+						if tdef.tool_cotton == "steel_wire" then
+							stick = minerdream.steel_wire
+						else
+							stick=tdef.tool_cotton
+						end
 					end
 					minetest.register_craft({
 						output=minerdream.modname..":"..tool.."_"..i,
