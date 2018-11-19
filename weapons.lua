@@ -2724,7 +2724,7 @@ minetest.register_tool('minerdream:golden_crystal_trisword', {
 })
 
 ----------------spears---------------
-
+--[[
 minetest.register_tool("minerdream:spear_bronze", {
 		description = "".. core.colorize("#BFFFFF", "Bronze spear\n")..core.colorize("#A0A0A0", "tier: 2 (uncommon)\n")..core.colorize("#A0A0A0", "mele damage: 7\n")..core.colorize("#A0A0A0", "range: 6.0 \n")..core.colorize("#A0A0A0", "attack interval: 1.50 "),
 	inventory_image = "minerdream_spear_bronze.png",
@@ -2952,7 +2952,7 @@ minetest.register_tool('minerdream:spear_rhodium', {
 		damage_groups = {fleshy=15},
 	},
 })
-
+]]
 ---------------artefact--------
 
 minetest.register_tool('minerdream:dagger', {
@@ -3044,3 +3044,4 @@ minetest.register_tool('minerdream:katana', {
 		damage_groups = {fleshy=12},
 	},
 })
+

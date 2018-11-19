@@ -35,30 +35,31 @@ for i,tdef in pairs(tool_definition) do
 		for col in pairs(tdef) do
 			tooldef=minerdream.parse_tree(tooldef,col,tdef[col])
 		end
-		for tool in pairs({"pick"}) do
+		for _,tool in pairs({"pick","axe","sword","shovel","spear"}) do
 			if tooldef[tool] ~= nil then
 				local ttv=tooldef[tool]
 				tt_def={description=i.." "..tool,
-					inventory_image=minderdream.modname.."_"..tool.."_"..i..".png",
+					inventory_image=minerdream.modname.."_"..tool.."_"..i..".png",
 					range=tooldef.range or 2,
 					tool_capabilities={max_drop_level = 1},
 					damage_groups = {fleshy = ttv.fleshy or 4},
 					}
-minetest.register_tool('minerdream:pick_rhodium', {
-		description = "".. core.colorize("#00FF00", "rhodium pickaxe\n")..core.colorize("#A0A0A0", "tier: 6 (epic)\n")..core.colorize("#A0A0A0", "mele damage: 12\n")..core.colorize("#A0A0A0", "range: 5.0 \n")..core.colorize("#A0A0A0", "attack interval: 0.75 "),
-	wield_scale = {x=1.55,y=1.55,z=1.2},
-	inventory_image = "minerdream_pick_rhodium.png",
-	range = 5.0,
-	tool_capabilities = {
-		full_punch_interval = 0.8,
-		max_drop_level=1,
-		groupcaps={
-			cracky={times={[6]=6.00, [5]=4.00, [4]=3.00, [1]=1.25, [2]=0.5, [3]=0.20}, uses=105, maxlevel=3},
-			crumbly={times={[1]=0.6, [2]=0.25, [3]=0.10}, uses=105, maxlevel=3},
-		},
-		damage_groups = {fleshy=12},
-	},
-})
+				for _,gc in pairs({"cracky","crumbly","choppy","snappy"}) do
+					if ttv[gc] ~= nil then
+						local ml = 1
+						if tooldef.maxlevel ~=nil then
+							ml=tooldef.maxlevel
+						end
+						if ttv.maxlevel ~= nil then
+							ml = ttv.maxlevel
+						end
+						tt_def.tool_capabilities[gc]={times=table.copy(ttv[gc]),
+							uses=tooldef.uses,max_level=ml}
+					end
+				end
+				print(dump2(tt_def))
+				toolname=minerdream.modname..":"..tool.."_"..i
+				minetest.register_tool(toolname,tt_def)
 			end
 		end
 	end

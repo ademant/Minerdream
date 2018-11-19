@@ -1,3 +1,4 @@
+--[[
 minetest.register_tool('minerdream:pick_rhodium', {
 		description = "".. core.colorize("#00FF00", "rhodium pickaxe\n")..core.colorize("#A0A0A0", "tier: 6 (epic)\n")..core.colorize("#A0A0A0", "mele damage: 12\n")..core.colorize("#A0A0A0", "range: 5.0 \n")..core.colorize("#A0A0A0", "attack interval: 0.75 "),
 	wield_scale = {x=1.55,y=1.55,z=1.2},
@@ -702,5 +703,5 @@ minetest.register_tool('minerdream:sword_flint', {
 		damage_groups = {fleshy=5},
 	},
 })
-
+]]
 
