@@ -57,7 +57,7 @@ for i,tdef in pairs(tool_definition) do
 							uses=tooldef.uses,max_level=ml}
 					end
 				end
-				print(dump2(tt_def))
+--				print(dump2(tt_def))
 				toolname=minerdream.modname..":"..tool.."_"..i
 				minetest.register_tool(toolname,tt_def)
 			end

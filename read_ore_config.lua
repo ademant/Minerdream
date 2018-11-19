@@ -81,6 +81,7 @@ local local_get_recipe=function(tool,material,stick)
 	if stick == nil then
 		stick="group:stick"
 	end
+	local out_recipe={}
 	if tool == "spear" then
 	out_recipe={
 		{'', material, material},
@@ -149,13 +150,28 @@ local local_get_recipe=function(tool,material,stick)
 end
 
 for i,tdef in pairs(miner_definition) do
-	if i ~= "default" then
+	local is_enabled = true
+	if tdef.disabled_by_mod ~= nil then
+		print(tdef.disabled_by_mod)
+		print(dump2(minetest.get_modnames()))
+		if minetest.get_modpath(tdef.disabled_by_mod)~=nil then
+			is_enabled=false
+		end
+	end
+	if (i ~= "default") and (is_enabled) then
+		minerdream.items[i]={}
+		local ore_modname=minerdream.modname
+		if tdef.orig_modname then
+			ore_modname=tdef.orig_modname
+		end
+		local needs_mapgen=false
+		local mapgen_name=""
 		-- register ores within stone
 		if tdef.crack ~= nil then
 			-- base config of ore found in normal stone
-			local lump_name=minerdream.modname..":"..i
+			local lump_name=ore_modname..":"..i
 			if tdef.groups.drop_as_lump ~= nil then
-				lump_name=minerdream.modname..":"..i.."_lump"
+				lump_name=lump_name.."_lump"
 			end
 			ore_def={description=i.." ore",
 				name=minerdream.modname..":stone_with_"..i,
@@ -169,7 +185,6 @@ for i,tdef in pairs(miner_definition) do
 				inventory_image=lump_name:gsub(":","_")..".png",
 				stack_max=minerdream.lump_max_stack,
 				}
---			print(lump_name)
 			-- override existing ore?
 			local to_override = false
 			if tdef.overrides ~= nil then
@@ -201,18 +216,8 @@ for i,tdef in pairs(miner_definition) do
 				
 				-- if not already defined, then add mapgen parameter
 				if tdef.scarcity ~= nil then
-					local map_def={ore_type    = "scatter",
-								ore            = ore_name,
-								wherein        = "default:stone",
-								clust_scarcity = tdef.scarcity * tdef.scarcity * tdef.scarcity,
-								clust_num_ores = tdef.num_ores or 1,
-								clust_size     = tdef.clust_size or 1,
-								y_min          = tdef.y_min or (-31000),
-								y_max          = tdef.y_max or 0,
-							}
-					
-					local_item_insert(i,"map_def",map_def)
-					minetest.register_ore(map_def)
+					needs_mapgen = true
+					mapgen_name=ore_def.name
 				end
 			end
 			local_item_insert(i,"ore_def",ore_def)
@@ -223,9 +228,29 @@ for i,tdef in pairs(miner_definition) do
 				desertore_def.name=minerdream.modname..":desertstone_with_"..i
 				desertore_def.tiles={"default_desert_stone.png^"..minerdream.modname.."_"..i.."_ore.png"}
 				local_item_insert(i,"desertore_def",desertore_def)
-				print(desertore_def.name)
 				minetest.register_node(desertore_def.name,desertore_def)
 			end
+		else
+			-- if not already defined, then add mapgen parameter
+			if tdef.scarcity ~= nil then
+				needs_mapgen = true
+				mapgen_name=minerdream.modname..":"..i
+			end
+		end
+		
+		-- define mapgeneration for ores
+		if needs_mapgen then
+			local map_def={ore_type    = "scatter",
+						ore            = mapgen_name,
+						wherein        = "default:stone",
+						clust_scarcity = tdef.scarcity * tdef.scarcity * tdef.scarcity,
+						clust_num_ores = tdef.num_ores or 1,
+						clust_size     = tdef.clust_size or 1,
+						y_min          = tdef.y_min or (-31000),
+						y_max          = tdef.y_max or 0,
+					}
+			local_item_insert(i,"map_def",map_def)
+			minetest.register_ore(map_def)
 		end
 		
 		-- define ore dust
@@ -310,7 +335,7 @@ for i,tdef in pairs(miner_definition) do
 			local_item_insert(i,"block_def",block_def)
 			minetest.register_node(minerdream.modname..":"..i.."_block",block_def)
 			local in_def=minerdream.items[i].ingot_def
-			if ingot_def == nil and minerdream.items[i].lump_def ~= nil then
+			if in_def == nil and minerdream.items[i].lump_def ~= nil then
 				local in_def=minerdream.items[i].lump_def
 			end
 			if in_def ~= nil then
@@ -332,7 +357,7 @@ for i,tdef in pairs(miner_definition) do
 			end
 		end
 		
-		if minerdream.items[i].ingot_def then
+		if minerdream.items[i].ingot_def ~= nil then
 			local ingot_name=minerdream.items[i].ingot_def.name
 			for _,tool in ipairs({"spear","pick","axe","sword","shovel","helmet","chestplate","leggings","boots","shield"}) do
 				if tdef.groups["has_"..tool] ~= nil then
