@@ -218,11 +218,12 @@ for i,tdef in pairs(miner_definition) do
 			local_item_insert(i,"ore_def",ore_def)
 			local_item_insert(i,"lump_def",lump_def)
 			-- define desert ores
-			if tdef.in_desert then
+			if tdef.groups.in_desert then
 				desertore_def=table.copy(ore_def)
 				desertore_def.name=minerdream.modname..":desertstone_with_"..i
 				desertore_def.tiles={"default_desert_stone.png^"..minerdream.modname.."_"..i.."_ore.png"}
 				local_item_insert(i,"desertore_def",desertore_def)
+				print(desertore_def.name)
 				minetest.register_node(desertore_def.name,desertore_def)
 			end
 		end

@@ -479,3 +479,11 @@ minetest.register_node("minerdream:garnet", {
 	},
 })
 
+-- from original version by daviddoesminetest
+minetest.register_node("minerdream:desertstone_with_coal", {
+	description = "Desert coal ore",
+	tiles = {"default_desert_stone.png^default_mineral_coal.png"},
+	groups = {cracky = 3},
+	drop = 'default:coal_lump 1',
+	sounds = default.node_sound_stone_defaults(),
+})
