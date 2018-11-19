@@ -166,10 +166,10 @@ for i,tdef in pairs(miner_definition) do
 				}
 			lump_def={description=i.." lump",
 				name=lump_name,
-				inventory_image=minerdream.modname.."_"..i.."_lump.png",
+				inventory_image=lump_name:gsub(":","_")..".png",
 				stack_max=minerdream.lump_max_stack,
 				}
-			print(lump_name)
+--			print(lump_name)
 			-- override existing ore?
 			local to_override = false
 			if tdef.overrides ~= nil then

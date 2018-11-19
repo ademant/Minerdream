@@ -20,6 +20,10 @@ minerdream.import_csv = function(infile,def)
 	if def.seperator then
 		splitchar=def.seperator
 	end
+	local as_numeric=false
+	if def.as_numeric then
+		as_numeric = true
+	end
 	local header = file:read():gsub("\r",""):split(splitchar,true)
 	-- read each line, split in separat fields and stores in array
 	-- by header the value is stored as numeric, in the group environment or as text
@@ -43,8 +47,16 @@ minerdream.import_csv = function(infile,def)
 						dsaved = true
 					end
 				end
-				if not dsaved then
-					nrow[th]=d
+				if th == "name" then
+					nrow[th] = d
+				else
+					if not dsaved then
+						if as_numeric then
+							nrow[th] = tonumber(d)
+						else
+							nrow[th]=d
+						end
+					end
 				end
 			end
 		end
