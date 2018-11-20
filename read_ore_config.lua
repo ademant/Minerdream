@@ -93,64 +93,56 @@ local local_get_recipe=function(tool,material,stick)
 		{'', material, material},
 		{'', stick, material},
 		{stick, '', ''},}
-	end
-	if tool == "bow" then
+	elseif tool == "bow" then
 		out_recipe = {
 		{'', material, material},
 		{material, '', stick},
 		{material, stick, ''},}
-	end
-	if tool == "pick" then
+	elseif tool == "pick" then
 		out_recipe = {
 		{material, material, material},
 		{'', stick, ''},
 		{'', stick, ''},}
-	end
-	if tool == "axe" then
+	elseif tool == "axe" then
 		out_recipe = {
 		{material, material, ''},
 		{material, stick, ''},
 		{'', stick, ''},}
-	end
-	if tool == "shovel" then
+	elseif tool == "shovel" then
 		out_recipe = {
 		{'', material, ''},
 		{'', stick, ''},
 		{'', stick, ''},}
-	end
-	if tool == "sword" then
+	elseif tool == "sword" then
 		out_recipe = {
 		{'', material, ''},
 		{'', material, ''},
 		{'', stick, ''},}
-	end
-	if tool == "helmet" then
+	elseif tool == "helmet" then
 		out_recipe = {
 		{material, material, material},
 		{material, '', material},}
-	end
-	if tool == "chestplate" then
+	elseif tool == "chestplate" then
 		out_recipe = {
 		{material, '', material},
 		{material, material, material},
 		{material, material, material},}
-	end
-	if tool == "leggings" then
+	elseif tool == "leggings" then
 	out_recipe = {
 		{material, material, material},
 		{material, '', material},
 		{material, '', material},}
-	end
-	if tool == "boots" then
+	elseif tool == "boots" then
 	out_recipe = {
 		{material, '', material},
 		{material, '', material},}
-	end
-	if tool == "shield" then
+	elseif tool == "shield" then
 	out_recipe = {
 		{material, material, material},
 		{material, material, material},
 		{'', material, ''},}
+	else
+		out_recipe={}
 	end
 	return out_recipe
 end
@@ -294,6 +286,7 @@ for i,tdef in pairs(miner_definition) do
 			if tdef.ingot_name then --already defined and overridden with new image
 				ingot_def.name=nil
 				minetest.override_item(tdef.ingot_name,ingot_def)
+				minetest.register_alias(tdef.ingot_name,minerdream.modname..":"..i.."_bar")
 				ingot_def.name=tdef.ingot_name
 			else
 				ingot_def.name=minerdream.modname..":"..i.."_ingot"

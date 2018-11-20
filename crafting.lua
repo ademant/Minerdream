@@ -290,42 +290,6 @@ minetest.register_craft({
 })
 
 
--------------mineralsmelting----------
---[[
-local function smelt_register(element,cooktime)
-  minetest.register_craft({
-	type="cooking",
-	cooktime=cooktime,
-	output="minerdream:"..element.."_bar",
-	recipe="minerdream:"..element.."_lump",
-  })
-  if minetest.get_modpath("technic") then
-  	technic.register_grinder_recipe({input = {"minerdream:"..element.."_lump"}, output = "minerdream:"..element.."_dust 2"})
-  	technic.register_grinder_recipe({input = {"minerdream:"..element.."_bar"}, output = "minerdream:"..element.."_dust"})
-    minetest.register_craft({
-	  type="cooking",
-	  cooktime=cooktime,
-	  output="minerdream:"..element.."_bar",
-	  recipe="minerdream:"..element.."_dust",
-    })
-  end
-end]]
---[[
-smelt_register("potassium",2)
-smelt_register("calcium",2)
-smelt_register("nickel",4)
---smelt_register("lead",4)
-smelt_register("zinc",4)
---smelt_register("silver",8)
-smelt_register("platinum",16)
-smelt_register("cobalt",32)
-smelt_register("ruthenium",32)
-smelt_register("tantalum",64)
-smelt_register("rhodium",64)
-if not minetest.get_modpath("aluminium") then
-  smelt_register("aluminium",32)
-end
-]]
 --------------lapis----------------
 
 minetest.register_craft({
@@ -1254,7 +1218,6 @@ minetest.register_craft({
 	recipe = {
 		{'', 'minerdream:amethyst', ''},
 		{'default:gold_ingot', 'minerdream:helmet_cobalt', 'default:gold_ingot'},
-
 	}
 })
 
@@ -1264,7 +1227,6 @@ minetest.register_craft({
 		{'minerdream:amethyst', '', 'minerdream:amethyst'},
 		{'default:gold_ingot', 'minerdream:chestplate_cobalt', 'default:gold_ingot'},
 		{'default:gold_ingot', 'default:gold_ingot', 'default:gold_ingot'},
-
 	}
 })
 
@@ -1274,7 +1236,6 @@ minetest.register_craft({
 		{'', 'default:gold_ingot', ''},
 		{'minerdream:amethyst', 'minerdream:leggings_cobalt', 'minerdream:amethyst'},
 		{'', '', ''},
-
 	}
 })
 
@@ -1284,7 +1245,6 @@ minetest.register_craft({
 		{'', '', ''},
 		{'minerdream:amethyst', 'minerdream:boots_cobalt', 'minerdream:amethyst'},
 		{'default:gold_ingot', '', 'default:gold_ingot'},
-
 	}
 })
 
@@ -1294,7 +1254,6 @@ minetest.register_craft({
 		{'', 'default:gold_ingot', ''},
 		{'default:gold_ingot', 'minerdream:amethyst', 'default:gold_ingot'},
 		{'', 'minerdream:shield_cobalt', ''},
-
 	}
 })
 
@@ -1303,7 +1262,6 @@ minetest.register_craft({
 	recipe = {
 		{'', 'minerdream:garnet', ''},
 		{'default:bronze_ingot', 'minerdream:helmet_ruthenium', 'default:bronze_ingot'},
-
 	}
 })
 
