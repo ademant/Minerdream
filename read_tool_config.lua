@@ -1,5 +1,8 @@
 
 local has_value = minerdream.has_value 
+local tier_cols={
+	col_num={"name"},}
+local tier_definition = minerdream.import_csv(minerdream.path.."/tiers.txt",tier_cols)
 local tool_cols={
 	col_num={"range","uses"},
 	as_numeric=1,
@@ -30,7 +33,9 @@ minerdream.parse_tree=function(mat,ind,val)
 end
 
 for i,tdef in pairs(tool_definition) do
-	if i ~= "default" then
+	print(dump2(minerdream.items[i]))
+	if (i ~= "default") and (minerdream.items[i] ~= nil) then
+		tdef=table.copy(minerdream.items[i])
 		local tooldef={}
 		for col in pairs(tdef) do
 			tooldef=minerdream.parse_tree(tooldef,col,tdef[col])
@@ -38,7 +43,9 @@ for i,tdef in pairs(tool_definition) do
 		for _,tool in pairs({"pick","axe","sword","shovel","spear"}) do
 			if tooldef[tool] ~= nil then
 				local ttv=tooldef[tool]
-				tt_def={description=i.." "..tool,
+				tt_def={description=core.colorize("#"..tdef.tierdef.color, i.." "..tool.."\n")..tdef.tier_string..
+						core.colorize("#A0A0A0", "tier: "..tdef.tierdef.name.." ("..tdef.tierdef.desc..")"),
+--				tt_def={description=i.." "..tool,
 					inventory_image=minerdream.modname.."_"..tool.."_"..i..".png",
 					range=tooldef.range or 2,
 					tool_capabilities={max_drop_level = 1},

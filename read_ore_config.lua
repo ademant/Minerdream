@@ -1,5 +1,8 @@
 
 local has_value = minerdream.has_value 
+local tier_cols={
+	col_num={"name"},}
+local tier_definition = minerdream.import_csv(minerdream.path.."/tiers.txt",tier_cols)
 local ore_cols={
 	col_num={"crack","scarcity","num_ores","clust_size","y_min","y_max","tier","lump_cooking_time"},
 	groups_num={"has_dust","has_block","in_desert","has_block","has_brick",
@@ -30,12 +33,15 @@ if miner_definition["default"] ~= nil then
 	end
 end
 
-local local_create_def=function(name,type,cracky)
+local local_create_def=function(name,type,cracky,tdef)
 	local temp_def={description=name.." "..type,
 				tiles={minerdream.modname.."_"..name.."_"..type..".png"},
 				groups={cracky=cracky},
 				sounds = default.node_sound_stone_defaults(),
 				}
+	if tdef.tier then
+		temp_def.description=core.colorize("#00FF00", temp_def.description.."\n")..tdef.tier_string
+	end
 	return temp_def
 end
 local local_item_insert=function(name,ttype,def)
@@ -152,9 +158,7 @@ end
 for i,tdef in pairs(miner_definition) do
 	local is_enabled = true
 	if tdef.disabled_by_mod ~= nil then
-		print(tdef.disabled_by_mod)
-		print(dump2(minetest.get_modnames()))
-		if minetest.get_modpath(tdef.disabled_by_mod)~=nil then
+		if minerdream.has_value(minetest.get_modnames(),tdef.disabled_by_mod) then
 			is_enabled=false
 		end
 	end
@@ -166,6 +170,13 @@ for i,tdef in pairs(miner_definition) do
 		end
 		local needs_mapgen=false
 		local mapgen_name=""
+		tdef.tier_string=""
+		tdef.tierd={}
+		if tdef.tier then
+			tdef.tierd=tier_definition[tostring(tdef.tier)]
+			tdef.tier_string=core.colorize("#A0A0A0", "tier: "..tdef.tier.." ("..tdef.tierd.desc..")")
+			minerdream.items[i].tierdef=table.copy(tier_definition[tostring(tdef.tier)])
+		end
 		-- register ores within stone
 		if tdef.crack ~= nil then
 			-- base config of ore found in normal stone
@@ -196,6 +207,10 @@ for i,tdef in pairs(miner_definition) do
 					lump_def.name=temp_def.drop
 					to_override = true
 				end
+			end
+			if tdef.tier then
+				ore_def.description=core.colorize("#00FF00", ore_def.description.."\n")..tdef.tier_string
+				lump_def.description=core.colorize("#00FF00", lump_def.description.." lump\n")..tdef.tier_string
 			end
 			local ore_name=ore_def.name
 			local lump_name=lump_def.name
@@ -256,7 +271,7 @@ for i,tdef in pairs(miner_definition) do
 		-- define ore dust
 		-- only makes sense if it can be grinded
 		if tdef.groups.has_dust and minetest.get_modpath("technic") then
-			local dust_def=local_create_def(i,"dust",tdef.groups.has_dust)
+			local dust_def=local_create_def(i,"dust",tdef.groups.has_dust,tdef)
 			dust_def.tiles={minerdream.modname.."_dust.png"}
 			dust_def.inventory_image=minerdream.modname.."_dust.png"
 			minetest.register_node(minerdream.modname..":"..i.."_dust",dust_def)
@@ -273,7 +288,7 @@ for i,tdef in pairs(miner_definition) do
 		
 		-- define ingot
 		if tdef.groups.has_bar then
-			local ingot_def=local_create_def(i,"ingot",tdef.groups.has_bar)
+			local ingot_def=local_create_def(i,"ingot",tdef.groups.has_bar,tdef)
 			ingot_def.inventory_image=minerdream.modname.."_"..i.."_bar.png"
 			ingot_def.stack_max = minerdream.ingot_max_stack
 			if tdef.ingot_name then --already defined and overridden with new image
@@ -319,7 +334,7 @@ for i,tdef in pairs(miner_definition) do
 
 		-- define ore bricks (ore + cobble)
 		if tdef.groups.has_brick then
-			local brick_def=local_create_def(i,"brick",tdef.groups.has_brick)
+			local brick_def=local_create_def(i,"brick",tdef.groups.has_brick,tdef)
 			minetest.register_node(minerdream.modname..":"..i.."_brick",brick_def)
 			brick_def.name=minerdream.modname..":"..i.."_brick"
 			local_item_insert(i,"brick_def",brick_def)
@@ -331,7 +346,7 @@ for i,tdef in pairs(miner_definition) do
 		
 		-- define ore blocks (9 ores)
 		if tdef.groups.has_block then
-			local block_def=local_create_def(i,"block",tdef.groups.has_block)
+			local block_def=local_create_def(i,"block",tdef.groups.has_block,tdef)
 			local_item_insert(i,"block_def",block_def)
 			minetest.register_node(minerdream.modname..":"..i.."_block",block_def)
 			local in_def=minerdream.items[i].ingot_def
@@ -345,7 +360,7 @@ for i,tdef in pairs(miner_definition) do
 		
 		-- define bar stack
 		if tdef.groups.has_bar_block then
-			local bar_def=local_create_def(i,"bar_block",tdef.groups.has_bar_block)
+			local bar_def=local_create_def(i,"bar_block",tdef.groups.has_bar_block,tdef)
 			bar_def.paramtype="light"
 			bar_def.is_ground_content=true
 			bar_def.groups={snappy=tdef.groups.has_bar,dig_immediate=3}
