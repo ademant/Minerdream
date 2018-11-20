@@ -7,7 +7,7 @@ local tool_cols={
 	col_num={"range","uses"},
 	as_numeric=1,
 }
-local tool_definition = minerdream.import_csv(minerdream.path.."/tools.txt",tool_cols)
+local tool_definition = minerdream.import_csv(minerdream.path.."/armor.txt",tool_cols)
 --print(dump2(tool_definition))
 
 
@@ -18,8 +18,9 @@ for i,tdef in pairs(tool_definition) do
 		for col in pairs(tdef) do
 			tooldef=minerdream.parse_tree(tooldef,col,tdef[col])
 		end
-		for _,tool in pairs({"pick","axe","sword","shovel","spear"}) do
+		for _,tool in pairs({"helmet","chestplate","boots","leggings","shields"}) do
 			if tooldef[tool] ~= nil then
+				print(dump2(idef))
 				local ttv=tooldef[tool]
 				tdesc=core.colorize("#"..idef.tierdef.color, i.." "..tool.."\n")..
 						core.colorize("#A0A0A0", "tier: "..idef.tierdef.name.." ("..idef.tierdef.desc..")")
@@ -52,6 +53,7 @@ for i,tdef in pairs(tool_definition) do
 							uses=tooldef.uses,max_level=ml}
 					end
 				end
+--				print(dump2(tt_def))
 				toolname=minerdream.modname..":"..tool.."_"..i
 				minetest.register_tool(toolname,tt_def)
 			end

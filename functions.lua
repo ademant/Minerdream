@@ -70,3 +70,24 @@ minerdream.import_csv = function(infile,def)
 
 	return outdata
 end
+
+minerdream.parse_tree=function(mat,ind,val)
+	if string.find(ind,"_") == nil then
+		mat[ind] = {}
+		mat[ind] = tonumber(val)
+	else
+		local ind_split=string.split(ind,"_")
+		local first=ind_split[1]
+		local second=string.split(ind,"_")[2]
+		if #ind_split > 2 then
+			for n=3,#ind_split do
+				second = second.."_"..ind_split[n]
+			end
+		end
+		if mat[first] == nil then
+			mat[first]={}
+		end
+		mat[first]=minerdream.parse_tree(mat[first],second,val)
+	end
+	return(mat)
+end

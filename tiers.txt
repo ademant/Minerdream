@@ -3,7 +3,7 @@ name,color,desc
 2,BFFFFF,uncommon
 3,00FFFF,almost rare
 4,40FF80,rare
-5,0040FF,extra rare 
+5,0040FF,extra rare
 6,00FF00,epic
 7,00BF00,royal
 8,8000BF,heroic
