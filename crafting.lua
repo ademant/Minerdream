@@ -119,22 +119,9 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
-	output = 'minerdream:sulfur_powder',
-	recipe = {
-		{'minerdream:sulfur_lump'},
-	}
-})
-minetest.register_craft({
 	output = 'dye:blue 3',
 	recipe = {
 		{'minerdream:lapislazuli_lump'},
-	}
-})
-
-minetest.register_craft({
-	output = 'minerdream:saltpeter_powder',
-	recipe = {
-		{'minerdream:saltpeter_lump'},
 	}
 })
 
@@ -161,13 +148,24 @@ minetest.register_craft({
 	}
 })
 
-minetest.register_craft({
-	output = 'minerdream:expensivestick 2',
-	recipe = {
-		{'', 'minerdream:silver_bar', ''},
-		{'', 'default:gold_ingot', ''},
-	}
-})
+local silveringot=minerdream.items["silver"]
+if silveringot ~= nil then
+	local ingot_name=silveringot.ingot_name
+	if ingot_name == nil and silveringot.ingot_def ~= nil then
+		ingot_name = silveringot.ingot_def.name
+	end
+	print(ingot_name)
+	print(dump2(silveringot))
+	if ingot_name ~= nil then
+		minetest.register_craft({
+			output = 'minerdream:expensivestick 2',
+			recipe = {
+				{ingot_name},
+				{ 'default:gold_ingot'},
+			}
+		})
+	end
+end
 
 minetest.register_craft({
 	output = 'default:torch 8',
