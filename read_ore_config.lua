@@ -8,7 +8,7 @@ local ore_cols={
 	groups_num={"has_dust","has_block","in_desert","has_block","has_brick",
 		"has_bar","has_lump","has_bar_block","has_dust","has_spear","has_bow","has_arrow","has_pick",
 		"has_axe","has_shovel","has_sword","has_helmet","has_chestplate","has_shield","has_leggings",
-		"has_boots","drop_as_lump"}}
+		"has_boots","drop_as_lump","is_gemstone","has_no_drop"}}
 local miner_definition = minerdream.import_csv(minerdream.path.."/ores.txt",ore_cols)
 
 if miner_definition["default"] ~= nil then
@@ -176,14 +176,32 @@ for i,tdef in pairs(miner_definition) do
 			if tdef.groups.drop_as_lump ~= nil then
 				lump_name=lump_name.."_lump"
 			end
-			ore_def={description=i.." ore",
+			local ore_def={description=i.." ore",
 				name=minerdream.modname..":stone_with_"..i,
 				groups={cracky=tdef.crack},
 				tiles={"default_stone.png^"..minerdream.modname.."_"..i.."_ore.png"},
-				drop=lump_name,
 				sound=default.node_sound_stone_defaults(),
 				}
-			lump_def={description=i.." lump",
+			-- drops item
+			if tdef.groups.has_no_drop == nil then
+				ore_def.drop=lump_name
+			end
+			if tdef.stackmax then
+				ore_def.stack_max = tdef.stackmax
+			end
+			if tdef.groups.is_gemstone ~= nil then
+				ore_def.drawtype = "mesh"
+				ore_def.mesh = "topaz.obj"
+				ore_def.walkable = "true"
+				ore_def.inventory_image = "minerdream_"..i.."_gem.png"
+				ore_def.selection_box = {type = "fixed",
+					fixed = {{-0.2, -0.5, -0.2, 0.2, -0.25, 0.2},}
+					}
+				ore_def.node_box = {type = "fixed",
+					fixed = {{-0.2, -0.5, -0.2, 0.2, -0.25, 0.2},},
+					}
+			end
+			local lump_def={description=i.." lump",
 				name=lump_name,
 				inventory_image=lump_name:gsub(":","_")..".png",
 				stack_max=minerdream.lump_max_stack,

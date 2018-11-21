@@ -303,7 +303,7 @@ minetest.register_node("minerdream:lapislazuligold_brick_a", {
 
 
 -------------gemstones---------------
-
+--[[
 minetest.register_node("minerdream:onyx", {
 		description = "".. core.colorize("#00FF00", "Onyx gemstone\n")..core.colorize("#A0A0A0", "tier: 6 (eepic)"),
 	drawtype = "mesh",
@@ -478,7 +478,7 @@ minetest.register_node("minerdream:garnet", {
 		},
 	},
 })
-
+]]
 -- from original version by daviddoesminetest
 minetest.register_node("minerdream:desertstone_with_coal", {
 	description = "Desert coal ore",

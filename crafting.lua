@@ -19,8 +19,8 @@ local local_craft_pillar_bottom=function(input,output)
 minetest.register_craft({
 	output = output,
 	recipe = {
-		{,input,},
-		{,input,},
+		{'',input,''},
+		{'',input,''},
 		{input,input,input},
 	} })
 end
@@ -28,8 +28,8 @@ local local_craft_pillar_both=function(input,output)
 minetest.register_craft({
 	output = output,
 	recipe = {
-		{,input,},
-		{,input,},
+		{'',input,''},
+		{'',input,''},
 		{input,input,input},
 	} })
 end
@@ -38,8 +38,8 @@ minetest.register_craft({
 	output = output,
 	recipe = {
 		{input,input,input},
-		{,input,},
-		{,input,},
+		{'',input,''},
+		{'',input,''},
 	} })
 end
 local local_craft_block=function(input,output)
