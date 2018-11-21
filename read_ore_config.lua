@@ -190,10 +190,12 @@ for i,tdef in pairs(miner_definition) do
 				ore_def.stack_max = tdef.stackmax
 			end
 			if tdef.groups.is_gemstone ~= nil then
+				ore_def.name=minerdream.modname..":"..i
 				ore_def.drawtype = "mesh"
-				ore_def.mesh = "topaz.obj"
+				ore_def.mesh = i..".obj"
 				ore_def.walkable = "true"
 				ore_def.inventory_image = "minerdream_"..i.."_gem.png"
+				ore_def.tiles = {"minerdream_"..i..".png"}
 				ore_def.selection_box = {type = "fixed",
 					fixed = {{-0.2, -0.5, -0.2, 0.2, -0.25, 0.2},}
 					}
@@ -232,13 +234,16 @@ for i,tdef in pairs(miner_definition) do
 				lump_def.ingot_name=output.item:get_name()
 				tdef.ingot_name=output.item:get_name()
 				minetest.override_item(ore_name,ore_def)
-				minetest.override_item(lump_name,lump_def)
+				if tdef.groups.has_no_lump ~= nil then
+					minetest.override_item(lump_name,lump_def)
+				end
 				lump_def.name=lump_name
 				ore_def.name=ore_name
 			else
 				minetest.register_node(ore_def.name,ore_def)
-				minetest.register_craftitem(lump_def.name,lump_def)
-				
+				if tdef.groups.has_no_lump ~= nil then
+					minetest.register_craftitem(lump_def.name,lump_def)
+				end
 				-- if not already defined, then add mapgen parameter
 				if tdef.scarcity ~= nil then
 					needs_mapgen = true
@@ -246,7 +251,9 @@ for i,tdef in pairs(miner_definition) do
 				end
 			end
 			local_item_insert(i,"ore_def",ore_def)
-			local_item_insert(i,"lump_def",lump_def)
+			if tdef.groups.has_no_lump ~= nil then
+				local_item_insert(i,"lump_def",lump_def)
+			end
 			-- define desert ores
 			if tdef.groups.in_desert then
 				desertore_def=table.copy(ore_def)
