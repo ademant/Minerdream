@@ -68,8 +68,8 @@ local local_craft_stack=function(input,output)
 minetest.register_craft({
 	output = output,
 	recipe = {
-		{input, input, },
-		{input, input, },
+		{input, input },
+		{input, input },
 	} })
 
 minetest.register_craft({

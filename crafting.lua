@@ -1,188 +1,83 @@
+local local_craft_stack=function(input,output)
+minetest.register_craft({
+	output = output,
+	recipe = {
+		{input, input},
+		{input, input},
+	} })
+end
+local local_craft_pillar=function(input,output)
+minetest.register_craft({
+	output = output,
+	recipe = {
+		{input},
+		{input},
+		{input},
+	} })
+end
+local local_craft_pillar_bottom=function(input,output)
+minetest.register_craft({
+	output = output,
+	recipe = {
+		{,input,},
+		{,input,},
+		{input,input,input},
+	} })
+end
+local local_craft_pillar_both=function(input,output)
+minetest.register_craft({
+	output = output,
+	recipe = {
+		{,input,},
+		{,input,},
+		{input,input,input},
+	} })
+end
+local local_craft_pillar_top=function(input,output)
+minetest.register_craft({
+	output = output,
+	recipe = {
+		{input,input,input},
+		{,input,},
+		{,input,},
+	} })
+end
+local local_craft_block=function(input,output)
+minetest.register_craft({
+	output = output,
+	recipe = {
+		{input, input, input},
+		{input, input, input},
+		{input, input, input},
+	} })
+minetest.register_craft({
+	output = input.." 9",
+	recipe = {{output}} })
+end
 ----------slimerecipies------
-
-minetest.register_craft({
-	output = 'minerdream:slimeblock_green',
-	recipe = {
-		{'minerdream:slimeball_green', 'minerdream:slimeball_green', 'minerdream:slimeball_green'},
-		{'minerdream:slimeball_green', 'minerdream:slimeball_green', 'minerdream:slimeball_green'},
-		{'minerdream:slimeball_green', 'minerdream:slimeball_green', 'minerdream:slimeball_green'},
+local slime_def={red={torches=5,burntime=50},
+	blue={torches=4,burntime=40},
+	green={torches=3,burntime=30},
+	yellow={torches=6,burntime=60},
+	purple={torches=7,burntime=70},
+	brown={torches=8,burntime=80},
 	}
-})
+for i,idef in pairs(slime_def) do
+	local_craft_block('minerdream:slimeball_'..i,'minerdream:slimeblock_'..i)
+	minetest.register_craft({
+		output = 'default:torch '..idef.torches,
+		recipe = {
+			{'minerdream:slimeball_'..i},
+			{'group:stick'},
+		}
+	})
+	minetest.register_craft({
+		type = "fuel",
+		recipe = "minerdream:slimeball_"..i,
+		burntime = idef.burntime,
+	})
+end
 
-minetest.register_craft({
-	output = 'minerdream:slimeball_green 9',
-	recipe = {
-		{'', 'minerdream:slimeblock_green', ''},
-	}
-})
-
-minetest.register_craft({
-	output = 'default:torch 3',
-	recipe = {
-		{'', 'minerdream:slimeball_green', ''},
-		{'', 'group:stick', ''},
-	}
-})
-
-minetest.register_craft({
-	type = "fuel",
-	recipe = "minerdream:slimeball_green",
-	burntime = 30,
-})
-
-
-minetest.register_craft({
-	output = 'minerdream:slimeblock_blue',
-	recipe = {
-		{'minerdream:slimeball_blue', 'minerdream:slimeball_blue', 'minerdream:slimeball_blue'},
-		{'minerdream:slimeball_blue', 'minerdream:slimeball_blue', 'minerdream:slimeball_blue'},
-		{'minerdream:slimeball_blue', 'minerdream:slimeball_blue', 'minerdream:slimeball_blue'},
-	}
-})
-
-minetest.register_craft({
-	output = 'minerdream:slimeball_blue 9',
-	recipe = {
-		{'', 'minerdream:slimeblock_blue', ''},
-	}
-})
-
-minetest.register_craft({
-	output = 'default:torch 4',
-	recipe = {
-		{'', 'minerdream:slimeball_blue', ''},
-		{'', 'group:stick', ''},
-	}
-})
-
-minetest.register_craft({
-	type = "fuel",
-	recipe = "minerdream:slimeball_blue",
-	burntime = 40,
-})
-
-
-minetest.register_craft({
-	output = 'minerdream:slimeblock_red',
-	recipe = {
-		{'minerdream:slimeball_red', 'minerdream:slimeball_red', 'minerdream:slimeball_red'},
-		{'minerdream:slimeball_red', 'minerdream:slimeball_red', 'minerdream:slimeball_red'},
-		{'minerdream:slimeball_red', 'minerdream:slimeball_red', 'minerdream:slimeball_red'},
-	}
-})
-
-minetest.register_craft({
-	output = 'minerdream:slimeball_red 9',
-	recipe = {
-		{'', 'minerdream:slimeblock_red', ''},
-	}
-})
-
-minetest.register_craft({
-	output = 'default:torch 5',
-	recipe = {
-		{'', 'minerdream:slimeball_red', ''},
-		{'', 'group:stick', ''},
-	}
-})
-
-minetest.register_craft({
-	type = "fuel",
-	recipe = "minerdream:slimeball_red",
-	burntime = 50,
-})
-
-
-minetest.register_craft({
-	output = 'minerdream:slimeblock_yellow',
-	recipe = {
-		{'minerdream:slimeball_yellow', 'minerdream:slimeball_yellow', 'minerdream:slimeball_yellow'},
-		{'minerdream:slimeball_yellow', 'minerdream:slimeball_yellow', 'minerdream:slimeball_yellow'},
-		{'minerdream:slimeball_yellow', 'minerdream:slimeball_yellow', 'minerdream:slimeball_yellow'},
-	}
-})
-
-minetest.register_craft({
-	output = 'minerdream:slimeball_yellow 9',
-	recipe = {
-		{'', 'minerdream:slimeblock_yellow', ''},
-	}
-})
-
-minetest.register_craft({
-	output = 'default:torch 6',
-	recipe = {
-		{'', 'minerdream:slimeball_yellow', ''},
-		{'', 'group:stick', ''},
-	}
-})
-
-minetest.register_craft({
-	type = "fuel",
-	recipe = "minerdream:slimeball_yellow",
-	burntime = 60,
-})
-
-
-minetest.register_craft({
-	output = 'minerdream:slimeblock_purple',
-	recipe = {
-		{'minerdream:slimeball_purple', 'minerdream:slimeball_purple', 'minerdream:slimeball_purple'},
-		{'minerdream:slimeball_purple', 'minerdream:slimeball_purple', 'minerdream:slimeball_purple'},
-		{'minerdream:slimeball_purple', 'minerdream:slimeball_purple', 'minerdream:slimeball_purple'},
-	}
-})
-
-minetest.register_craft({
-	output = 'minerdream:slimeball_purple 9',
-	recipe = {
-		{'', 'minerdream:slimeblock_purple', ''},
-	}
-})
-
-minetest.register_craft({
-	output = 'default:torch 7',
-	recipe = {
-		{'', 'minerdream:slimeball_purple', ''},
-		{'', 'group:stick', ''},
-	}
-})
-
-minetest.register_craft({
-	type = "fuel",
-	recipe = "minerdream:slimeball_purple",
-	burntime = 70,
-})
-
-minetest.register_craft({
-	output = 'minerdream:slimeblock_brown',
-	recipe = {
-		{'minerdream:slimeball_brown', 'minerdream:slimeball_brown', 'minerdream:slimeball_brown'},
-		{'minerdream:slimeball_brown', 'minerdream:slimeball_brown', 'minerdream:slimeball_brown'},
-		{'minerdream:slimeball_brown', 'minerdream:slimeball_brown', 'minerdream:slimeball_brown'},
-	}
-})
-
-minetest.register_craft({
-	output = 'minerdream:slimeball_brown 9',
-	recipe = {
-		{'', 'minerdream:slimeblock_brown', ''},
-	}
-})
-
-minetest.register_craft({
-	output = 'default:torch 8',
-	recipe = {
-		{'', 'minerdream:slimeball_brown', ''},
-		{'', 'group:stick', ''},
-	}
-})
-
-minetest.register_craft({
-	type = "fuel",
-	recipe = "minerdream:slimeball_brown",
-	burntime = 80,
-})
 
 -----------------alloys n stuff---------
 
@@ -277,8 +172,8 @@ minetest.register_craft({
 minetest.register_craft({
 	output = 'default:torch 8',
 	recipe = {
-		{'', 'minerdream:bituminous_coal', ''},
-		{'', 'group:stick', ''},
+		{'minerdream:bituminous_coal'},
+		{'group:stick'},
 	}
 })
 ----------fuels-------------
@@ -370,106 +265,7 @@ minetest.register_craft( {
 	recipe = {"minerdream:lapislazuli_goldblock_d"},
 })
 
--------------mineral blocks-------
 ----------bar stacks---------------
-
-minetest.register_craft({
-	output = 'minerdream:rhodium_bar_block',
-	recipe = {
-		{'minerdream:rhodium_bar', 'minerdream:rhodium_bar', ''},
-		{'minerdream:rhodium_bar', 'minerdream:rhodium_bar', ''},
-
-	}
-})
-
-minetest.register_craft({
-	output = 'minerdream:rhodium_bar 4',
-	recipe = {
-		{'minerdream:rhodium_bar_block', '', ''},
-	}
-})
-
-minetest.register_craft({
-	output = 'minerdream:tantalum_bar_block',
-	recipe = {
-		{'minerdream:tantalum_bar', 'minerdream:tantalum_bar', ''},
-		{'minerdream:tantalum_bar', 'minerdream:tantalum_bar', ''},
-
-	}
-})
-
-minetest.register_craft({
-	output = 'minerdream:tantalum_bar 4',
-	recipe = {
-		{'minerdream:tantalum_bar_block', '', ''},
-	}
-})
-
-minetest.register_craft({
-	output = 'minerdream:ruthenium_bar_block',
-	recipe = {
-		{'minerdream:ruthenium_bar', 'minerdream:ruthenium_bar', ''},
-		{'minerdream:ruthenium_bar', 'minerdream:ruthenium_bar', ''},
-
-	}
-})
-
-minetest.register_craft({
-	output = 'minerdream:ruthenium_bar 4',
-	recipe = {
-		{'minerdream:ruthenium_bar_block', '', ''},
-	}
-})
-
-minetest.register_craft({
-	output = 'minerdream:cobalt_bar_block',
-	recipe = {
-		{'minerdream:cobalt_bar', 'minerdream:cobalt_bar', ''},
-		{'minerdream:cobalt_bar', 'minerdream:cobalt_bar', ''},
-
-	}
-})
-
-minetest.register_craft({
-	output = 'minerdream:cobalt_bar 4',
-	recipe = {
-		{'minerdream:cobalt_bar_block', '', ''},
-	}
-})
-
-minetest.register_craft({
-	output = 'minerdream:platinum_bar_block',
-	recipe = {
-		{'minerdream:platinum_bar', 'minerdream:platinum_bar', ''},
-		{'minerdream:platinum_bar', 'minerdream:platinum_bar', ''},
-
-	}
-})
-
-minetest.register_craft({
-	output = 'minerdream:platinum_bar 4',
-	recipe = {
-		{'minerdream:platinum_bar_block', '', ''},
-	}
-})
-
-
-minetest.register_craft({
-	output = 'minerdream:aluminum_bar_block',
-	recipe = {
-		{'minerdream:aluminum_bar', 'minerdream:aluminum_bar', ''},
-		{'minerdream:aluminum_bar', 'minerdream:aluminum_bar', ''},
-
-	}
-})
-
-minetest.register_craft({
-	output = 'minerdream:aluminum_bar 4',
-	recipe = {
-		{'minerdream:aluminum_bar_block', '', ''},
-	}
-})
-
 minetest.register_craft({
 	output = 'minerdream:brass_bar_block',
 	recipe = {
@@ -486,586 +282,16 @@ minetest.register_craft({
 	}
 })
 
-minetest.register_craft({
-	output = 'minerdream:gold_bar_block',
-	recipe = {
-		{'default:gold_ingot', 'default:gold_ingot', ''},
-		{'default:gold_ingot', 'default:gold_ingot', ''},
-
-	}
-})
-
-minetest.register_craft({
-	output = 'default:gold_ingot 4',
-	recipe = {
-		{'minerdream:gold_bar_block', '', ''},
-	}
-})
-
-
-minetest.register_craft({
-	output = 'minerdream:tin_bar_block',
-	recipe = {
-		{'default:tin_ingot', 'default:tin_ingot', ''},
-		{'default:tin_ingot', 'default:tin_ingot', ''},
-
-	}
-})
-
-minetest.register_craft({
-	output = 'default:tin_ingot 4',
-	recipe = {
-		{'minerdream:tin_bar_block', '', ''},
-	}
-})
-
-minetest.register_craft({
-	output = 'default:copper_ingot 4',
-	recipe = {
-		{'minerdream:copper_bar_block', '', ''},
-	}
-})
-
-minetest.register_craft({
-	output = 'minerdream:copper_bar_block',
-	recipe = {
-		{'default:copper_ingot', 'default:copper_ingot', ''},
-		{'default:copper_ingot', 'default:copper_ingot', ''},
-
-	}
-})
-
-minetest.register_craft({
-	output = 'default:steel_ingot 4',
-	recipe = {
-		{'minerdream:steel_bar_block', '', ''},
-	}
-})
-
-minetest.register_craft({
-	output = 'minerdream:steel_bar_block',
-	recipe = {
-		{'default:steel_ingot', 'default:steel_ingot', ''},
-		{'default:steel_ingot', 'default:steel_ingot', ''},
-
-	}
-})
-
-minetest.register_craft({
-	output = 'default:bronze_ingot 4',
-	recipe = {
-		{'minerdream:bronze_bar_block', '', ''},
-	}
-})
-
-minetest.register_craft({
-	output = 'minerdream:bronze_bar_block',
-	recipe = {
-		{'default:bronze_ingot', 'default:bronze_ingot', ''},
-		{'default:bronze_ingot', 'default:bronze_ingot', ''},
-
-	}
-})
-
-minetest.register_craft({
-	output = 'minerdream:potassium_bar 4',
-	recipe = {
-		{'minerdream:potassium_bar_block', '', ''},
-	}
-})
-
-minetest.register_craft({
-	output = 'minerdream:potassium_bar_block',
-	recipe = {
-		{'minerdream:potassium_bar', 'minerdream:potassium_bar', ''},
-		{'minerdream:potassium_bar', 'minerdream:potassium_bar', ''},
-
-	}
-})
-
-minetest.register_craft({
-	output = 'minerdream:calcium_bar 4',
-	recipe = {
-		{'minerdream:calcium_bar_block', '', ''},
-	}
-})
-
-minetest.register_craft({
-	output = 'minerdream:calcium_bar_block',
-	recipe = {
-		{'minerdream:calcium_bar', 'minerdream:calcium_bar', ''},
-		{'minerdream:calcium_bar', 'minerdream:calcium_bar', ''},
-
-	}
-})
-
-minetest.register_craft({
-	output = 'minerdream:nickel_bar 4',
-	recipe = {
-		{'minerdream:nickel_bar_block', '', ''},
-	}
-})
-
-minetest.register_craft({
-	output = 'minerdream:nickel_bar_block',
-	recipe = {
-		{'minerdream:nickel_bar', 'minerdream:nickel_bar', ''},
-		{'minerdream:nickel_bar', 'minerdream:nickel_bar', ''},
-
-	}
-})
-
-minetest.register_craft({
-	output = 'minerdream:silver_bar 4',
-	recipe = {
-		{'minerdream:silver_bar_block', '', ''},
-	}
-})
-
-minetest.register_craft({
-	output = 'minerdream:silver_bar_block',
-	recipe = {
-		{'minerdream:silver_bar', 'minerdream:silver_bar', ''},
-		{'minerdream:silver_bar', 'minerdream:silver_bar', ''},
-
-	}
-})
-
-minetest.register_craft({
-	output = 'minerdream:zinc_bar 4',
-	recipe = {
-		{'minerdream:zinc_bar_block', '', ''},
-	}
-})
-
-minetest.register_craft({
-	output = 'minerdream:zinc_bar_block',
-	recipe = {
-		{'minerdream:zinc_bar', 'minerdream:zinc_bar', ''},
-		{'minerdream:zinc_bar', 'minerdream:zinc_bar', ''},
-
-	}
-})
-
-minetest.register_craft({
-	output = 'minerdream:lead_bar 4',
-	recipe = {
-		{'minerdream:lead_bar_block', '', ''},
-	}
-})
-
-minetest.register_craft({
-	output = 'minerdream:lead_bar_block',
-	recipe = {
-		{'minerdream:lead_bar', 'minerdream:lead_bar', ''},
-		{'minerdream:lead_bar', 'minerdream:lead_bar', ''},
-
-	}
-})
-
 -------------------marble-------------
-
-minetest.register_craft({
-	output = 'minerdream:marble_white_polished 4',
-	recipe = {
-		{'minerdream:marble_white', 'minerdream:marble_white', ''},
-		{'minerdream:marble_white', 'minerdream:marble_white', ''},
-
-	}
-})
-
-minetest.register_craft({
-	output = 'minerdream:marble_pink_polished 4',
-	recipe = {
-		{'minerdream:marble_pink', 'minerdream:marble_pink', ''},
-		{'minerdream:marble_pink', 'minerdream:marble_pink', ''},
-
-	}
-})
-
-minetest.register_craft({
-	output = 'minerdream:marble_red_polished 4',
-	recipe = {
-		{'minerdream:marble_red', 'minerdream:marble_red', ''},
-		{'minerdream:marble_red', 'minerdream:marble_red', ''},
-
-	}
-})
-
-minetest.register_craft({
-	output = 'minerdream:marble_green_polished 4',
-	recipe = {
-		{'minerdream:marble_green', 'minerdream:marble_green', ''},
-		{'minerdream:marble_green', 'minerdream:marble_green', ''},
-
-	}
-})
-
-minetest.register_craft({
-	output = 'minerdream:marble_purple_polished 4',
-	recipe = {
-		{'minerdream:marble_purple', 'minerdream:marble_purple', ''},
-		{'minerdream:marble_purple', 'minerdream:marble_purple', ''},
-
-	}
-})
-
-minetest.register_craft({
-	output = 'minerdream:marble_black_polished 4',
-	recipe = {
-		{'minerdream:marble_black', 'minerdream:marble_black', ''},
-		{'minerdream:marble_black', 'minerdream:marble_black', ''},
-
-	}
-})
-
-minetest.register_craft({
-	output = 'minerdream:marble_white_brick 4',
-	recipe = {
-		{'minerdream:marble_white_polished', 'minerdream:marble_white_polished', ''},
-		{'minerdream:marble_white_polished', 'minerdream:marble_white_polished', ''},
-
-	}
-})
-
-minetest.register_craft({
-	output = 'minerdream:marble_pink_brick 4',
-	recipe = {
-		{'minerdream:marble_pink_polished', 'minerdream:marble_pink_polished', ''},
-		{'minerdream:marble_pink_polished', 'minerdream:marble_pink_polished', ''},
-
-	}
-})
-
-minetest.register_craft({
-	output = 'minerdream:marble_red_brick 4',
-	recipe = {
-		{'minerdream:marble_red_polished', 'minerdream:marble_red_polished', ''},
-		{'minerdream:marble_red_polished', 'minerdream:marble_red_polished', ''},
-
-	}
-})
-
-minetest.register_craft({
-	output = 'minerdream:marble_green_brick 4',
-	recipe = {
-		{'minerdream:marble_green_polished', 'minerdream:marble_green_polished', ''},
-		{'minerdream:marble_green_polished', 'minerdream:marble_green_polished', ''},
-
-	}
-})
-
-minetest.register_craft({
-	output = 'minerdream:marble_blue_brick 4',
-	recipe = {
-		{'minerdream:marble_blue_polished', 'minerdream:marble_blue_polished', ''},
-		{'minerdream:marble_blue_polished', 'minerdream:marble_blue_polished', ''},
-
-	}
-})
-
-minetest.register_craft({
-	output = 'minerdream:marble_black_brick 4',
-	recipe = {
-		{'minerdream:marble_black_polished', 'minerdream:marble_black_polished', ''},
-		{'minerdream:marble_black_polished', 'minerdream:marble_black_polished', ''},
-
-	}
-})
-
-minetest.register_craft({
-	output = 'minerdream:marble_white_smallbrick 4',
-	recipe = {
-		{'minerdream:marble_white_brick', 'minerdream:marble_white_brick', ''},
-		{'minerdream:marble_white_brick', 'minerdream:marble_white_brick', ''},
-
-	}
-})
-
-minetest.register_craft({
-	output = 'minerdream:marble_pink_smallbrick 4',
-	recipe = {
-		{'minerdream:marble_pink_brick', 'minerdream:marble_pink_brick', ''},
-		{'minerdream:marble_pink_brick', 'minerdream:marble_pink_brick', ''},
-
-	}
-})
-
-minetest.register_craft({
-	output = 'minerdream:marble_red_smallbrick 4',
-	recipe = {
-		{'minerdream:marble_red_brick', 'minerdream:marble_red_brick', ''},
-		{'minerdream:marble_red_brick', 'minerdream:marble_red_brick', ''},
-
-	}
-})
-
-minetest.register_craft({
-	output = 'minerdream:marble_green_smallbrick 4',
-	recipe = {
-		{'minerdream:marble_green_brick', 'minerdream:marble_green_brick', ''},
-		{'minerdream:marble_green_brick', 'minerdream:marble_green_brick', ''},
-
-	}
-})
-
-minetest.register_craft({
-	output = 'minerdream:marble_blue_smallbrick 4',
-	recipe = {
-		{'minerdream:marble_blue_brick', 'minerdream:marble_blue_brick', ''},
-		{'minerdream:marble_blue_brick', 'minerdream:marble_blue_brick', ''},
-
-	}
-})
-
-minetest.register_craft({
-	output = 'minerdream:marble_black_smallbrick 4',
-	recipe = {
-		{'minerdream:marble_black_brick', 'minerdream:marble_black_brick', ''},
-		{'minerdream:marble_black_brick', 'minerdream:marble_black_brick', ''},
-
-	}
-})
-
-minetest.register_craft({
-	output = 'minerdream:pillar_marble_white_middle 3',
-	recipe = {
-		{'minerdream:marble_white', '', ''},
-		{'minerdream:marble_white', '', ''},
-		{'minerdream:marble_white', '', ''},
-
-	}
-})
-
-minetest.register_craft({
-	output = 'minerdream:pillar_marble_white_bottom 5',
-	recipe = {
-		{'', 'minerdream:marble_white', ''},
-		{'', 'minerdream:marble_white', ''},
-		{'minerdream:marble_white', 'minerdream:marble_white', 'minerdream:marble_white'},
-
-	}
-})
-
-minetest.register_craft({
-	output = 'minerdream:pillar_marble_white_top 5',
-	recipe = {
-		{'minerdream:marble_white', 'minerdream:marble_white', 'minerdream:marble_white'},
-		{'', 'minerdream:marble_white', ''},
-		{'', 'minerdream:marble_white', ''},
-
-	}
-})
-
-minetest.register_craft({
-	output = 'minerdream:pillar_marble_white_both 7',
-	recipe = {
-		{'minerdream:marble_white', 'minerdream:marble_white', 'minerdream:marble_white'},
-		{'', 'minerdream:marble_white', ''},
-		{'minerdream:marble_white', 'minerdream:marble_white', 'minerdream:marble_white'},
-
-	}
-})
-
-minetest.register_craft({
-	output = 'minerdream:pillar_marble_pink_middle 3',
-	recipe = {
-		{'minerdream:marble_pink', '', ''},
-		{'minerdream:marble_pink', '', ''},
-		{'minerdream:marble_pink', '', ''},
-
-	}
-})
-
-minetest.register_craft({
-	output = 'minerdream:pillar_marble_pink_bottom 5',
-	recipe = {
-		{'', 'minerdream:marble_pink', ''},
-		{'', 'minerdream:marble_pink', ''},
-		{'minerdream:marble_pink', 'minerdream:marble_pink', 'minerdream:marble_pink'},
-
-	}
-})
-
-minetest.register_craft({
-	output = 'minerdream:pillar_marble_pink_top 5',
-	recipe = {
-		{'minerdream:marble_pink', 'minerdream:marble_pink', 'minerdream:marble_pink'},
-		{'', 'minerdream:marble_pink', ''},
-		{'', 'minerdream:marble_pink', ''},
-
-	}
-})
-
-minetest.register_craft({
-	output = 'minerdream:pillar_marble_pink_both 7',
-	recipe = {
-		{'minerdream:marble_pink', 'minerdream:marble_pink', 'minerdream:marble_pink'},
-		{'', 'minerdream:marble_pink', ''},
-		{'minerdream:marble_pink', 'minerdream:marble_pink', 'minerdream:marble_pink'},
-
-	}
-})
-
-minetest.register_craft({
-	output = 'minerdream:pillar_marble_red_middle 3',
-	recipe = {
-		{'minerdream:marble_red', '', ''},
-		{'minerdream:marble_red', '', ''},
-		{'minerdream:marble_red', '', ''},
-
-	}
-})
-
-minetest.register_craft({
-	output = 'minerdream:pillar_marble_red_bottom 5',
-	recipe = {
-		{'', 'minerdream:marble_red', ''},
-		{'', 'minerdream:marble_red', ''},
-		{'minerdream:marble_red', 'minerdream:marble_red', 'minerdream:marble_red'},
-
-	}
-})
-
-minetest.register_craft({
-	output = 'minerdream:pillar_marble_red_top 5',
-	recipe = {
-		{'minerdream:marble_red', 'minerdream:marble_red', 'minerdream:marble_red'},
-		{'', 'minerdream:marble_red', ''},
-		{'', 'minerdream:marble_red', ''},
-
-	}
-})
-
-minetest.register_craft({
-	output = 'minerdream:pillar_marble_red_both 7',
-	recipe = {
-		{'minerdream:marble_red', 'minerdream:marble_red', 'minerdream:marble_red'},
-		{'', 'minerdream:marble_red', ''},
-		{'minerdream:marble_red', 'minerdream:marble_red', 'minerdream:marble_red'},
-
-	}
-})
-
-minetest.register_craft({
-	output = 'minerdream:pillar_marble_blue_middle 3',
-	recipe = {
-		{'minerdream:marble_blue', '', ''},
-		{'minerdream:marble_blue', '', ''},
-		{'minerdream:marble_blue', '', ''},
-
-	}
-})
-
-minetest.register_craft({
-	output = 'minerdream:pillar_marble_blue_bottom 5',
-	recipe = {
-		{'', 'minerdream:marble_blue', ''},
-		{'', 'minerdream:marble_blue', ''},
-		{'minerdream:marble_blue', 'minerdream:marble_blue', 'minerdream:marble_blue'},
-
-	}
-})
-
-minetest.register_craft({
-	output = 'minerdream:pillar_marble_blue_top 5',
-	recipe = {
-		{'minerdream:marble_blue', 'minerdream:marble_blue', 'minerdream:marble_blue'},
-		{'', 'minerdream:marble_blue', ''},
-		{'', 'minerdream:marble_blue', ''},
-
-	}
-})
-
-minetest.register_craft({
-	output = 'minerdream:pillar_marble_blue_both 7',
-	recipe = {
-		{'minerdream:marble_blue', 'minerdream:marble_blue', 'minerdream:marble_blue'},
-		{'', 'minerdream:marble_blue', ''},
-		{'minerdream:marble_blue', 'minerdream:marble_blue', 'minerdream:marble_blue'},
-
-	}
-})
-
-minetest.register_craft({
-	output = 'minerdream:pillar_marble_green_middle 3',
-	recipe = {
-		{'minerdream:marble_green', '', ''},
-		{'minerdream:marble_green', '', ''},
-		{'minerdream:marble_green', '', ''},
-
-	}
-})
-
-minetest.register_craft({
-	output = 'minerdream:pillar_marble_green_bottom 5',
-	recipe = {
-		{'', 'minerdream:marble_green', ''},
-		{'', 'minerdream:marble_green', ''},
-		{'minerdream:marble_green', 'minerdream:marble_green', 'minerdream:marble_green'},
-
-	}
-})
-
-minetest.register_craft({
-	output = 'minerdream:pillar_marble_green_top 5',
-	recipe = {
-		{'minerdream:marble_green', 'minerdream:marble_green', 'minerdream:marble_green'},
-		{'', 'minerdream:marble_green', ''},
-		{'', 'minerdream:marble_green', ''},
-
-	}
-})
-
-minetest.register_craft({
-	output = 'minerdream:pillar_marble_green_both 7',
-	recipe = {
-		{'minerdream:marble_green', 'minerdream:marble_green', 'minerdream:marble_green'},
-		{'', 'minerdream:marble_green', ''},
-		{'minerdream:marble_green', 'minerdream:marble_green', 'minerdream:marble_green'},
-
-	}
-})
-
-minetest.register_craft({
-	output = 'minerdream:pillar_marble_black_middle 3',
-	recipe = {
-		{'minerdream:marble_black', '', ''},
-		{'minerdream:marble_black', '', ''},
-		{'minerdream:marble_black', '', ''},
-
-	}
-})
-
-minetest.register_craft({
-	output = 'minerdream:pillar_marble_black_bottom 5',
-	recipe = {
-		{'', 'minerdream:marble_black', ''},
-		{'', 'minerdream:marble_black', ''},
-		{'minerdream:marble_black', 'minerdream:marble_black', 'minerdream:marble_black'},
-
-	}
-})
-
-minetest.register_craft({
-	output = 'minerdream:pillar_marble_black_top 5',
-	recipe = {
-		{'minerdream:marble_black', 'minerdream:marble_black', 'minerdream:marble_black'},
-		{'', 'minerdream:marble_black', ''},
-		{'', 'minerdream:marble_black', ''},
-
-	}
-})
-
-minetest.register_craft({
-	output = 'minerdream:pillar_marble_black_both 7',
-	recipe = {
-		{'minerdream:marble_black', 'minerdream:marble_black', 'minerdream:marble_black'},
-		{'', 'minerdream:marble_black', ''},
-		{'minerdream:marble_black', 'minerdream:marble_black', 'minerdream:marble_black'},
-
-	}
-})
+for _,colo in pairs({"white","pink","red","green","purple","black"}) do
+	local_craft_stack('minerdream:marble_'..colo,'minerdream:marble_'..colo..'_polished 4')
+	local_craft_stack('minerdream:marble_'..colo..'_polished','minerdream:marble_'..colo..'_brick 4')
+	local_craft_stack('minerdream:marble_'..colo..'_brick','minerdream:marble_'..colo..'_smallbrick 4')
+	local_craft_pillar('minerdream:marble_'..colo,'minerdream:pillar_marble_'..colo..'_middle 3')
+	local_craft_pillar_bottom('minerdream:marble_'..colo,'minerdream:pillar_marble_'..colo..'_bottom 5')
+	local_craft_pillar_top('minerdream:marble_'..colo,'minerdream:pillar_marble_'..colo..'_top 5')
+	local_craft_pillar_both('minerdream:marble_'..colo,'minerdream:pillar_marble_'..colo..'_both 7')
+end
 
 --------------misc items-------------
 
@@ -1075,16 +301,6 @@ minetest.register_craft( {
 	recipe = {"default:iron_lump", "minerdream:calcium_lump", "minerdream:potassium_lump", "minerdream:zinc_lump"},
 })
 
-------------spears---------------
-
-minetest.register_craft({
-	output = 'minerdream:spear_bronze',
-	recipe = {
-		{'', 'default:bronze_ingot', 'default:bronze_ingot'},
-		{'', 'group:stick', 'default:bronze_ingot'},
-		{'group:stick', '', ''},
-	}
-})
 --------------------bows----------------
 
 
@@ -1094,14 +310,6 @@ minetest.register_craft({
 		{'', 'default:copper_ingot', 'default:copper_ingot'},
 		{'default:copper_ingot', '', 'farming:cotton'},
 		{'default:copper_ingot', 'farming:cotton', ''},
-	}
-})
-minetest.register_craft({
-	output = 'minerdream:bow_bronze',
-	recipe = {
-		{'', 'default:bronze_ingot', 'default:bronze_ingot'},
-		{'default:bronze_ingot', '', 'farming:cotton'},
-		{'default:bronze_ingot', 'farming:cotton', ''},
 	}
 })
 ------------unusualweapons and ammo------------
@@ -1426,4 +634,3 @@ minetest.register_craft({
 
 	}
 })
-
