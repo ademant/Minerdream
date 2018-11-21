@@ -8,7 +8,7 @@ local ore_cols={
 	groups_num={"has_dust","has_block","in_desert","has_block","has_brick",
 		"has_bar","has_lump","has_bar_block","has_dust","has_spear","has_bow","has_arrow","has_pick",
 		"has_axe","has_shovel","has_sword","has_helmet","has_chestplate","has_shield","has_leggings",
-		"has_boots","drop_as_lump","is_gemstone","has_no_drop"}}
+		"has_boots","drop_as_lump","is_gemstone","has_no_drop","has_no_lump"}}
 local miner_definition = minerdream.import_csv(minerdream.path.."/ores.txt",ore_cols)
 
 if miner_definition["default"] ~= nil then
@@ -191,6 +191,7 @@ for i,tdef in pairs(miner_definition) do
 			end
 			if tdef.groups.is_gemstone ~= nil then
 				ore_def.name=minerdream.modname..":"..i
+				ore_def.description=i
 				ore_def.drawtype = "mesh"
 				ore_def.mesh = i..".obj"
 				ore_def.walkable = "true"
@@ -222,7 +223,7 @@ for i,tdef in pairs(miner_definition) do
 			end
 			if tdef.tier then
 				ore_def.description=core.colorize("#00FF00", ore_def.description.."\n")..tdef.tier_string
-				lump_def.description=core.colorize("#00FF00", lump_def.description.." lump\n")..tdef.tier_string
+				lump_def.description=core.colorize("#00FF00", lump_def.description.."\n")..tdef.tier_string
 			end
 			local ore_name=ore_def.name
 			local lump_name=lump_def.name
@@ -233,15 +234,16 @@ for i,tdef in pairs(miner_definition) do
 				local output, decremented_input = minetest.get_craft_result({ method = "cooking", width = 1, items = { ItemStack(lump_name) }})
 				lump_def.ingot_name=output.item:get_name()
 				tdef.ingot_name=output.item:get_name()
+				minerdream.items[i].ingot_name=output.item:get_name()
 				minetest.override_item(ore_name,ore_def)
-				if tdef.groups.has_no_lump ~= nil then
+				if tdef.groups.has_no_lump == nil then
 					minetest.override_item(lump_name,lump_def)
 				end
 				lump_def.name=lump_name
 				ore_def.name=ore_name
 			else
 				minetest.register_node(ore_def.name,ore_def)
-				if tdef.groups.has_no_lump ~= nil then
+				if tdef.groups.has_no_lump == nil then
 					minetest.register_craftitem(lump_def.name,lump_def)
 				end
 				-- if not already defined, then add mapgen parameter
@@ -251,7 +253,7 @@ for i,tdef in pairs(miner_definition) do
 				end
 			end
 			local_item_insert(i,"ore_def",ore_def)
-			if tdef.groups.has_no_lump ~= nil then
+			if tdef.groups.has_no_lump == nil then
 				local_item_insert(i,"lump_def",lump_def)
 			end
 			-- define desert ores
@@ -283,6 +285,11 @@ for i,tdef in pairs(miner_definition) do
 					}
 			local_item_insert(i,"map_def",map_def)
 			minetest.register_ore(map_def)
+			if tdef.groups.in_desert then
+				map_def.ore=desertore_def.name
+				map_def.wherein = "default:desert_stone"
+				minetest.register_ore(map_def)
+			end
 		end
 		
 		-- define ore dust
