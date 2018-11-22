@@ -10,7 +10,6 @@ local tool_cols={
 local tool_definition = minerdream.import_csv(minerdream.path.."/armor.txt",tool_cols)
 --print(dump2(tool_definition))
 
-
 for i,tdef in pairs(tool_definition) do
 	if (i ~= "default") then
 		local tooldef={}
