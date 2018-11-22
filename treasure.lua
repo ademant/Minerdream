@@ -146,18 +146,18 @@ minetest.register_node("minerdream:treasure2", {
 				items = {'minerdream:lead_lump 3'},
 				rarity = 15,
 			},
-			{
+--[[			{
 				items = {'minerdream:silver_lump 3'},
 				rarity = 15,
-			},
+			},]]
 			{
 				items = {'default:gold_lump 3'},
 				rarity = 15,
 			},
-			{
+--[[			{
 				items = {'minerdream:lapislazuli_lump 4'},
 				rarity = 11,
-			},
+			},]]
 			{
 				items = {'default:mese_crystal 3'},
 				rarity = 15,
@@ -230,10 +230,10 @@ minetest.register_node("minerdream:treasure3", {
 				items = {'minerdream:platinum_lump 3'},
 				rarity = 15,
 			},
-			{
+--[[			{
 				items = {'minerdream:aluminum_lump 3'},
 				rarity = 15,
-			},
+			},]]
 			{
 				items = {'default:ladder_wood 20'},
 				rarity = 5,
@@ -302,10 +302,10 @@ minetest.register_node("minerdream:treasure4", {
 				items = {'default:steel_ingot 8'},
 				rarity = 10,
 			},
-			{
+--[[			{
 				items = {'minerdream:stainlesssteel_bar 3'},
 				rarity = 15,
-			},
+			},]]
 			{
 				items = {'minerdream:cobalt_lump 3'},
 				rarity = 15,
@@ -394,10 +394,10 @@ minetest.register_node("minerdream:treasure5", {
 				items = {'default:steel_ingot 10'},
 				rarity = 10,
 			},
-			{
+--[[			{
 				items = {'minerdream:stainlesssteel_bar 4'},
 				rarity = 13,
-			},
+			},]]
 			{
 				items = {'minerdream:rhodium_lump 3'},
 				rarity = 15,
