@@ -21,7 +21,7 @@ if miner_definition["default"] ~= nil then
 		end
 	end
 
-	-- check for each crop, if value can be copied from default entry
+	-- check for each ore, if value can be copied from default entry
 	for i,tdef in pairs(miner_definition) do
 		if tdef.name ~= default_ore.name then
 			for j,colu in pairs(test_values) do
@@ -243,9 +243,9 @@ for i,tdef in pairs(miner_definition) do
 				ore_def.name=ore_name
 			else
 				minetest.register_node(ore_def.name,ore_def)
-				if tdef.groups.has_no_lump == nil then
-					minetest.register_craftitem(lump_def.name,lump_def)
-				end
+--				if tdef.groups.has_no_lump == nil then
+				minetest.register_craftitem(lump_def.name,lump_def)
+--				end
 				-- if not already defined, then add mapgen parameter
 				if tdef.scarcity ~= nil then
 					needs_mapgen = true
@@ -253,9 +253,9 @@ for i,tdef in pairs(miner_definition) do
 				end
 			end
 			local_item_insert(i,"ore_def",ore_def)
-			if tdef.groups.has_no_lump == nil then
-				local_item_insert(i,"lump_def",lump_def)
-			end
+--			if tdef.groups.has_no_lump == nil then
+			local_item_insert(i,"lump_def",lump_def)
+--			end
 			-- define desert ores
 			if tdef.groups.in_desert then
 				desertore_def=table.copy(ore_def)
