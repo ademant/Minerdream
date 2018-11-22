@@ -9,7 +9,6 @@ local mob_cols={
 --	as_numeric=1,
 }
 local mob_definition = minerdream.import_csv(minerdream.path.."/mobs.txt",mob_cols)
---print(dump2(tool_definition))
 
 local mob_default = {
 		type = "monster",
@@ -86,7 +85,7 @@ for i,tdef in pairs(mob_definition) do
 			{"minerdream:slime_"..i},
 			}
 		mdef.blood_texture = "minerdream_slimeball_"..i..".png"
-		mdef,drops = {
+		mdef.drops = {
 			{name = "minerdream:slimeball_"..i, chance = mdef.slimeball, min = 1, max = 3},
 			{name = "minerdream:slime_"..i.."_egg", chance = mdef.egg, min = 1, max = 1},
 			{name = "minerdream:accessory_slimering", chance = mdef.slimering, min = 1, max = 1},
