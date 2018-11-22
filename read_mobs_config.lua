@@ -138,7 +138,6 @@ for i,tdef in pairs(mob_definition) do
 				}
 			}
 		})
-
 	end
 end
 
