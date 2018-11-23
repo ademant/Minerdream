@@ -1,15 +1,15 @@
 
-local has_value = minerdream.has_value 
+local has_value = basic_functions.has_value 
 local tier_cols={
 	col_num={"name"},}
-local tier_definition = minerdream.import_csv(minerdream.path.."/tiers.txt",tier_cols)
+local tier_definition = basic_functions.import_csv(minerdream.path.."/tiers.txt",tier_cols)
 local ore_cols={
 	col_num={"crack","scarcity","num_ores","clust_size","y_min","y_max","tier","lump_cooking_time"},
 	groups_num={"has_dust","has_block","in_desert","has_block","has_brick",
 		"has_bar","has_lump","has_bar_block","has_dust","has_spear","has_bow","has_arrow","has_pick",
 		"has_axe","has_shovel","has_sword","has_helmet","has_chestplate","has_shield","has_leggings",
 		"has_boots","drop_as_lump","is_gemstone","has_no_drop","has_no_lump"}}
-local miner_definition = minerdream.import_csv(minerdream.path.."/ores.txt",ore_cols)
+local miner_definition = basic_functions.import_csv(minerdream.path.."/ores.txt",ore_cols)
 
 if miner_definition["default"] ~= nil then
 	default_ore = miner_definition["default"]
@@ -150,7 +150,7 @@ end
 for i,tdef in pairs(miner_definition) do
 	local is_enabled = true
 	if tdef.disabled_by_mod ~= nil then
-		if minerdream.has_value(minetest.get_modnames(),tdef.disabled_by_mod) then
+		if basic_functions.has_value(minetest.get_modnames(),tdef.disabled_by_mod) then
 			is_enabled=false
 		end
 	end

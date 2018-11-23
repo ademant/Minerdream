@@ -1,13 +1,13 @@
 
-local has_value = minerdream.has_value 
+local has_value = basic_functions.has_value 
 local tier_cols={
 	col_num={"name"},}
-local tier_definition = minerdream.import_csv(minerdream.path.."/tiers.txt",tier_cols)
+local tier_definition = basic_functions.import_csv(minerdream.path.."/tiers.txt",tier_cols)
 local tool_cols={
 	col_num={"range","uses"},
 	as_numeric=1,
 }
-local tool_definition = minerdream.import_csv(minerdream.path.."/tools.txt",tool_cols)
+local tool_definition = basic_functions.import_csv(minerdream.path.."/tools.txt",tool_cols)
 --print(dump2(tool_definition))
 
 
@@ -16,7 +16,7 @@ for i,tdef in pairs(tool_definition) do
 		idef=table.copy(minerdream.items[i])
 		local tooldef={}
 		for col in pairs(tdef) do
-			tooldef=minerdream.parse_tree(tooldef,col,tdef[col])
+			tooldef=basic_functions.parse_tree(tooldef,col,tdef[col])
 		end
 		for _,tool in pairs({"pick","axe","sword","shovel","spear"}) do
 			if tooldef[tool] ~= nil then

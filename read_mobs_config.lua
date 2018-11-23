@@ -1,5 +1,5 @@
 
-local has_value = minerdream.has_value 
+local has_value = basic_functions.has_value 
 local mob_cols={
 	col_num={"reach","damage","hp_min",
 		"hp_max","armor","walk_velocity","run_velocity","walk_chance",
@@ -8,7 +8,7 @@ local mob_cols={
 		"egg","slimering","maxlight","chance","max_height","collisionbox"},
 --	as_numeric=1,
 }
-local mob_definition = minerdream.import_csv(minerdream.path.."/mobs.txt",mob_cols)
+local mob_definition = basic_functions.import_csv(minerdream.path.."/mobs.txt",mob_cols)
 
 local mob_default = {
 		type = "monster",

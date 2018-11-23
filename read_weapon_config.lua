@@ -1,14 +1,14 @@
 
-local has_value = minerdream.has_value 
+local has_value = basic_functions.has_value 
 local tier_cols={
 	col_num={"name"},}
-local tier_definition = minerdream.import_csv(minerdream.path.."/tiers.txt",tier_cols)
+local tier_definition = basic_functions.import_csv(minerdream.path.."/tiers.txt",tier_cols)
 local tool_cols={
 	col_num={"bow_wield_scale","tier","bow_velocity","bow_acceleration","arrow_damage"},
 	groups_num={"is_bowarrow"},
 --	as_numeric=1,
 }
-local tool_definition = minerdream.import_csv(minerdream.path.."/arrows.txt",tool_cols)
+local tool_definition = basic_functions.import_csv(minerdream.path.."/arrows.txt",tool_cols)
 --print(dump2(tool_definition))
 
 local minerdream_arrow = {
