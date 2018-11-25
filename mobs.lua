@@ -47,7 +47,7 @@ mobs:register_mob("minerdream:slime_green", {
 	},
 })
 
---[[
+
 mobs:spawn({
 	name = "minerdream:slime_green",
 	nodes = {"default:stone"},
@@ -55,7 +55,7 @@ mobs:spawn({
 	chance = 1000,
 	max_height = 0,
 })
-]]
+
 
 minetest.register_craftitem("minerdream:slime_green_egg", {
 	description = "Green slime spawnegg",
