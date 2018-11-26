@@ -311,6 +311,9 @@ for i,tdef in pairs(miner_definition) do
 			local dust_def=local_create_def(i,"dust",tdef.groups.has_dust,tdef)
 			dust_def.tiles={minerdream.modname.."_dust.png"}
 			dust_def.inventory_image=minerdream.modname.."_dust.png"
+			if tdef.color ~= nil then
+				dust_def.inventory_image="minerdream_stone_dust.png^[colorize:#"..tdef.color
+			end
 			minetest.register_node(minerdream.modname..":"..i.."_dust",dust_def)
 			if minerdream.items[i].lump_def then
 				local lump_def=table.copy(minerdream.items[i].lump_def)
