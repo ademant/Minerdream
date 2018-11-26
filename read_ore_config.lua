@@ -8,7 +8,7 @@ local ore_cols={
 	groups_num={"has_dust","has_block","in_desert","has_block","has_brick",
 		"has_bar","has_lump","has_bar_block","has_dust","has_spear","has_bow","has_arrow","has_pick",
 		"has_axe","has_shovel","has_sword","has_helmet","has_chestplate","has_shield","has_leggings",
-		"has_boots","drop_as_lump","is_gemstone","has_no_drop","has_no_lump"}}
+		"has_boots","drop_as_lump","is_gemstone","is_lump_gemstone","has_no_drop","has_no_lump"}}
 local miner_definition = basic_functions.import_csv(minerdream.path.."/ores.txt",ore_cols)
 
 if miner_definition["default"] ~= nil then
@@ -190,25 +190,38 @@ for i,tdef in pairs(miner_definition) do
 				ore_def.stack_max = tdef.stackmax
 			end
 			if tdef.groups.is_gemstone ~= nil then
-				ore_def.name=minerdream.modname..":"..i
+--				ore_def.name=minerdream.modname..":"..i
 				ore_def.description=i
+				ore_def.paramtype="light"
 				ore_def.drawtype = "mesh"
-				ore_def.mesh = i..".obj"
+				ore_def.mesh = "gemstone_cubic_pillars.obj"
 				ore_def.walkable = "true"
 				ore_def.inventory_image = "minerdream_"..i.."_gem.png"
-				ore_def.tiles = {"minerdream_"..i..".png"}
+				ore_def.tiles = {"minerdream_"..i.."_rock.png"}
 				ore_def.selection_box = {type = "fixed",
-					fixed = {{-0.2, -0.5, -0.2, 0.2, -0.25, 0.2},}
-					}
+					fixed = {{-0.4, -0.5, -0.4, 0.4, 0.0, 0.4},},}
 				ore_def.node_box = {type = "fixed",
-					fixed = {{-0.2, -0.5, -0.2, 0.2, -0.25, 0.2},},
-					}
+					fixed = {{-0.4, -0.5, -0.4, 0.4, 0.0, 0.4},},}
 			end
 			local lump_def={description=i.." lump",
 				name=lump_name,
 				inventory_image=lump_name:gsub(":","_")..".png",
 				stack_max=minerdream.lump_max_stack,
 				}
+			if tdef.groups.is_lump_gemstone ~= nil then
+				lump_def.drawtype="mesh"
+				lump_def.mesh = i..".obj"
+				lump_def.walkable = "true"
+				lump_def.inventory_image = "minerdream_"..i.."_gem.png"
+				lump_def.tiles = {"minerdream_"..i..".png"}
+				lump_def.paramtype = "light"
+				lump_def.is_ground_content = true
+				lump_def.groups={snappy=3,dig_immidiate=3}
+				lump_def.selection_box = {type = "fixed",
+					fixed = {{-0.2, -0.5, -0.2, 0.2, -0.25, 0.2},},}
+				lump_def.node_box = {type = "fixed",
+					fixed = {{-0.2, -0.5, -0.2, 0.2, -0.25, 0.2},},}
+			end
 			-- override existing ore?
 			local to_override = false
 			if tdef.overrides ~= nil then

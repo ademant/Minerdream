@@ -154,8 +154,6 @@ if silveringot ~= nil then
 	if ingot_name == nil and silveringot.ingot_def ~= nil then
 		ingot_name = silveringot.ingot_def.name
 	end
-	print(ingot_name)
-	print(dump2(silveringot))
 	if ingot_name ~= nil then
 		minetest.register_craft({
 			output = 'minerdream:expensivestick 2',

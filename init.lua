@@ -23,4 +23,3 @@ dofile(minerdream.path .. "/experiments.lua")
 dofile(minerdream.path .. "/read_mobs_config.lua")
 dofile(minerdream.path .. "/awards.lua")
 
---print(dump(minerdream.items))

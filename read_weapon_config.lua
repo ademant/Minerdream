@@ -179,8 +179,6 @@ for i,tdef in pairs(tool_definition) do
 				end
 				self.lastpos= {x = pos.x, y = pos.y, z = pos.z}
 			end
-			print(i)
-			print(dump2(tthrow))
 			minetest.register_entity("minerdream:"..i:gsub(" ","_"), tthrow)
 		end
 	end
