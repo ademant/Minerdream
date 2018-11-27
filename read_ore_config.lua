@@ -329,7 +329,7 @@ for i,tdef in pairs(miner_definition) do
 		-- define ingot
 		if tdef.groups.has_bar then
 			local ingot_def=local_create_def(i,"ingot",tdef.groups.has_bar,tdef)
-			ingot_def.inventory_image=minerdream.modname.."_"..i.."_bar.png"
+			ingot_def.inventory_image=minerdream.modname.."_"..i.."_ingot.png"
 			ingot_def.stack_max = minerdream.ingot_max_stack
 			if tdef.ingot_name then --already defined and overridden with new image
 				ingot_def.name=nil
