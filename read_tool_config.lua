@@ -36,8 +36,8 @@ for i,tdef in pairs(tool_definition) do
 --				tt_def={description=i.." "..tool,
 					inventory_image=minerdream.modname.."_"..tool.."_"..i..".png",
 					range=tooldef.range or 2,
-					tool_capabilities={max_drop_level = 1,groupcaps={}},
-					damage_groups = {fleshy = ttv.fleshy or 4},
+					tool_capabilities={max_drop_level = 1,groupcaps={},
+						damage_groups = {fleshy = ttv.fleshy or 4},},
 --		damage_groups = {fleshy=6.25},
 					}
 				for _,gc in pairs({"cracky","crumbly","choppy","snappy"}) do
@@ -50,12 +50,12 @@ for i,tdef in pairs(tool_definition) do
 							ml = ttv.maxlevel
 						end
 						tt_def.tool_capabilities.groupcaps[gc]={times=table.copy(ttv[gc]),
-							uses=tooldef.uses,max_level=ml}
+							uses=tooldef.uses,maxlevel=ml}
 					end
 				end
 				toolname=minerdream.modname..":"..tool.."_"..i
---				print(dump2(tt_def))
 				minetest.register_tool(toolname,tt_def)
+
 			end
 		end
 	end
