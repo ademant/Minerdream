@@ -4,12 +4,10 @@ minerdream.modname = minetest.get_current_modname()
 minerdream.items={}
 
 dofile(minerdream.path .. "/config.lua")
---dofile(minerdream.path .. "/api.lua")
 dofile(minerdream.path .. "/read_ore_config.lua")
 dofile(minerdream.path .. "/read_tool_config.lua")
 dofile(minerdream.path .. "/read_armor_config.lua")
 dofile(minerdream.path .. "/items.lua")
---dofile(minerdream.path .. "/tools.lua")
 dofile(minerdream.path .. "/overrides.lua")
 dofile(minerdream.path .. "/blocks.lua")
 dofile(minerdream.path .. "/generation.lua")
