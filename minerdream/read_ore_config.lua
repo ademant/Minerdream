@@ -44,6 +44,7 @@ local local_create_def=function(name,type,cracky,tdef)
 	end
 	return temp_def
 end
+
 local local_item_insert=function(name,ttype,def)
 	if minerdream.items[name] == nil then
 		minerdream.items[name] = {}
@@ -63,26 +64,28 @@ minetest.register_craft({
 	output = input.." 9",
 	recipe = {{output}} })
 end
-local local_craft_stack=function(input,output)
 
+-- register craft recipes for creating stacks
+local local_craft_stack=function(input,output)
 minetest.register_craft({
 	output = output,
 	recipe = {
 		{input, input },
 		{input, input },
 	} })
-
 minetest.register_craft({
 	output = input.." 4",
 	recipe = {{output}} })
 end
 
+-- register craft recipes for creating bricks
 local local_craft_brick = function(input,output)
 	minetest.register_craft( {type = "shapeless",
 		output = output,
 		recipe = {input, "default:cobble"},})
 end
 
+-- return recipes for different tools
 local local_get_recipe=function(tool,material,stick)
 	if stick == nil then
 		stick="group:stick"
