@@ -3,6 +3,9 @@ minerdream.path = minetest.get_modpath("minerdream")
 minerdream.modname = minetest.get_current_modname()
 minerdream.items={}
 
+-- import settingtypes.txt
+basic_functions.import_settingtype(minerdream.path .. "/settingtypes.txt")
+
 dofile(minerdream.path .. "/config.lua")
 dofile(minerdream.path .. "/read_ore_config.lua")
 dofile(minerdream.path .. "/read_tool_config.lua")
