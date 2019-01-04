@@ -36,6 +36,7 @@ for i,tdef in pairs(tool_definition) do
 --				tt_def={description=i.." "..tool,
 					inventory_image=minerdream.modname.."_"..tool.."_"..i..".png",
 					range=tooldef.range or 2,
+					groups={weapon=1},
 					tool_capabilities={max_drop_level = 1,groupcaps={},
 						damage_groups = {fleshy = ttv.fleshy or 4},},
 --		damage_groups = {fleshy=6.25},
