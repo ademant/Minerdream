@@ -3,6 +3,10 @@ default
 shields
 mana
 mobs
+basic_functions
 awards?
 hbhunger?
 hunger?
+technic?
+basic_materials?
+technic_aluminum?
