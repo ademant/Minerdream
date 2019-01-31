@@ -258,7 +258,7 @@ local function smelter_node_timer(pos, elapsed)
 		local fuel_percent = math.floor(fuel_time / fuel_totaltime * 100)
 		fuel_state = fuel_percent .. "%"
 		formspec = M.get_smelter_active_formspec(fuel_percent, item_percent, refrac_percent)
-		swap_node(pos, "default:furnace_active")
+		swap_node(pos, "default:smelter_active")
 		-- make sure timer restarts automatically
 		result = true
 	else
@@ -266,7 +266,7 @@ local function smelter_node_timer(pos, elapsed)
 			fuel_state = "0%"
 		end
 		formspec = M.get_smelter_inactive_formspec()
-		swap_node(pos, "default:furnace")
+		swap_node(pos, "default:smelter")
 		-- stop timer on the inactive furnace
 		minetest.get_node_timer(pos):stop()
 	end
