@@ -68,7 +68,6 @@ local function can_dig(pos, player)
 end
 
 local function allow_metadata_inventory_put(pos, listname, index, stack, player)
-	print(dump2(stack))
 	if minetest.is_protected(pos, player:get_player_name()) then
 		return 0
 	end
@@ -86,7 +85,7 @@ local function allow_metadata_inventory_put(pos, listname, index, stack, player)
 	elseif listname == "src" then
 		return stack:get_count()
 	elseif listname == "refrac" then
-		if stack=="default:clay_brick" then
+		if stack:get_name()=="default:clay_brick" then
 			return stack:get_count()
 		else
 			return 0
