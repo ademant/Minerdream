@@ -3,6 +3,8 @@ minerdream.path = minetest.get_modpath("minerdream")
 minerdream.modname = minetest.get_current_modname()
 minerdream.items={}
 
+minetest.log("action", "[MOD]"..minetest.get_current_modname().." -- start loading from "..minetest.get_modpath(minetest.get_current_modname()))
+
 -- import settingtypes.txt
 basic_functions.import_settingtype(minerdream.path .. "/settingtypes.txt")
 
@@ -23,3 +25,4 @@ dofile(minerdream.path .. "/experiments.lua")
 --dofile(minerdream.path .. "/mobs.lua")
 dofile(minerdream.path .. "/read_mobs_config.lua")
 
+minetest.log("action", "[MOD]"..minetest.get_current_modname().." -- loaded ")

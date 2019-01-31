@@ -132,7 +132,9 @@ minetest.register_craft({
 	}
 })
 
-
+print(dump2(minetest.registered_items['default:steel_ingot']))
+print(dump2(minetest.registered_items['minerdream:zinc_ingot']))
+print(dump2(minetest.registered_items['default:coal_lump']))
 minetest.register_craft({
 	output = 'minerdream:stainlesssteel_bar 1',
 	recipe = {

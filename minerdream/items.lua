@@ -21,6 +21,11 @@ minetest.register_craftitem('minerdream:steelstick', {
 	stack_max= 1000,
 })
 
+minetest.register_craftitem('minerdream:stainlesssteel_bar', {
+		description = "Stainless steel bar",
+	inventory_image = "minerdream_stainlesssteel_bar.png",
+	stack_max= 1000,
+})
 -----------------ores----------------
 
 minetest.register_craftitem('minerdream:brass_nugget', {
