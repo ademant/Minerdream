@@ -256,7 +256,7 @@ for i,tdef in pairs(miner_definition) do
 				-- get cooking output of already defined lump
 				local output, decremented_input = minetest.get_craft_result({ method = "cooking", width = 1, items = { ItemStack(lump_name) }})
 				lump_def.ingot_name=output.item:get_name()
-				print(dump2(minetest.get_all_craft_recipes(method="cooking",output=lump_def.ingot_name)))
+				print(dump2(minetest.get_all_craft_recipes(lump_def.ingot_name)))
 				tdef.ingot_name=output.item:get_name()
 				minerdream.items[i].ingot_name=output.item:get_name()
 				minetest.override_item(ore_name,ore_def)
