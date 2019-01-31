@@ -1,61 +1,6 @@
 
-minetest.register_craft({
-	output = 'minerdream:smelter',
-	recipe = {
-		{'default:steel_ingot', 'group:stone', 'default:steel_ingot'},
-		{'group:stone', '', 'group:stone'},
-		{'default:steel_ingot', 'group:stone', 'default:steel_ingot'},
-	}
-})
-
-
-local M=minerdream
---
--- Formspecs
---
-
-function M.get_smelter_active_formspec(fuel_percent, item_percent,refractory_percent)
-	return "size[8,8.5]"..
-		"list[context;src;2.75,0.5;1,1;]"..
-		"list[context;refrac;1.75,2.5;1,1;]"..
-		"list[context;fuel;2.75,2.5;1,1;]"..
-		"image[1.75,1.5;1,1;minerdream_refractory_bg.png^[lowpart:"..
-		(100-refractory_percent)..":default_clay_brick.png]"..
-		"image[2.75,1.5;1,1;default_furnace_fire_bg.png^[lowpart:"..
-		(100-fuel_percent)..":default_furnace_fire_fg.png]"..
-		"image[3.75,1.5;1,1;gui_furnace_arrow_bg.png^[lowpart:"..
-		(item_percent)..":gui_furnace_arrow_fg.png^[transformR270]"..
-		"list[context;dst;4.75,0.96;2,2;]"..
-		"list[current_player;main;0,4.25;8,1;]"..
-		"list[current_player;main;0,5.5;8,3;8]"..
-		"listring[context;dst]"..
-		"listring[current_player;main]"..
-		"listring[context;src]"..
-		"listring[current_player;main]"..
-		"listring[context;fuel]"..
-		"listring[current_player;main]"..
-		default.get_hotbar_bg(0, 4.25)
-end
-
-function M.get_smelter_inactive_formspec()
-	return "size[8,8.5]"..
-		"list[context;src;2.75,0.5;1,1;]"..
-		"list[context;refrac;1.75,2.5;1,1;]"..
-		"list[context;fuel;2.75,2.5;1,1;]"..
-		"image[1.75,1.5;1,1;minerdream_refractory_bg.png]"..
-		"image[2.75,1.5;1,1;default_furnace_fire_bg.png]"..
-		"image[3.75,1.5;1,1;gui_furnace_arrow_bg.png^[transformR270]"..
-		"list[context;dst;4.75,0.96;2,2;]"..
-		"list[current_player;main;0,4.25;8,1;]"..
-		"list[current_player;main;0,5.5;8,3;8]"..
-		"listring[context;dst]"..
-		"listring[current_player;main]"..
-		"listring[context;src]"..
-		"listring[current_player;main]"..
-		"listring[context;fuel]"..
-		"listring[current_player;main]"..
-		default.get_hotbar_bg(0, 4.25)
-end
+-- copied from minetest_default game
+-- and modified for usage with minerdream
 
 --
 -- Node callback functions that are the same for active and inactive furnace
@@ -64,7 +9,7 @@ end
 local function can_dig(pos, player)
 	local meta = minetest.get_meta(pos);
 	local inv = meta:get_inventory()
-	return inv:is_empty("fuel") and inv:is_empty("dst") and inv:is_empty("src") and inv:is_empty("refrac")
+	return inv:is_empty("fuel") and inv:is_empty("dst") and inv:is_empty("src")
 end
 
 local function allow_metadata_inventory_put(pos, listname, index, stack, player)
@@ -84,12 +29,6 @@ local function allow_metadata_inventory_put(pos, listname, index, stack, player)
 		end
 	elseif listname == "src" then
 		return stack:get_count()
-	elseif listname == "refrac" then
-		if stack=="default:clay_brick" then
-			return stack:get_count()
-		else
-			return 0
-		end
 	elseif listname == "dst" then
 		return 0
 	end
@@ -118,7 +57,7 @@ local function swap_node(pos, name)
 	minetest.swap_node(pos, node)
 end
 
-local function smelter_node_timer(pos, elapsed)
+local function furnace_node_timer(pos, elapsed)
 	--
 	-- Inizialize metadata
 	--
@@ -126,13 +65,12 @@ local function smelter_node_timer(pos, elapsed)
 	local fuel_time = meta:get_float("fuel_time") or 0
 	local src_time = meta:get_float("src_time") or 0
 	local fuel_totaltime = meta:get_float("fuel_totaltime") or 0
-	local refrac_time = meta:get_float("refrac_time") or 0
-	
+
 	local inv = meta:get_inventory()
-	local srclist, fuellist, refraclist
+	local srclist, fuellist
 
 	local cookable, cooked
-	local fuel, refrac
+	local fuel
 
 	local update = true
 	while elapsed > 0 and update do
@@ -140,8 +78,7 @@ local function smelter_node_timer(pos, elapsed)
 
 		srclist = inv:get_list("src")
 		fuellist = inv:get_list("fuel")
-		refraclist = inv:get_list("refrac")
-		
+
 		--
 		-- Cooking
 		--
@@ -149,25 +86,11 @@ local function smelter_node_timer(pos, elapsed)
 		-- Check if we have cookable content
 		local aftercooked
 		cooked, aftercooked = minetest.get_craft_result({method = "cooking", width = 1, items = srclist})
-		cookable = cooked.time ~= 0
+		cookable = (cooked.time > 0) and (cooked.time <=32)
 
 		local el = math.min(elapsed, fuel_totaltime - fuel_time)
 		if cookable then -- fuel lasts long enough, adjust el to cooking duration
 			el = math.min(el, cooked.time - src_time)
-		end
-		
-		-- check for refractory
-		if cookable then
-			-- cooking time > durability time of refractory?
-			if cooked.time > refrac_time then
-				-- is refrac slot filled or empty?
-				if not inv:is_empty("refrac") and (refraclist:get_name() == "default:clay_brick") then
-					inv:remove_item("refrac",ItemStack("default:clay_brick"))
-					refrac_time=refrac_time + 6000
-				else
-					cookable = false
-				end
-			end
 		end
 
 		-- Check if we have enough fuel to burn
@@ -183,7 +106,6 @@ local function smelter_node_timer(pos, elapsed)
 						inv:add_item("dst", cooked.item)
 						inv:set_stack("src", 1, aftercooked.items[1])
 						src_time = src_time - cooked.time
-						refrac_time=refrac_time- cooked.time
 						update = true
 					end
 				else
@@ -233,7 +155,6 @@ local function smelter_node_timer(pos, elapsed)
 	local item_state
 	local item_percent = 0
 	if cookable then
-		refrac_percent = math.floor (refrac_time / 60)
 		item_percent = math.floor(src_time / cooked.time * 100)
 		if item_percent > 100 then
 			item_state = "100% (output full)"
@@ -256,7 +177,7 @@ local function smelter_node_timer(pos, elapsed)
 		active = "active"
 		local fuel_percent = math.floor(fuel_time / fuel_totaltime * 100)
 		fuel_state = fuel_percent .. "%"
-		formspec = M.get_smelter_active_formspec(fuel_percent, item_percent, refrac_percent)
+		formspec = default.get_furnace_active_formspec(fuel_percent, item_percent)
 		swap_node(pos, "default:furnace_active")
 		-- make sure timer restarts automatically
 		result = true
@@ -264,7 +185,7 @@ local function smelter_node_timer(pos, elapsed)
 		if not fuellist[1]:is_empty() then
 			fuel_state = "0%"
 		end
-		formspec = M.get_smelter_inactive_formspec()
+		formspec = default.get_furnace_inactive_formspec()
 		swap_node(pos, "default:furnace")
 		-- stop timer on the inactive furnace
 		minetest.get_node_timer(pos):stop()
@@ -279,7 +200,6 @@ local function smelter_node_timer(pos, elapsed)
 	meta:set_float("fuel_totaltime", fuel_totaltime)
 	meta:set_float("fuel_time", fuel_time)
 	meta:set_float("src_time", src_time)
-	meta:set_float("refrac_time", refrac_time)
 	meta:set_string("formspec", formspec)
 	meta:set_string("infotext", infotext)
 
@@ -290,8 +210,8 @@ end
 -- Node definitions
 --
 
-minetest.register_node("minerdream:smelter", {
-	description = "Smelter",
+minetest.register_node(":default:furnace", {
+	description = "Furnace",
 	tiles = {
 		"default_furnace_top.png", "default_furnace_bottom.png",
 		"default_furnace_side.png", "default_furnace_side.png",
@@ -309,11 +229,10 @@ minetest.register_node("minerdream:smelter", {
 
 	on_construct = function(pos)
 		local meta = minetest.get_meta(pos)
-		meta:set_string("formspec", M.get_smelter_inactive_formspec())
+		meta:set_string("formspec", default.get_furnace_inactive_formspec())
 		local inv = meta:get_inventory()
 		inv:set_size('src', 1)
 		inv:set_size('fuel', 1)
-		inv:set_size('refrac', 1)
 		inv:set_size('dst', 4)
 	end,
 
@@ -339,8 +258,8 @@ minetest.register_node("minerdream:smelter", {
 	allow_metadata_inventory_take = allow_metadata_inventory_take,
 })
 
-minetest.register_node("minerdream:smelter_active", {
-	description = "Smelter",
+minetest.register_node(":default:furnace_active", {
+	description = "Furnace",
 	tiles = {
 		"default_furnace_top.png", "default_furnace_bottom.png",
 		"default_furnace_side.png", "default_furnace_side.png",

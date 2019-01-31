@@ -25,6 +25,7 @@ dofile(minerdream.path .. "/experiments.lua")
 --dofile(minerdream.path .. "/mobs.lua")
 dofile(minerdream.path .. "/read_mobs_config.lua")
 dofile(minerdream.path .. "/smelter.lua")
+dofile(minerdream.path .. "/furnace.lua")
 
 
 minetest.log("action", "[MOD]"..minetest.get_current_modname().." -- loaded ")

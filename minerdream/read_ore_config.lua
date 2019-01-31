@@ -486,4 +486,3 @@ for i,tdef in pairs(miner_definition) do
 end
 
 
-print(dump2(technic.recipes["grinding"]))
