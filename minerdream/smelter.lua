@@ -162,7 +162,7 @@ local function smelter_node_timer(pos, elapsed)
 			-- cooking time > durability time of refractory?
 			if cooked.time > refrac_time then
 				-- is refrac slot filled or empty?
-				if not inv:is_empty("refrac") and (refraclist:get_name() == "default:clay_brick") then
+				if not inv:is_empty("refrac") and (refraclist[1]:get_name() == "default:clay_brick") then
 					inv:remove_item("refrac",ItemStack("default:clay_brick"))
 					refrac_time=refrac_time + 6000
 				else
