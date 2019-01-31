@@ -132,9 +132,6 @@ minetest.register_craft({
 	}
 })
 
-print(dump2(minetest.registered_items['default:steel_ingot']))
-print(dump2(minetest.registered_items['minerdream:zinc_ingot']))
-print(dump2(minetest.registered_items['default:coal_lump']))
 minetest.register_craft({
 	output = 'minerdream:stainlesssteel_bar 1',
 	recipe = {
@@ -142,11 +139,15 @@ minetest.register_craft({
 	}
 })
 
+local stainlessbar="minerdream:stainlesssteel_bar"
+if minetest.registered_items["technic:stainless_steel_ingot"] ~= nil then
+	stainlessbar = "technic:stainless_steel_ingot"
+end
 minetest.register_craft({
 	output = 'minerdream:steelstick 3',
 	recipe = {
-		{'', 'minerdream:stainlesssteel_bar', ''},
-		{'', 'minerdream:stainlesssteel_bar', ''},
+		{'', stainlessbar, ''},
+		{'', stainlessbar, ''},
 	}
 })
 
