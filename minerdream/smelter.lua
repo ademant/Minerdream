@@ -164,7 +164,7 @@ local function smelter_node_timer(pos, elapsed)
 				-- is refrac slot filled or empty?
 				if not inv:is_empty("refrac") and (refraclist[1]:get_name() == "default:clay_brick") then
 					inv:remove_item("refrac",ItemStack("default:clay_brick"))
-					refrac_time=refrac_time + 6000
+					refrac_time=refrac_time + minerdream.smelter_refractory_duration
 				else
 					cookable = false
 				end
@@ -233,8 +233,9 @@ local function smelter_node_timer(pos, elapsed)
 	local formspec
 	local item_state
 	local item_percent = 0
+	local refrac_percent = 0
 	if cookable then
-		refrac_percent = math.floor (refrac_time / 60)
+		refrac_percent = math.min(100, math.floor (refrac_time / minerdream.smelter_refractory_duration * 100))
 		item_percent = math.floor(src_time / cooked.time * 100)
 		if item_percent > 100 then
 			item_state = "100% (output full)"
@@ -266,7 +267,7 @@ local function smelter_node_timer(pos, elapsed)
 			fuel_state = "0%"
 		end
 		formspec = M.get_smelter_inactive_formspec()
-		swap_node(pos, "default:smelter")
+		swap_node(pos, "minerdream:smelter")
 		-- stop timer on the inactive furnace
 		minetest.get_node_timer(pos):stop()
 	end
