@@ -259,7 +259,7 @@ local function smelter_node_timer(pos, elapsed)
 		local fuel_percent = math.floor(fuel_time / fuel_totaltime * 100)
 		fuel_state = fuel_percent .. "%"
 		formspec = M.get_smelter_active_formspec(fuel_percent, item_percent, refrac_percent)
-		swap_node(pos, "default:smelter_active")
+		swap_node(pos, "minerdream:smelter_active")
 		-- make sure timer restarts automatically
 		result = true
 	else
