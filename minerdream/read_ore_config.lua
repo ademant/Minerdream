@@ -241,6 +241,11 @@ for i,tdef in pairs(miner_definition) do
 					ore_def.name=tdef.overrides
 					ore_def.drop=temp_def.drop
 					lump_def.name=temp_def.drop
+					local override_mod=tdef.overrides:split(":")[1]
+					if override_mod ~=nil then
+						ore_def.override_mod=override_mod
+						lump_def.override_mod=override_mod
+					end
 					to_override = true
 				end
 			end
@@ -255,10 +260,12 @@ for i,tdef in pairs(miner_definition) do
 				lump_def.name=nil
 				-- get cooking output of already defined lump
 				local output, decremented_input = minetest.get_craft_result({ method = "cooking", width = 1, items = { ItemStack(lump_name) }})
-				lump_def.ingot_name=output.item:get_name()
-				print(dump2(minetest.get_all_craft_recipes(lump_def.ingot_name)))
-				tdef.ingot_name=output.item:get_name()
-				minerdream.items[i].ingot_name=output.item:get_name()
+				local override_ingot=output.item:get_name()
+				if override_ingot ~= nil then
+					lump_def.ingot_name=output.item:get_name()
+					tdef.ingot_name=output.item:get_name()
+					minerdream.items[i].ingot_name=output.item:get_name()
+				end
 				minetest.override_item(ore_name,ore_def)
 				if tdef.groups.has_no_lump == nil then
 					minetest.override_item(lump_name,lump_def)
@@ -319,22 +326,36 @@ for i,tdef in pairs(miner_definition) do
 		-- define ore dust
 		-- only makes sense if it can be grinded
 		if tdef.groups.has_dust and minetest.get_modpath("technic") then
+			
 			local dust_def=local_create_def(i,"dust",tdef.groups.has_dust,tdef)
-			dust_def.tiles={minerdream.modname.."_dust.png"}
-			dust_def.inventory_image=minerdream.modname.."_dust.png"
-			if tdef.color ~= nil then
-				dust_def.inventory_image="minerdream_stone_dust.png^[colorize:#"..tdef.color
-			end
-			minetest.register_node(minerdream.modname..":"..i.."_dust",dust_def)
+			dust_def.tiles={minerdream.modname.."_"..i.."_dust.png"}
+			dust_def.inventory_image=minerdream.modname.."_"..i.."_dust.png"
+			local overridden = false
+			
+			-- check, if dust is already defined
 			if minerdream.items[i].lump_def then
-				local lump_def=table.copy(minerdream.items[i].lump_def)
-				local grind_time=math.ceil((tdef.lump_cooking_time or 64)/minerdream.dust_cooking_time_reduce)
-				lump_def.grind_time=grind_time
-				local_item_insert(i,"lump_def",lump_def)
-				technic.register_grinder_recipe({input = {lump_def.name}, output = dust_def.name.." 2",time=grind_time})
-				dust_def.grind_source=lump_def.name
+				local lumpdef=minerdream.items[i].lump_def
+				if lumpdef.override_mod ~= nil then
+					local override_dust=lumpdef.override_mod..":"..i.."_dust"
+					if minetest.registered_items[override_dust] ~= nil then
+						overridden = true
+						minetest.register_node(":"..override_dust,dust_def)
+					end
+				end
 			end
-			local_item_insert(i,"dust_def",dust_def)
+			-- if not defined, register node and grinding recipe
+			if not overridden then
+				minetest.register_node(minerdream.modname..":"..i.."_dust",dust_def)
+				if minerdream.items[i].lump_def then
+					local lump_def=table.copy(minerdream.items[i].lump_def)
+					local grind_time=math.ceil((tdef.lump_cooking_time or 64)/minerdream.dust_cooking_time_reduce)
+					lump_def.grind_time=grind_time
+					local_item_insert(i,"lump_def",lump_def)
+					technic.register_grinder_recipe({input = {lump_def.name}, output = dust_def.name.." 2",time=grind_time})
+					dust_def.grind_source=lump_def.name
+				end
+				local_item_insert(i,"dust_def",dust_def)
+			end
 		end
 		
 		-- define ingot
@@ -359,12 +380,16 @@ for i,tdef in pairs(miner_definition) do
 				lump_def.ingot_name=ingot_def.name
 				ingot_def.lump_name=lump_def.name
 				lump_def.cooking_time=tdef.lump_cooking_time
-				  minetest.register_craft({type="cooking",
-					cooktime=tdef.lump_cooking_time,
-					output=ingot_def.name,
-					recipe=lump_def.name,
-				  })
-				minerdream.items[i].lump_def=lump_def
+				-- check, if cooking recipe already registered
+				local output, decremented_input = minetest.get_craft_result({ method = "cooking", width = 1, items = { ItemStack(lump_def.name) }})
+				if output.item:get_name() ~= ingot_def.name then
+					minetest.register_craft({type="cooking",
+						cooktime=tdef.lump_cooking_time,
+						output=ingot_def.name,
+						recipe=lump_def.name,
+					})
+					minerdream.items[i].lump_def=lump_def
+				end
 			end
 			-- if technic loaded and dust registered than add recipes for dust
 			if tdef.groups.has_dust and minetest.get_modpath("technic") then
