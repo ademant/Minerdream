@@ -158,6 +158,7 @@ for i,tdef in pairs(miner_definition) do
 		end
 	end
 	if (i ~= "default") and (is_enabled) then
+		local starttime=os.clock()
 		minerdream.items[i]={}
 		local ore_modname=minerdream.modname
 		if tdef.orig_modname then
@@ -481,7 +482,9 @@ for i,tdef in pairs(miner_definition) do
 				end
 			end
 		end
-		
+		print("minerdream registering "..i.." in "..(math.floor(1000000*(os.clock()-starttime))/1000).." milliseconds")
+	else
+		print("minerdream: "..i.." not enabled")
 	end
 end
 

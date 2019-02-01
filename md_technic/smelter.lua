@@ -1,6 +1,6 @@
 
 minetest.register_craft({
-	output = 'minerdream:smelter',
+	output = 'md_technic:smelter',
 	recipe = {
 		{'default:steel_ingot', 'group:stone', 'default:steel_ingot'},
 		{'group:stone', '', 'group:stone'},
@@ -9,7 +9,7 @@ minetest.register_craft({
 })
 
 
-local M=minerdream
+local M=md_technic
 --
 -- Formspecs
 --
@@ -167,7 +167,7 @@ local function smelter_node_timer(pos, elapsed)
 				-- is refrac slot filled or empty?
 				if not inv:is_empty("refrac") and (refraclist[1]:get_name() == "default:clay_brick") then
 					inv:remove_item("refrac",ItemStack("default:clay_brick"))
-					refrac_time=refrac_time + minerdream.smelter_refractory_duration
+					refrac_time=refrac_time + M.smelter_refractory_duration
 				else
 					cookable = false
 				end
@@ -236,7 +236,7 @@ local function smelter_node_timer(pos, elapsed)
 	local formspec
 	local item_state
 	local item_percent = 0
-	local refrac_percent = math.min(100, math.floor (refrac_time / minerdream.smelter_refractory_duration * 100))
+	local refrac_percent = math.min(100, math.floor (refrac_time / M.smelter_refractory_duration * 100))
 	local refrac_state = refrac_percent.."%"
 	if cookable then
 		item_percent = math.floor(src_time / cooked.time * 100)
@@ -262,7 +262,7 @@ local function smelter_node_timer(pos, elapsed)
 		local fuel_percent = math.floor(fuel_time / fuel_totaltime * 100)
 		fuel_state = fuel_percent .. "%"
 		formspec = M.get_smelter_active_formspec(fuel_percent, item_percent, refrac_percent)
-		swap_node(pos, "minerdream:smelter_active")
+		swap_node(pos, "md_technic:smelter_active")
 		-- make sure timer restarts automatically
 		result = true
 	else
@@ -270,7 +270,7 @@ local function smelter_node_timer(pos, elapsed)
 			fuel_state = "0%"
 		end
 		formspec = M.get_smelter_inactive_formspec(refrac_percent)
-		swap_node(pos, "minerdream:smelter")
+		swap_node(pos, "md_technic:smelter")
 		-- stop timer on the inactive furnace
 		minetest.get_node_timer(pos):stop()
 	end
@@ -295,7 +295,7 @@ end
 -- Node definitions
 --
 
-minetest.register_node("minerdream:smelter", {
+minetest.register_node("md_technic:smelter", {
 	description = "Smelter",
 	tiles = {
 		"default_furnace_top.png", "default_furnace_bottom.png",
@@ -314,7 +314,7 @@ minetest.register_node("minerdream:smelter", {
 
 	on_construct = function(pos)
 		local meta = minetest.get_meta(pos)
-		meta:set_string("formspec", M.get_smelter_inactive_formspec())
+		meta:set_string("formspec", M.get_smelter_inactive_formspec(0))
 		local inv = meta:get_inventory()
 		inv:set_size('src', 1)
 		inv:set_size('fuel', 1)
@@ -335,7 +335,7 @@ minetest.register_node("minerdream:smelter", {
 		default.get_inventory_drops(pos, "refrac", drops)
 		default.get_inventory_drops(pos, "fuel", drops)
 		default.get_inventory_drops(pos, "dst", drops)
-		drops[#drops+1] = "minerdream:smelter"
+		drops[#drops+1] = "md_technic:smelter"
 		minetest.remove_node(pos)
 		return drops
 	end,
@@ -345,7 +345,7 @@ minetest.register_node("minerdream:smelter", {
 	allow_metadata_inventory_take = allow_metadata_inventory_take,
 })
 
-minetest.register_node("minerdream:smelter_active", {
+minetest.register_node("md_technic:smelter_active", {
 	description = "Smelter",
 	tiles = {
 		"default_furnace_top.png", "default_furnace_bottom.png",
@@ -364,7 +364,7 @@ minetest.register_node("minerdream:smelter_active", {
 	},
 	paramtype2 = "facedir",
 	light_source = 8,
-	drop = "minerdream:smelter",
+	drop = "md_technic:smelter",
 	groups = {cracky=2, not_in_creative_inventory=1},
 	legacy_facedir_simple = true,
 	is_ground_content = false,
