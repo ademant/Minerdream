@@ -37,10 +37,12 @@ function M.get_smelter_active_formspec(fuel_percent, item_percent,refractory_per
 		default.get_hotbar_bg(0, 4.25)
 end
 
-function M.get_smelter_inactive_formspec()
+function M.get_smelter_inactive_formspec(refractory_percent)
+	if refractory_percent == nil then refractory_percent = 0 end
 	return "size[8,8.5]"..
 		"list[context;src;2.75,0.5;1,1;]"..
-		"list[context;refrac;1.75,2.5;1,1;]"..
+		"image[1.75,1.5;1,1;minerdream_refractory_bg.png^[lowpart:"..
+		(100-refractory_percent)..":default_clay_brick.png]"..
 		"list[context;fuel;2.75,2.5;1,1;]"..
 		"image[1.75,1.5;1,1;minerdream_refractory_bg.png]"..
 		"image[2.75,1.5;1,1;default_furnace_fire_bg.png]"..
@@ -234,9 +236,9 @@ local function smelter_node_timer(pos, elapsed)
 	local formspec
 	local item_state
 	local item_percent = 0
-	local refrac_percent = 0
+	local refrac_percent = math.min(100, math.floor (refrac_time / minerdream.smelter_refractory_duration * 100))
+	local refrac_state = refrac_percent.."%"
 	if cookable then
-		refrac_percent = math.min(100, math.floor (refrac_time / minerdream.smelter_refractory_duration * 100))
 		item_percent = math.floor(src_time / cooked.time * 100)
 		if item_percent > 100 then
 			item_state = "100% (output full)"
@@ -267,14 +269,14 @@ local function smelter_node_timer(pos, elapsed)
 		if not fuellist[1]:is_empty() then
 			fuel_state = "0%"
 		end
-		formspec = M.get_smelter_inactive_formspec()
+		formspec = M.get_smelter_inactive_formspec(refrac_percent)
 		swap_node(pos, "minerdream:smelter")
 		-- stop timer on the inactive furnace
 		minetest.get_node_timer(pos):stop()
 	end
 
 	local infotext = "Furnace " .. active .. "\n(Item: " .. item_state ..
-		"; Fuel: " .. fuel_state .. ")"
+		"; Fuel: " .. fuel_state .. ")\n(Refractory: ".. refrac_state .. ")"
 
 	--
 	-- Set meta values
