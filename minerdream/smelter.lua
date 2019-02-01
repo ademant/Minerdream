@@ -151,7 +151,8 @@ local function smelter_node_timer(pos, elapsed)
 		local aftercooked
 		cooked, aftercooked = minetest.get_craft_result({method = "cooking", width = 1, items = srclist})
 		cookable = cooked.time ~= 0
-
+		local cookedtime=cooked.time / M.smelter_speedup
+		
 		local el = math.min(elapsed, fuel_totaltime - fuel_time)
 		if cookable then -- fuel lasts long enough, adjust el to cooking duration
 			el = math.min(el, cooked.time - src_time)
@@ -160,7 +161,7 @@ local function smelter_node_timer(pos, elapsed)
 		-- check for refractory
 		if cookable then
 			-- cooking time > durability time of refractory?
-			if cooked.time > refrac_time then
+			if cookedtime > refrac_time then
 				-- is refrac slot filled or empty?
 				if not inv:is_empty("refrac") and (refraclist[1]:get_name() == "default:clay_brick") then
 					inv:remove_item("refrac",ItemStack("default:clay_brick"))
@@ -178,13 +179,13 @@ local function smelter_node_timer(pos, elapsed)
 			-- If there is a cookable item then check if it is ready yet
 			if cookable then
 				src_time = src_time + el
-				if src_time >= cooked.time then
+				if src_time >= cookedtime then
 					-- Place result in dst list if possible
 					if inv:room_for_item("dst", cooked.item) then
 						inv:add_item("dst", cooked.item)
 						inv:set_stack("src", 1, aftercooked.items[1])
-						src_time = src_time - cooked.time
-						refrac_time=refrac_time- cooked.time
+						src_time = src_time - cookedtime
+						refrac_time=refrac_time- cookedtime
 						update = true
 					end
 				else
@@ -199,7 +200,7 @@ local function smelter_node_timer(pos, elapsed)
 				local afterfuel
 				fuel, afterfuel = minetest.get_craft_result({method = "fuel", width = 1, items = fuellist})
 
-				if fuel.time == 0 then
+				if fuel.time <= M.smelter_min_burntime then
 					-- No valid fuel in fuel list
 					fuel_totaltime = 0
 					src_time = 0

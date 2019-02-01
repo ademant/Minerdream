@@ -2,3 +2,5 @@ minerdream.ingot_stack_max (Max stack for ingots) int 250 99 1000
 minerdream.lump_stack_max (Max stack for lumps) int 999 99 1000
 minerdream.dust_cooking_time_reduce (Recucing factor for cooking dust instead of lump) float 2 1 5
 minerdream.smelter_refractory_duration (Smelting time the refractory lasts) int 6000 600 50000
+minerdream.smelter_min_burntime (Min. burntime of fuel for smelter) int 30 10 100
+minerdream.smelter_speedup (Speedup of smelter) float 1.5

@@ -5,6 +5,8 @@ minerdream.ingot_stack_max =  minetest.settings:get("minerdream.ingot_stack_max"
 minerdream.lump_stack_max =  minetest.settings:get("minerdream.lump_stack_max") or 999
 minerdream.dust_cooking_time_reduce =  minetest.settings:get("minerdream.dust_cooking_time_reduce") or 2
 minerdream.smelter_refractory_duration =  minetest.settings:get("minerdream.smelter_refractory_duration") or 5000
+minerdream.smelter_min_burntime=  minetest.settings:get("minerdream.smelter_min_burntime") or 30
+minerdream.smelter_speedup =  minetest.settings:get("minerdream.smelter_speedup") or 1.5
 
 minerdream.steel_wire="minerdream:steel_wire"
 if minetest.get_modpath("basic_materials") == nil then
