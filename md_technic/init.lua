@@ -4,3 +4,6 @@ md_technic.modname = minetest.get_current_modname()
 
 dofile(md_technic.path .. "/furnace.lua")
 dofile(md_technic.path .. "/smelter.lua")
+if technic ~= nil then
+	dofile(md_technic.path .. "/batteries.lua")
+end
