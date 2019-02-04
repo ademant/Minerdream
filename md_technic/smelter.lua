@@ -41,6 +41,7 @@ function M.get_smelter_inactive_formspec(refractory_percent)
 	if refractory_percent == nil then refractory_percent = 0 end
 	return "size[8,8.5]"..
 		"list[context;src;2.75,0.5;1,1;]"..
+		"list[context;refrac;1.75,2.5;1,1;]"..
 		"image[1.75,1.5;1,1;minerdream_refractory_bg.png^[lowpart:"..
 		(100-refractory_percent)..":default_clay_brick.png]"..
 		"list[context;fuel;2.75,2.5;1,1;]"..
