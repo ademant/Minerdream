@@ -8,7 +8,7 @@ local ore_cols={
 	groups_num={"has_dust","has_block","in_desert","has_block","has_brick","is_metall","is_mineral",
 		"has_bar","has_lump","has_bar_block","has_dust","has_spear","has_bow","has_arrow","has_pick",
 		"has_axe","has_shovel","has_sword","has_helmet","has_chestplate","has_shield","has_leggings",
-		"has_boots","drop_as_lump","is_gemstone","is_lump_gemstone","has_no_drop","has_no_lump"}}
+		"has_boots","drop_as_lump","is_gemstone","is_lump_gemstone","has_no_drop","has_no_lump","has_nugget"}}
 local miner_definition = basic_functions.import_csv(minerdream.path.."/ores.txt",ore_cols)
 
 if miner_definition["default"] ~= nil then
@@ -296,6 +296,21 @@ for i,tdef in pairs(miner_definition) do
 				local_item_insert(i,"desertore_def",desertore_def)
 				minetest.register_node(desertore_def.name,desertore_def)
 			end
+			if tdef.groups.has_nugget and tdef.groups.has_nugget>0 then
+				local poor_def=table.copy(ore_def)
+				local nugget_def=table.copy(lump_def)
+				poor_def.description="Poor "..i
+--				poor_def.name=poor_def.name.."_poor"
+				poor_def.name=minerdream.modname..":stone_with_"..i.."_poor"
+				poor_def.tiles={"default_stone.png^"..minerdream.modname.."_"..i.."_poorore.png"}
+				nugget_def.description=i.." Nugget"
+				nugget_def.name=minerdream.modname..":"..i.."_nugget"
+				nugget_def.inventory_image=nugget_def.name:gsub(":","_")..".png"
+				poor_def.drop=nugget_def.name
+				minetest.register_node(poor_def.name,poor_def)
+				minetest.register_craftitem(nugget_def.name,nugget_def)
+				local_craft_stack(nugget_def.name,lump_def.name)
+			end
 		else
 			-- if not already defined, then add mapgen parameter
 			if tdef.scarcity ~= nil then
@@ -315,6 +330,13 @@ for i,tdef in pairs(miner_definition) do
 						y_min          = tdef.y_min or (-31000),
 						y_max          = tdef.y_max or 0,
 					}
+			if tdef.groups.has_nugget and tdef.groups.has_nugget>0 then
+				local poor_map_def=table.copy(map_def)
+				poor_map_def.ore=mapgen_name.."_poor"
+				minetest.register_ore(poor_map_def)
+				map_def.clust_scarcity=map_def.clust_scarcity*tdef.groups.has_nugget
+				map_def.clust_size=map_def.clust_size*tdef.groups.has_nugget
+			end
 			local_item_insert(i,"map_def",map_def)
 			minetest.register_ore(map_def)
 			if tdef.groups.in_desert then
