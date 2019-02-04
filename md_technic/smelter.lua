@@ -236,7 +236,7 @@ local function smelter_node_timer(pos, elapsed)
 	local formspec
 	local item_state
 	local item_percent = 0
-	local refrac_percent = math.min(100, math.floor (refrac_time / M.smelter_refractory_duration * 100))
+	local refrac_percent = math.min(100, math.floor (refrac_time / M.smelter_refractory_duration * 100)) or 0
 	local refrac_state = refrac_percent.."%"
 	if cookable then
 		item_percent = math.floor(src_time / cooked.time * 100)
