@@ -8,6 +8,7 @@ minetest.log("action", "[MOD]"..minetest.get_current_modname().." -- start loadi
 -- import settingtypes.txt
 basic_functions.import_settingtype(md_technic.path .. "/settingtypes.txt")
 
+dofile(md_technic.path .. "/config.lua")
 dofile(md_technic.path .. "/furnace.lua")
 dofile(md_technic.path .. "/smelter.lua")
 if technic ~= nil then
