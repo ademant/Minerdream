@@ -1,34 +1,30 @@
 if armor ~= nil then
-	treasures.add_drop("treasures:treasure1",{items = {'shields:helmet_steel 1'},rarity = 20,})
+	treasures.add_drop("treasures:treasure1",{items = {'3d_armor:helmet_steel 1'},rarity = 20,})
 	treasures.add_drop("treasures:treasure2",{items = {'shields:shield_steel 1'},rarity = 20,})
-	treasures.add_drop("treasures:treasure3",{items = {'shields:boots_steel 1'},rarity = 20,})
-	treasures.add_drop("treasures:treasure3",{items = {'shields:chestplate_steel 1'},rarity = 20,})
-	treasures.add_drop("treasures:treasure4",{items = {'shields:chestplate_diamond 1'},rarity = 20,})
+	treasures.add_drop("treasures:treasure3",{items = {'3d_armor:boots_steel 1'},rarity = 20,})
+	treasures.add_drop("treasures:treasure3",{items = {'3d_armor:chestplate_steel 1'},rarity = 20,})
+	treasures.add_drop("treasures:treasure4",{items = {'3d_armor:chestplate_diamond 1'},rarity = 20,})
 	treasures.add_drop("treasures:treasure4",{items = {'shields:shield_diamond 1'},rarity = 20,})
-	treasures.add_drop("treasures:treasure5",{items = {'shields:chestplate_mithril 1'},rarity = 20,})
-	treasures.add_drop("treasures:treasure5",{items = {'shields:shield_mithril 1'},rarity = 20,})
+	treasures.add_drop("treasures:treasure5",{items = {'3d_armor:chestplate_gold 1'},rarity = 20,})
+	treasures.add_drop("treasures:treasure5",{items = {'shields:shield_gold 1'},rarity = 20,})
 end
 
 treasures.add_drop("treasures:treasure1",{items = {'minerdream:dagger 1'},rarity = 25,})
-treasures.add_drop("treasures:treasure1",{items = {'minerdream:treasure2'},rarity = 15,})
 treasures.add_drop("treasures:treasure1",{items = {'minerdream:arrow 10'},rarity = 5,})
 treasures.add_drop("treasures:treasure1",{items = {'minerdream:shuriken 15'},rarity = 5,})
 treasures.add_drop("treasures:treasure1",{items = {'minerdream:potassium_lump 3'},rarity = 10,})
 treasures.add_drop("treasures:treasure1",{items = {'minerdream:calcium_lump 3'},rarity = 10,})
-treasures.add_drop("treasures:treasure1",{items = {'minerdream:zinc_lump 3'},rarity = 15,})
 treasures.add_drop("treasures:treasure1",{items = {'minerdream:nickel_lump 3'},rarity = 15,})
 
 treasures.add_drop("treasures:treasure2",{items = {'minerdream:shortsword 1'},rarity = 25,})
 treasures.add_drop("treasures:treasure2",{items = {'minerdream:club 1'},rarity = 25,})
 treasures.add_drop("treasures:treasure2",{items = {'minerdream:grenade 1'},rarity = 5,})
-treasures.add_drop("treasures:treasure2",{items = {'minerdream:treasure3'},rarity = 25,})
 treasures.add_drop("treasures:treasure2",{items = {'minerdream:shuriken 25'},rarity = 5,})
 treasures.add_drop("treasures:treasure2",{items = {'minerdream:vitamin 3'},rarity = 5,})
 treasures.add_drop("treasures:treasure2",{items = {'minerdream:potion_tiny 1'},rarity = 5,})
 treasures.add_drop("treasures:treasure2",{items = {'minerdream:arrow 15'},rarity = 5,})
 
 treasures.add_drop("treasures:treasure3",{items = {'minerdream:mace 1'},rarity = 25,})
-treasures.add_drop("treasures:treasure3",{items = {'minerdream:treasure4'},rarity = 30,})
 treasures.add_drop("treasures:treasure3",{items = {'minerdream:grenade 2'},rarity = 5,})
 treasures.add_drop("treasures:treasure3",{items = {'minerdream:throwing_knife 15'},rarity = 5,})
 treasures.add_drop("treasures:treasure3",{items = {'minerdream:potion_tiny 2'},rarity = 3,})
@@ -37,7 +33,6 @@ treasures.add_drop("treasures:treasure3",{items = {'minerdream:arrow 20'},rarity
 
 treasures.add_drop("treasures:treasure4",{items = {'minerdream:revolver'},rarity = 25,})
 treasures.add_drop("treasures:treasure4",{items = {'minerdream:claymore'},rarity = 20,})
-treasures.add_drop("treasures:treasure4",{items = {'minerdream:treasure5'},rarity = 20,})
 treasures.add_drop("treasures:treasure4",{items = {'minerdream:throwing_knife 25'},rarity = 5,})
 treasures.add_drop("treasures:treasure4",{items = {'minerdream:grenade 3'},rarity = 5,})
 treasures.add_drop("treasures:treasure4",{items = {'minerdream:potion_lesser 1'},rarity = 3,})
@@ -52,7 +47,6 @@ treasures.add_drop("treasures:treasure4",{items = {'minerdream:bullet 25'},rarit
 
 treasures.add_drop("treasures:treasure5",{items = {'minerdream:shotgun'},rarity = 25,})
 treasures.add_drop("treasures:treasure5",{items = {'minerdream:katana'},rarity = 20,})
-treasures.add_drop("treasures:treasure5",{items = {'minerdream:treasure5'},rarity = 25,})
 treasures.add_drop("treasures:treasure5",{items = {'minerdream:throwing_knife 30'},rarity = 5,})
 treasures.add_drop("treasures:treasure5",{items = {'minerdream:grenade 4'},rarity = 5,})
 treasures.add_drop("treasures:treasure5",{items = {'minerdream:potion_lesser 2'},rarity = 3,})
@@ -65,4 +59,3 @@ treasures.add_drop("treasures:treasure5",{items = {'minerdream:topaz 1'},rarity 
 treasures.add_drop("treasures:treasure5",{items = {'minerdream:aquamarine 1'},rarity = 15,})
 treasures.add_drop("treasures:treasure5",{items = {'minerdream:arrow 30'},rarity = 5,})
 treasures.add_drop("treasures:treasure5",{items = {'minerdream:bullet 30'},rarity = 7,})
-
