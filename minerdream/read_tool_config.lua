@@ -11,7 +11,6 @@ local tool_cols={
 -- reading config table
 local tool_definition = basic_functions.import_csv(minerdream.path.."/tools.txt",tool_cols)
 
-
 for i,tdef in pairs(tool_definition) do
 	if (i ~= "default") and (minerdream.items[i] ~= nil) then
 		idef=table.copy(minerdream.items[i])
