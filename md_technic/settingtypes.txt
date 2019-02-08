@@ -1,0 +1,3 @@
+md_technic.smelter_refractory_duration (Smelting time the refractory lasts) int 6000 600 50000
+md_technic.smelter_min_burntime (Min. burntime of fuel for smelter) int 30 10 100
+md_technic.smelter_speedup (Speedup of smelter) float 1.5
