@@ -1,5 +1,5 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-#Minerdream modpack
+# Minerdream modpack for Minetest
 The minerdream modpack of daviddoesminetest is a great work, I wanted to extend.
 After a big deal of redesign I created a modpack to integrete minerdream better with other mods. The loot nodes is a nice idea, which I out sourced into an own mod, making it easier to use it in other mods.
 
@@ -13,20 +13,20 @@ https://github.com/ademant/minerdream.git
 
 https://gitlab.com/ademant/minerdream.git
 
-##Minerdream
+## Minerdream
 The main work is in mod minerdream.
 
 The definition of ores are redesigned using a spreadsheet file. This configuration is loaded and all needed items and dependencies are registered by special functions.
 
-##md_awards
+## md_awards
 In original mod Minerdream defined awards are separated into an own mod, reducing minerdream to base functions.
 Also the loot nodes, which are out sourced into mod treasure, is extended by items of minerdream.
 
-##md_technic
+## md_technic
 Extend the idea of special ores: The standard furnace burns only items with a low burn time. Special ores can only be smelted in a new smelter. The smelter needs clay bricks as refractory.
 
 
-# Minerdream_mod
+## Minerdream_mod
 [davieddoesminetest] A mod, that makes minig way more fun, and is a replacement for Xtraores, which I abandoned.
 
 [ademant]
