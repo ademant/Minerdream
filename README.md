@@ -1,6 +1,6 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 #Minerdream modpack
-The minerdream modpack of davieddoesminetest is a great work, I wanted to extend.
+The minerdream modpack of daviddoesminetest is a great work, I wanted to extend.
 After a big deal of redesign I created a modpack to integrete minerdream better with other mods. The loot nodes is a nice idea, which I out sourced into an own mod, making it easier to use it in other mods.
 
 Main repository:

@@ -1,7 +1,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 #Minerdream
 Original by 
-[davieddoesminetest] A mod, that makes minig way more fun, and is a replacement for Xtraores, which I abandoned.
+[daviddoesminetest] A mod, that makes minig way more fun, and is a replacement for Xtraores, which I abandoned.
 
 A nice mod, I redesigned mostly by implement a complete new kind of configuration, making it easier to define new ores. And also to override existing ores with other tiles.
 
