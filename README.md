@@ -3,6 +3,16 @@
 The minerdream modpack of davieddoesminetest is a great work, I wanted to extend.
 After a big deal of redesign I created a modpack to integrete minerdream better with other mods. The loot nodes is a nice idea, which I out sourced into an own mod, making it easier to use it in other mods.
 
+Main repository:
+
+https://notabug.org/ademant/minerdream.git
+
+Mirrors:
+
+https://github.com/ademant/minerdream.git
+
+https://gitlab.com/ademant/minerdream.git
+
 ##Minerdream
 The main work is in mod minerdream.
 
