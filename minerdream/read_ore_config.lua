@@ -304,6 +304,7 @@ for i,tdef in pairs(miner_definition) do
 --				poor_def.name=poor_def.name.."_poor"
 				poor_def.name=minerdream.modname..":stone_with_"..i.."_poor"
 				poor_def.tiles={"default_stone.png^"..minerdream.modname.."_"..i.."_poorore.png"}
+				poor_def.groups.cracky=math.max(1,math.floor(tdef.crack/2)) -- poor ore should be easier to dig
 				nugget_def.description=i.." Nugget"
 				nugget_def.name=minerdream.modname..":"..i.."_nugget"
 				nugget_def.inventory_image=nugget_def.name:gsub(":","_")..".png"
