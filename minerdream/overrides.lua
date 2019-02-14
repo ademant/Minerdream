@@ -1,29 +1,31 @@
+local S=minerdream.intllib
+
 minetest.override_item('3d_armor:helmet_diamond', {
-		description = "".. core.colorize("#00FFFF", "Soft diamond helmet\n")..core.colorize("#A0A0A0", "tier: 3 (almost rare)\n")..core.colorize("#A0A0A0", "Defence: 13\n")..core.colorize("#A0A0A0", "heal: 7 \n")..core.colorize("#A0A0A0", "type: head gear "),
+		description = "".. core.colorize("#00FFFF", "Soft "..S("diamond").." "..S("helmet\n"))..core.colorize("#A0A0A0", "tier: 3 (almost rare)\n")..core.colorize("#A0A0A0", "Defence: 13\n")..core.colorize("#A0A0A0", "heal: 7 \n")..core.colorize("#A0A0A0", "type: head gear "),
 		groups = {armor_head=1, armor_heal=7, armor_use=150,},
 	armor_groups = {fleshy=13},
 })
 
 minetest.override_item('3d_armor:chestplate_diamond', {
-		description = "".. core.colorize("#00FFFF", "Soft diamond chestplate\n")..core.colorize("#A0A0A0", "tier: 3 (almost rare)\n")..core.colorize("#A0A0A0", "Defence: 18\n")..core.colorize("#A0A0A0", "heal: 7 \n")..core.colorize("#A0A0A0", "type: torso gear "),
+		description = "".. core.colorize("#00FFFF", "Soft "..S("diamond").." "..S("chestplate\n"))..core.colorize("#A0A0A0", "tier: 3 (almost rare)\n")..core.colorize("#A0A0A0", "Defence: 18\n")..core.colorize("#A0A0A0", "heal: 7 \n")..core.colorize("#A0A0A0", "type: torso gear "),
 		groups = {armor_torso=1, armor_heal=7, armor_use=150,},
 	armor_groups = {fleshy=18},
 })
 
 minetest.override_item('3d_armor:leggings_diamond', {
-		description = "".. core.colorize("#00FFFF", "Soft diamond leggings\n")..core.colorize("#A0A0A0", "tier: 3 (almost rare)\n")..core.colorize("#A0A0A0", "Defence: 18\n")..core.colorize("#A0A0A0", "heal: 7 \n")..core.colorize("#A0A0A0", "type: leg gear "),
+		description = "".. core.colorize("#00FFFF", "Soft "..S("diamond").." "..S("leggings\n"))..core.colorize("#A0A0A0", "tier: 3 (almost rare)\n")..core.colorize("#A0A0A0", "Defence: 18\n")..core.colorize("#A0A0A0", "heal: 7 \n")..core.colorize("#A0A0A0", "type: leg gear "),
 		groups = {armor_legs=1, armor_heal=7, armor_use=150,},
 	armor_groups = {fleshy=18},
 })
 
 minetest.override_item('3d_armor:boots_diamond', {
-		description = "".. core.colorize("#00FFFF", "Soft diamond boots\n")..core.colorize("#A0A0A0", "tier: 3 (almost rare)\n")..core.colorize("#A0A0A0", "Defence: 13\n")..core.colorize("#A0A0A0", "heal: 7 \n")..core.colorize("#A0A0A0", "type: feet gear "),
+		description = "".. core.colorize("#00FFFF", "Soft "..S("diamond").." "..S("boots\n"))..core.colorize("#A0A0A0", "tier: 3 (almost rare)\n")..core.colorize("#A0A0A0", "Defence: 13\n")..core.colorize("#A0A0A0", "heal: 7 \n")..core.colorize("#A0A0A0", "type: feet gear "),
 		groups = {armor_feet=1, armor_heal=7, armor_use=150,},
 	armor_groups = {fleshy=13},
 })
 
 minetest.override_item('shields:shield_diamond', {
-		description = "".. core.colorize("#00FFFF", "Soft diamond shield\n")..core.colorize("#A0A0A0", "tier: 3 (almost rare)\n")..core.colorize("#A0A0A0", "Defence: 13\n")..core.colorize("#A0A0A0", "heal: 7 \n")..core.colorize("#A0A0A0", "type: hand gear "),
+		description = "".. core.colorize("#00FFFF", "Soft "..S("diamond").." "..S("shield\n"))..core.colorize("#A0A0A0", "tier: 3 (almost rare)\n")..core.colorize("#A0A0A0", "Defence: 13\n")..core.colorize("#A0A0A0", "heal: 7 \n")..core.colorize("#A0A0A0", "type: hand gear "),
 		groups = {armor_shield=1, armor_heal=7, armor_use=150,},
 	armor_groups = {fleshy=13},
 })

@@ -1,3 +1,4 @@
+local S=minerdream.intllib
 
 local has_value = basic_functions.has_value 
 local tier_cols={
@@ -22,17 +23,17 @@ for i,tdef in pairs(tool_definition) do
 		for _,tool in pairs({"pick","axe","sword","shovel","spear"}) do
 			if tooldef[tool] ~= nil then
 				local ttv=tooldef[tool]
-				tdesc=core.colorize("#"..idef.tierdef.color, i.." "..tool.."\n")..
+				tdesc=core.colorize("#"..idef.tierdef.color, S(i).." "..S(tool).."\n")..
 						core.colorize("#A0A0A0", "tier: "..idef.tierdef.name.." ("..idef.tierdef.desc..")")
 				-- check special attributes of tool definition and use fallback definitions
 				if tooldef.uses then
-					tdesc=tdesc.."\n"..core.colorize("#A0A0A0","Uses: "..tooldef.uses)
+					tdesc=tdesc.."\n"..core.colorize("#A0A0A0",S("Uses")..": "..tooldef.uses)
 				end
 				if ttv.maxlevel then
-					tdesc=tdesc.."\n"..core.colorize("#A0A0A0","Max. Level: "..ttv.maxlevel)
+					tdesc=tdesc.."\n"..core.colorize("#A0A0A0",S("Max. Level")..": "..ttv.maxlevel)
 				end
 				if ttv.fleshy then
-					tdesc=tdesc.."\n"..core.colorize("#A0A0A0","Damage: "..ttv.fleshy)
+					tdesc=tdesc.."\n"..core.colorize("#A0A0A0",S("Damage")..": "..ttv.fleshy)
 				end
 				tt_def={description=tdesc,
 					inventory_image=minerdream.modname.."_"..tool.."_"..i..".png",

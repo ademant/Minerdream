@@ -1,3 +1,4 @@
+local S=minerdream.intllib
 
 local has_value = basic_functions.has_value 
 local mob_cols={
@@ -101,7 +102,7 @@ for i,tdef in pairs(mob_definition) do
 		})
 		
 		minetest.register_craftitem("minerdream:slime_"..i.."_egg", {
-			description = i.." slime spawnegg",
+			description = S(i).." "..S("slime spawnegg"),
 			inventory_image = "minerdream_egg_"..i.."slime.png",
 			on_place = function(itemstack, placer, pointed_thing)
 				if pointed_thing.above then

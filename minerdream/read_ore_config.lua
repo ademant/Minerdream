@@ -1,3 +1,4 @@
+local S=minerdream.intllib
 
 local has_value = basic_functions.has_value 
 local tier_cols={
@@ -34,7 +35,7 @@ if miner_definition["default"] ~= nil then
 end
 
 local local_create_def=function(name,type,cracky,tdef)
-	local temp_def={description=name.." "..type,
+	local temp_def={description=S(name).." "..S(type),
 				tiles={minerdream.modname.."_"..name.."_"..type..".png"},
 				groups={cracky=cracky},
 				sounds = default.node_sound_stone_defaults(),
@@ -180,7 +181,7 @@ for i,tdef in pairs(miner_definition) do
 			if tdef.groups.drop_as_lump ~= nil then
 				lump_name=lump_name.."_lump"
 			end
-			local ore_def={description=i.." ore",
+			local ore_def={description=S(i).." "..S("ore"),
 				name=minerdream.modname..":stone_with_"..i,
 				groups={cracky=tdef.crack},
 				tiles={"default_stone.png^"..minerdream.modname.."_"..i.."_ore.png"},
@@ -214,7 +215,7 @@ for i,tdef in pairs(miner_definition) do
 				ore_def.node_box = {type = "fixed",
 					fixed = {{-0.4, -0.5, -0.4, 0.4, 0.0, 0.4},},}
 			end
-			local lump_def={description=i.." lump",
+			local lump_def={description=S(i).." "..S("lump"),
 				name=lump_name,
 				inventory_image=lump_name:gsub(":","_")..".png",
 				stack_max=minerdream.lump_max_stack,
@@ -299,7 +300,7 @@ for i,tdef in pairs(miner_definition) do
 			if tdef.groups.has_nugget and tdef.groups.has_nugget>0 then
 				local poor_def=table.copy(ore_def)
 				local nugget_def=table.copy(lump_def)
-				poor_def.description="Poor "..i
+				poor_def.description=S("Poor").." "..S(i)
 --				poor_def.name=poor_def.name.."_poor"
 				poor_def.name=minerdream.modname..":stone_with_"..i.."_poor"
 				poor_def.tiles={"default_stone.png^"..minerdream.modname.."_"..i.."_poorore.png"}
@@ -473,6 +474,8 @@ for i,tdef in pairs(miner_definition) do
 			end
 		end
 		
+		
+		-- define armor and weapons
 		if minerdream.items[i].ingot_def ~= nil then
 			local ingot_name=minerdream.items[i].ingot_def.name
 			for _,tool in ipairs({"spear","pick","axe","sword","shovel","helmet","chestplate","leggings","boots","shield"}) do

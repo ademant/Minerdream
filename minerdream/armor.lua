@@ -1,3 +1,5 @@
+local S=minerdream.intllib
+
 if minetest.global_exists("armor") and armor.elements then
 	table.insert(armor.elements, "accessory")
 	local mult = armor.config.level_multiplier or 1

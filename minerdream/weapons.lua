@@ -1,8 +1,9 @@
+local S=minerdream.intllib
 
 -----------------------guns---------------
 
 minetest.register_tool("minerdream:handgun", {
-		description = "".. core.colorize("#00FFFF", "handgun\n")..core.colorize("#A0A0A0", "tier: 3 (almost rare)\n")..core.colorize("#A0A0A0", "projectile speed: 20\n")..core.colorize("#A0A0A0", "ranged damage: 4\n")..core.colorize("#A0A0A0", "ammo: bullets"),
+		description = "".. core.colorize("#00FFFF", S("handgun").."\n")..core.colorize("#A0A0A0", "tier: 3 (almost rare)\n")..core.colorize("#A0A0A0", "projectile speed: 20\n")..core.colorize("#A0A0A0", "ranged damage: 4\n")..core.colorize("#A0A0A0", "ammo: bullets"),
 	inventory_image = "minerdream_handgun.png",
 	wield_scale = {x=1.0,y=1.0,z=1.0},
 	on_use = function(itemstack, user, pointed_thing)
@@ -103,7 +104,7 @@ minetest.register_entity("minerdream:handgunshot", minerdream_handgunshot)
 
 
 minetest.register_craftitem("minerdream:bullet", {
-		description = "".. core.colorize("#FFFFFF", "bullet\n")..core.colorize("#A0A0A0", "ammunition for guns"),
+		description = "".. core.colorize("#FFFFFF", S("bullet").."\n")..core.colorize("#A0A0A0", "ammunition for guns"),
 	stack_max= 2000,
 	inventory_image = "minerdream_bullet_inv.png",
 })

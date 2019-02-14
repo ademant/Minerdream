@@ -1,3 +1,4 @@
+local S=minerdream.intllib
 
 local has_value = basic_functions.has_value 
 local tier_cols={
@@ -20,22 +21,22 @@ for i,tdef in pairs(tool_definition) do
 		for _,tool in pairs({"helmet","chestplate","boots","leggings","shields"}) do
 			if tooldef[tool] ~= nil then
 				local ttv=tooldef[tool]
-				tdesc=core.colorize("#"..tierd.color, i.." "..tool.."\n")..
+				tdesc=core.colorize("#"..tierd.color, S(i).." "..S(tool).."\n")..
 						core.colorize("#A0A0A0", "tier: "..tierd.name.." ("..tierd.desc..")")
 				if ttv.fleshy then
-					tdesc=tdesc.."\n"..core.colorize("#A0A0A0","Defense: "..ttv.fleshy)
+					tdesc=tdesc.."\n"..core.colorize("#A0A0A0",S("Defense")..": "..ttv.fleshy)
 				end
 				if ttv.heal then
-					tdesc=tdesc.."\n"..core.colorize("#A0A0A0","Heal: "..ttv.heal)
+					tdesc=tdesc.."\n"..core.colorize("#A0A0A0",S("Heal")..": "..ttv.heal)
 				end
 				if ttv.speed then
-					tdesc=tdesc.."\n"..core.colorize("#A0A0A0","Walking speed: "..(ttv.speed*100).."%")
+					tdesc=tdesc.."\n"..core.colorize("#A0A0A0",S("Walking speed")..": "..(ttv.speed*100).."%")
 				end
 				if ttv.gravity then
-					tdesc=tdesc.."\n"..core.colorize("#A0A0A0","Gravity: "..(ttv.gravity*100).."%")
+					tdesc=tdesc.."\n"..core.colorize("#A0A0A0",S("Gravity")..": "..(ttv.gravity*100).."%")
 				end
 				if ttv.jump then
-					tdesc=tdesc.."\n"..core.colorize("#A0A0A0","Jump force: "..(ttv.jump*100).."%")
+					tdesc=tdesc.."\n"..core.colorize("#A0A0A0",S("Jump force")..": "..(ttv.jump*100).."%")
 				end
 				tt_def={description=tdesc,
 --				tt_def={description=i.." "..tool,

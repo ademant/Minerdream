@@ -1,0 +1,228 @@
+# German Translation for Minerdream mod.
+# Copyright (C) 2017
+# This file is distributed under the same license as the farming package.
+# Xanthin.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: 1.27\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-14 HO:MI+ZONE\n"
+"PO-Revision-Date: 2019-02-14 HO:MI+ZONE\n"
+"Last-Translator: ademant\n"
+"Language-Team: \n"
+"Language: German \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "tungsten"
+msgstr "Wolfram"
+
+msgid "orichalcum"
+msgstr "oreichalkos"
+
+msgid "calcium"
+msgstr "kalzium"
+
+msgid "tantalum"
+msgstr "tantal"
+
+msgid "platinum"
+msgstr "platin"
+
+msgid "aluminum"
+msgstr "aluminium"
+
+msgid "titanium"
+msgstr "titan"
+
+msgid "zinc"
+msgstr "zink"
+
+msgid "lead"
+msgstr "blei"
+
+msgid "silver"
+msgstr "silber"
+
+msgid "potassium"
+msgstr "kalium"
+
+msgid "flint"
+msgstr "feuerstein"
+
+msgid "tin"
+msgstr "zinn"
+
+msgid "copper"
+msgstr "kupfer"
+
+msgid "steel"
+msgstr "stahl"
+
+msgid "iron"
+msgstr "eisen"
+
+msgid "diamond"
+msgstr "diamant"
+
+msgid "stainlesssteel"
+msgstr "edelstahl"
+
+msgid "brass"
+msgstr "messing"
+
+msgid "sulfur"
+msgstr "schwefel"
+
+msgid "saltpeter"
+msgstr "kaliumnitrat"
+
+msgid "garnet"
+msgstr "granat"
+
+msgid "ore"
+msgstr "erz"
+
+msgid "lump"
+msgstr "klumpen"
+
+msgid "Poor"
+msgstr "Mager"
+
+msgid "dust"
+msgstr "staub"
+
+msgid "ingot"
+msgstr "block"
+
+msgid "brick"
+msgstr "ziegel"
+
+msgid "block"
+msgstr "stapel"
+
+msgid "Uses"
+msgstr "Haltbarkeit"
+
+msgid "Damage"
+msgstr "Schaden"
+
+msgid "pick"
+msgstr "Spitzhacke"
+
+msgid "axe"
+msgstr "Axt"
+
+msgid "sword"
+msgstr "Schwert"
+
+msgid "shovel"
+msgstr "Schaufel"
+
+msgid "spear"
+msgstr "Speer"
+
+msgid "handgun"
+msgstr "pistole"
+
+msgid "bullet"
+msgstr "kugel"
+
+msgid "Steel Wire"
+msgstr "Stahldraht"
+
+msgid "helmet"
+msgstr "helm"
+
+msgid "chestplate"
+msgstr "brustpanzer"
+
+msgid "boots"
+msgstr "stiefel"
+
+msgid "leggings"
+msgstr "hose"
+
+msgid "shields"
+msgstr "schild"
+
+msgid "Defense"
+msgstr "Verteidigung"
+
+msgid "Heal"
+msgstr "Heilung"
+
+msgid "Walking speed"
+msgstr "Laufgeschwindigkeit"
+
+msgid "Gravity"
+msgstr "Gravitation"
+
+msgid "Jump force"
+msgstr "Sprungkraft"
+
+msgid "green"
+msgstr "grün"
+
+msgid "blue"
+msgstr "blau"
+
+msgid "red"
+msgstr "rot"
+
+msgid "yellow"
+msgstr "gelb"
+
+msgid "purple"
+msgstr "purpur"
+
+msgid "brown"
+msgstr "braun"
+
+msgid "ball of slime"
+msgstr "Schleimball"
+
+msgid "Expensive stick"
+msgstr "Aufwendiger Stiel"
+
+msgid "Stainless steel stick"
+msgstr "Edelstahlstab"
+
+msgid "Vitamin pill"
+msgstr "Vitaminpille"
+
+msgid "Consumable"
+msgstr "Verzehrbar"
+
+msgid "Restores 3 hp"
+msgstr "Stellt 3 HP wieder her"
+
+msgid "Restores 5 hp"
+msgstr "Stellt 5 HP wieder her"
+
+msgid "Restores 10 hp"
+msgstr "Stellt 10 HP wieder her"
+
+msgid "Restores 15 hp"
+msgstr "Stellt 15 HP wieder her"
+
+msgid "Restores 20 hp"
+msgstr "Stellt 20 HP wieder her"
+
+msgid "Tiny healing potion"
+msgstr "Winziger Heiltrank"
+
+msgid "Lesser healing potion"
+msgstr "Kleiner Heiltrank"
+
+msgid "Healing potion"
+msgstr "Heiltrank"
+
+msgid "Greater healing potion"
+msgstr "Grosser Heiltrank"
+
+msgid "slime spawnegg"
+msgstr "Schleimei"

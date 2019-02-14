@@ -2,6 +2,8 @@ minerdream  = {}
 minerdream.path = minetest.get_modpath("minerdream")
 minerdream.modname = minetest.get_current_modname()
 minerdream.items={}
+local S = dofile(minerdream.path .. "/intllib.lua")
+minerdream.intllib = S
 
 minetest.log("action", "[MOD]"..minetest.get_current_modname().." -- start loading from "..minetest.get_modpath(minetest.get_current_modname()))
 
@@ -20,9 +22,7 @@ dofile(minerdream.path .. "/crafting.lua")
 dofile(minerdream.path .. "/weapons.lua")
 dofile(minerdream.path .. "/read_weapon_config.lua")
 dofile(minerdream.path .. "/armor.lua")
---dofile(minerdream.path .. "/treasure.lua")
 dofile(minerdream.path .. "/experiments.lua")
---dofile(minerdream.path .. "/mobs.lua")
 dofile(minerdream.path .. "/read_mobs_config.lua")
 
 

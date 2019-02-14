@@ -1,3 +1,4 @@
+local S=minerdream.intllib
 
 local has_value = basic_functions.has_value 
 local tier_cols={
