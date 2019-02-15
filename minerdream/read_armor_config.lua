@@ -21,7 +21,7 @@ for i,tdef in pairs(tool_definition) do
 		for _,tool in pairs({"helmet","chestplate","boots","leggings","shields"}) do
 			if tooldef[tool] ~= nil then
 				local ttv=tooldef[tool]
-				tdesc=core.colorize("#"..tierd.color, S(i).." "..S(tool).."\n")..
+				tdesc=core.colorize("#"..tierd.color, S(i:gsub("^%l", string.upper)).." "..S(tool:gsub("^%l", string.upper)).."\n")..
 						core.colorize("#A0A0A0", "tier: "..tierd.name.." ("..tierd.desc..")")
 				if ttv.fleshy then
 					tdesc=tdesc.."\n"..core.colorize("#A0A0A0",S("Defense")..": "..ttv.fleshy)

@@ -27,7 +27,7 @@ for i,tdef in pairs(tool_definition) do
 		if tdef.groups.is_bowarrow then
 			-- register bow
 			minetest.register_tool("minerdream:bow_"..i, {
-					description = "".. core.colorize("#BFFFFF", i.." bow\n")..core.colorize("#A0A0A0", "projectile speed: "..tdef.bow_velocity.."\n")..core.colorize("#A0A0A0", "projectile gravity: "..tdef.bow_acceleration.."\n")..core.colorize("#A0A0A0", "ranged damage: "..tdef.arrow_damage.."\n")..core.colorize("#A0A0A0", "ammo: arrows"),
+					description = "".. core.colorize("#BFFFFF", S(i:gsub("^%l", string.upper)).." bow\n")..core.colorize("#A0A0A0", "projectile speed: "..tdef.bow_velocity.."\n")..core.colorize("#A0A0A0", "projectile gravity: "..tdef.bow_acceleration.."\n")..core.colorize("#A0A0A0", "ranged damage: "..tdef.arrow_damage.."\n")..core.colorize("#A0A0A0", "ammo: arrows"),
 				inventory_image = "minerdream_bow_"..i..".png",
 				wield_scale = {x=tdef.bow_wield_scale,y=tdef.bow_wield_scale,z=tdef.bow_wield_scale},
 				on_use = function(itemstack, user, pointed_thing)

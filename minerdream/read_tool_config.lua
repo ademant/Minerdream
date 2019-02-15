@@ -23,7 +23,7 @@ for i,tdef in pairs(tool_definition) do
 		for _,tool in pairs({"pick","axe","sword","shovel","spear"}) do
 			if tooldef[tool] ~= nil then
 				local ttv=tooldef[tool]
-				tdesc=core.colorize("#"..idef.tierdef.color, S(i).." "..S(tool).."\n")..
+				tdesc=core.colorize("#"..idef.tierdef.color, S(i:gsub("^%l", string.upper)).." "..S(tool:gsub("^%l", string.upper)).."\n")..
 						core.colorize("#A0A0A0", "tier: "..idef.tierdef.name.." ("..idef.tierdef.desc..")")
 				-- check special attributes of tool definition and use fallback definitions
 				if tooldef.uses then

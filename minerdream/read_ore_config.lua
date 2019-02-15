@@ -35,7 +35,7 @@ if miner_definition["default"] ~= nil then
 end
 
 local local_create_def=function(name,type,cracky,tdef)
-	local temp_def={description=S(name).." "..S(type),
+	local temp_def={description=S(name:gsub("^%l", string.upper)).." "..S(type:gsub("^%l", string.upper)),
 				tiles={minerdream.modname.."_"..name.."_"..type..".png"},
 				groups={cracky=cracky},
 				sounds = default.node_sound_stone_defaults(),
@@ -181,7 +181,7 @@ for i,tdef in pairs(miner_definition) do
 			if tdef.groups.drop_as_lump ~= nil then
 				lump_name=lump_name.."_lump"
 			end
-			local ore_def={description=S(i).." "..S("ore"),
+			local ore_def={description=S(i:gsub("^%l", string.upper)).." "..S("ore"),
 				name=minerdream.modname..":stone_with_"..i,
 				groups={cracky=tdef.crack},
 				tiles={"default_stone.png^"..minerdream.modname.."_"..i.."_ore.png"},
@@ -203,7 +203,7 @@ for i,tdef in pairs(miner_definition) do
 			end
 			if tdef.groups.is_gemstone ~= nil then
 --				ore_def.name=minerdream.modname..":"..i
-				ore_def.description=i
+				ore_def.description=i:gsub("^%l", string.upper)
 				ore_def.paramtype="light"
 				ore_def.drawtype = "mesh"
 				ore_def.mesh = "gemstone_cubic_pillars.obj"
@@ -215,7 +215,7 @@ for i,tdef in pairs(miner_definition) do
 				ore_def.node_box = {type = "fixed",
 					fixed = {{-0.4, -0.5, -0.4, 0.4, 0.0, 0.4},},}
 			end
-			local lump_def={description=S(i).." "..S("lump"),
+			local lump_def={description=S(i:gsub("^%l", string.upper)).." "..S("lump"),
 				name=lump_name,
 				inventory_image=lump_name:gsub(":","_")..".png",
 				stack_max=minerdream.lump_max_stack,
@@ -300,12 +300,12 @@ for i,tdef in pairs(miner_definition) do
 			if tdef.groups.has_nugget and tdef.groups.has_nugget>0 then
 				local poor_def=table.copy(ore_def)
 				local nugget_def=table.copy(lump_def)
-				poor_def.description=S("Poor").." "..S(i)
+				poor_def.description=S("Poor").." "..S(i:gsub("^%l", string.upper))
 --				poor_def.name=poor_def.name.."_poor"
 				poor_def.name=minerdream.modname..":stone_with_"..i.."_poor"
 				poor_def.tiles={"default_stone.png^"..minerdream.modname.."_"..i.."_poorore.png"}
 				poor_def.groups.cracky=math.max(1,math.floor(tdef.crack/2)) -- poor ore should be easier to dig
-				nugget_def.description=i.." Nugget"
+				nugget_def.description=i:gsub("^%l", string.upper).." Nugget"
 				nugget_def.name=minerdream.modname..":"..i.."_nugget"
 				nugget_def.inventory_image=nugget_def.name:gsub(":","_")..".png"
 				poor_def.drop=nugget_def.name
