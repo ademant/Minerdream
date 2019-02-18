@@ -11,6 +11,7 @@ minetest.log("action", "[MOD]"..minetest.get_current_modname().." -- start loadi
 basic_functions.import_settingtype(minerdream.path .. "/settingtypes.txt")
 
 dofile(minerdream.path .. "/config.lua")
+dofile(minerdream.path .. "/api.lua")
 dofile(minerdream.path .. "/read_ore_config.lua")
 dofile(minerdream.path .. "/read_tool_config.lua")
 dofile(minerdream.path .. "/read_armor_config.lua")
