@@ -325,7 +325,7 @@ for i,tdef in pairs(miner_definition) do
 		if needs_mapgen then
 			local map_def={ore_type    = "scatter",
 						ore            = mapgen_name,
-						wherein        = "default:stone",
+						wherein        = {"default:stone","default:desert_stone"},
 						clust_scarcity = tdef.scarcity * tdef.scarcity * tdef.scarcity,
 						clust_num_ores = tdef.num_ores or 1,
 						clust_size     = tdef.clust_size or 1,
