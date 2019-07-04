@@ -272,7 +272,7 @@ minerdream.register_ore_lump=function(ore_name,tdef)
 		if override_ingot ~= nil then
 			lump_def.ingot_name=output.item:get_name()
 			tdef.ingot_name=output.item:get_name()
-			minerdream.items[i].ingot_name=output.item:get_name()
+			minerdream.items[ore_name].ingot_name=output.item:get_name()
 		end
 		minetest.override_item(orename,ore_def)
 		if tdef.groups.has_no_lump == nil then
