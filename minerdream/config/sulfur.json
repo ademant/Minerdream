@@ -1,0 +1,10 @@
+{"color":"E89700D0",
+"crack":3,
+"groups":{"drop_as_lump":1,
+"has_lump":1,
+"has_nugget":3,
+"in_desert":1,
+"is_mineral":2},
+"name":"sulfur",
+"overrides":"technic:mineral_sulfur",
+"tier":2}

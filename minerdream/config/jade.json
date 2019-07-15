@@ -1,0 +1,13 @@
+{"clust_size":1,
+"crack":4,
+"groups":{"has_block":1,
+"has_brick":3,
+"is_lump_gemstone":1,
+"is_mineral":5},
+"name":"jade",
+"num_ores":1,
+"scarcity":15,
+"stackmax":"200",
+"tier":5,
+"y_max":-650,
+"y_min":-31000}

@@ -1,0 +1,9 @@
+{"clust_size":3,
+"crack":4,
+"groups":{"has_lump":1},
+"name":"bituminous_coal",
+"num_ores":10,
+"scarcity":13,
+"tier":5,
+"y_max":-500,
+"y_min":-31000}
