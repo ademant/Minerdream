@@ -122,7 +122,6 @@ end
 minerdream.register_ore=function(i,tdef)
 	minerdream.items[i]={}
 	minerdream.itemdef[i]=tdef
-	print(i)
 	tdef.ore_modname=minerdream.modname
 	if tdef.orig_modname then
 		tdef.ore_modname=tdef.orig_modname
@@ -138,6 +137,11 @@ minerdream.register_ore=function(i,tdef)
 	end
 --		local tierd=tier_definition[tostring(tdef.tier)]
 	-- register ores within stone
+	if tdef.ore ~= nil and tdef.lump ~= nil then
+		if tdef.ore.crack ~= nil then
+			minerdream.register_ore_lump(i,tdef)
+		end
+	end
 	if tdef.crack ~= nil then
 		minerdream.register_ore_lump(i,tdef)
 	else
@@ -276,17 +280,17 @@ end
 
 minerdream.register_ore_lump=function(ore_name,tdef)
 	-- base config of ore found in normal stone
-	local lump_name=tdef.ore_modname..":"..ore_name
-	if tdef.lump ~= nil then
-		lump_name=tdef.lump.name or lump_name
-	end
+	local tore=tdef.ore
+	local tlump=tdef.lump
+	local lump_name=tlump.name or tdef.ore_modname..":"..ore_name
 	if tdef.groups.drop_as_lump ~= nil then
 		lump_name=lump_name.."_lump"
 	end
+	local torename=tore.inventory_image or minerdream.modname.."_"..ore_name.."_ore.png"
 	local ore_def={description=S(ore_name:gsub("^%l", string.upper)).." "..S("ore"),
 		name=minerdream.modname..":stone_with_"..ore_name,
-		groups={cracky=tdef.crack},
-		tiles={"default_stone.png^"..minerdream.modname.."_"..ore_name.."_ore.png"},
+		groups={cracky=tore.crack},
+		tiles={"default_stone.png^"..torename},
 		sound=default.node_sound_stone_defaults(),
 		}
 	-- group definitions for awards
@@ -300,8 +304,8 @@ minerdream.register_ore_lump=function(ore_name,tdef)
 	if tdef.groups.has_no_drop == nil then
 		ore_def.drop=lump_name
 	end
-	if tdef.stackmax then
-		ore_def.stack_max = tdef.stackmax
+	if tore.stackmax then
+		ore_def.stack_max = tore.stackmax
 	end
 	if tdef.groups.is_gemstone ~= nil then
 		ore_def.description=ore_name:gsub("^%l", string.upper)
@@ -318,12 +322,10 @@ minerdream.register_ore_lump=function(ore_name,tdef)
 	end
 	local lump_def={description=S(ore_name:gsub("^%l", string.upper)).." "..S("lump"),
 		name=lump_name,
-		inventory_image=lump_name:gsub(":","_")..".png",
-		stack_max=minerdream.lump_max_stack,
+		inventory_image=tdef.lump.inventory_image or lump_name:gsub(":","_")..".png"
 		}
-	if tdef.lump ~= nil then
-		lump_def.inventory_image=tdef.lump.inventory_image or lump_def.inventory_image
-		lump_def.stack_max=tdef.lump.stack_max or lump_def.stack_max
+	if tlump.stackmax ~= nil then
+		tlump_def.stack_max=tlump.stackmax
 	end
 	if tdef.groups.is_lump_gemstone ~= nil then
 		lump_def.drawtype="mesh"
@@ -400,21 +402,21 @@ minerdream.register_ore_lump=function(ore_name,tdef)
 	if tdef.groups.in_desert then
 		local desertore_def=table.copy(ore_def)
 		desertore_def.name=minerdream.modname..":desertstone_with_"..ore_name
-		desertore_def.tiles={"default_desert_stone.png^"..minerdream.modname.."_"..ore_name.."_ore.png"}
+		desertore_def.tiles={"default_desert_stone.png^"..torename}
 		local_item_insert(ore_name,"desertore_def",desertore_def)
 		minetest.register_node(desertore_def.name,desertore_def)
 	end
-	if tdef.groups.has_nugget and tdef.groups.has_nugget>0 then
+	if tdef.nugget ~= nil then
 		local poor_def=table.copy(ore_def)
 		local nugget_def=table.copy(lump_def)
 		poor_def.description=S("Poor").." "..S(ore_name:gsub("^%l", string.upper))
 --				poor_def.name=poor_def.name.."_poor"
 		poor_def.name=minerdream.modname..":stone_with_"..ore_name.."_poor"
 		poor_def.tiles={"default_stone.png^"..minerdream.modname.."_"..ore_name.."_poorore.png"}
-		poor_def.groups.cracky=math.max(1,math.floor(tdef.crack/2)) -- poor ore should be easier to dig
+		poor_def.groups.cracky= tdef.nugget.cracky or math.max(1,math.floor(tdef.crack/2)) -- poor ore should be easier to dig
 		nugget_def.description=ore_name:gsub("^%l", string.upper).." Nugget"
 		nugget_def.name=minerdream.modname..":"..ore_name.."_nugget"
-		nugget_def.inventory_image=nugget_def.name:gsub(":","_")..".png"
+		nugget_def.inventory_image=tdef.nugget.inventory_image or nugget_def.name:gsub(":","_")..".png"
 		poor_def.drop=nugget_def.name
 		minetest.register_node(poor_def.name,poor_def)
 		minetest.register_craftitem(nugget_def.name,nugget_def)
