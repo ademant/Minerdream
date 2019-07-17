@@ -142,47 +142,38 @@ minerdream.register_ore=function(i,tdef)
 			minerdream.register_ore_lump(i,tdef)
 		end
 	end
-	if tdef.crack ~= nil then
-		minerdream.register_ore_lump(i,tdef)
-	else
-		-- if not already defined, then add mapgen parameter
-		if tdef.scarcity ~= nil then
-			needs_mapgen = true
-			mapgen_name=minerdream.modname..":"..i
+	if tdef.ore ~= nil then
+		if tdef.ore.crack ~= nil then
+			minerdream.register_ore_lump(i,tdef)
+		else
+			-- if not already defined, then add mapgen parameter
+			if tdef.ore.scarcity ~= nil then
+				needs_mapgen = true
+				mapgen_name=minerdream.modname..":"..i
+			end
 		end
 	end
 	
 	-- define mapgeneration for ores
 	if needs_mapgen then
-		minerdream.register_mapgen(i,tdef,mapgen_name)
+		minerdream.register_mapgen(i,tdef,mapgen_name,tdef.ore)
+		if tdef.nugget ~= nil then
+			minerdream.register_mapgen(i,tdef,mapgen_name.."_poor",tdef.nugget)
+		end
 	end
 	
-	if tdef.groups then
-	-- define ore dust
-	-- only makes sense if it can be grinded
-		if tdef.groups.has_dust and minetest.get_modpath("technic") then
-			minerdream.register_dust(i,tdef)
-		end
-
-		-- define ingot
-		if tdef.groups.has_bar then
-			minerdream.register_ingot(i,tdef)
-		end
-		
-		-- define ore bricks (ore + cobble)
-		if tdef.groups.has_brick then
-			minerdream.register_brick(i,tdef)
-		end
-		
-		-- define ore blocks (9 ores)
-		if tdef.groups.has_block then
-			minerdream.register_block(i,tdef)
-		end
-		
-		-- define bar stack
-		if tdef.groups.has_bar_block then
-			minerdream.register_bar_block(i,tdef)
-		end
+-- define ore dust
+-- only makes sense if it can be grinded
+	if tdef.dust~= nil and minetest.get_modpath("technic") then
+		minerdream.register_dust(i,tdef)
+	end
+	-- register ingots
+	if tdef.ingot ~= nil then
+		minerdream.register_ingot(i,tdef)
+	end
+	
+	if tdef.block ~= nil then 
+		minerdream.register_block(i,tdef)
 	end
 	
 	-- define armor and weapons
@@ -409,10 +400,11 @@ minerdream.register_ore_lump=function(ore_name,tdef)
 	if tdef.nugget ~= nil then
 		local poor_def=table.copy(ore_def)
 		local nugget_def=table.copy(lump_def)
+		local poorimg=tdef.nugget.inventory_image or minerdream.modname.."_"..ore_name.."_poorore.png"
 		poor_def.description=S("Poor").." "..S(ore_name:gsub("^%l", string.upper))
 --				poor_def.name=poor_def.name.."_poor"
 		poor_def.name=minerdream.modname..":stone_with_"..ore_name.."_poor"
-		poor_def.tiles={"default_stone.png^"..minerdream.modname.."_"..ore_name.."_poorore.png"}
+		poor_def.tiles={"default_stone.png^"..poorimg}
 		poor_def.groups.cracky= tdef.nugget.cracky or math.max(1,math.floor(tdef.crack/2)) -- poor ore should be easier to dig
 		nugget_def.description=ore_name:gsub("^%l", string.upper).." Nugget"
 		nugget_def.name=minerdream.modname..":"..ore_name.."_nugget"
@@ -424,90 +416,84 @@ minerdream.register_ore_lump=function(ore_name,tdef)
 	end
 end
 
-minerdream.register_mapgen=function(ore_name,tdef,mapgen_name)
+minerdream.register_mapgen=function(ore_name,tdef,mapgen_name,odef)
 	local wherein={"default:stone"}
 	if tdef.groups.in_desert ~= nil then -- check, if ore can be found in desert stone
 		if minetest.registered_items["default:desert_stone"] ~= nil then
 			wherein={"default:stone","default:desert_stone"}
 		end
 	end
+	local tscar=odef.scarcity or 13
 	local map_def={ore_type    = "scatter",
 				ore            = mapgen_name,
 				wherein        = wherein,
-				clust_scarcity = tdef.scarcity * tdef.scarcity * tdef.scarcity,
-				clust_num_ores = tdef.num_ores or 1,
-				clust_size     = tdef.clust_size or 1,
-				y_min          = tdef.y_min or (-31000),
-				y_max          = tdef.y_max or 0,
+				clust_scarcity = tscar * tscar * tscar,
+				clust_num_ores = odef.num_ores or 1,
+				clust_size     = odef.clust_size or 1,
+				y_min          = odef.y_min or (-31000),
+				y_max          = odef.y_max or 0,
 			}
-	if tdef.groups.has_nugget and tdef.groups.has_nugget>0 then
-		local poor_map_def=table.copy(map_def)
-		poor_map_def.ore=mapgen_name.."_poor"
-		minetest.register_ore(poor_map_def)
-		map_def.clust_scarcity=map_def.clust_scarcity*tdef.groups.has_nugget
-		map_def.clust_size=map_def.clust_size*tdef.groups.has_nugget
-	end
 	local_item_insert(ore_name,"map_def",map_def)
 	minetest.register_ore(map_def)
 end
 
 minerdream.register_ingot=function(ore_name,tdef)
-	local ingot_def=local_create_def(ore_name,"ingot",tdef.groups.has_bar,tdef)
-	ingot_def.groups["metal"]=tdef.tier or 1 -- setting metal group
-	ingot_def.inventory_image=minerdream.modname.."_"..ore_name.."_ingot.png"
-	ingot_def.stack_max = minerdream.ingot_max_stack
-	if tdef.ingot_name then --already defined and overridden with new image
-		if tdef.ingot_name == "" then
+	if tdef.ingot ~= nil then
+		local idef=tdef.ingot
+		local ingot_def=local_create_def(ore_name,"ingot",idef.crack or (tdef.ore.crack+1),tdef)
+		ingot_def.groups["metal"]=tdef.tier or 1 -- setting metal group
+		ingot_def.inventory_image=idef.inventory_image or minerdream.modname.."_"..ore_name.."_ingot.png"
+		ingot_def.stack_max = idef.maxstack or minerdream.ingot_max_stack
+		if tdef.ingot_name then --already defined and overridden with new image
+			if tdef.ingot_name == "" then
+				ingot_def.name=minerdream.modname..":"..ore_name.."_ingot"
+				minetest.register_craftitem(ingot_def.name,ingot_def)
+			else
+				ingot_def.name=nil
+				minetest.override_item(tdef.ingot_name,ingot_def)
+				minetest.register_alias(tdef.ingot_name,minerdream.modname..":"..ore_name.."_bar")
+				ingot_def.name=tdef.ingot_name
+			end
+		else -- not yet defined
 			ingot_def.name=minerdream.modname..":"..ore_name.."_ingot"
 			minetest.register_craftitem(ingot_def.name,ingot_def)
-		else
-			ingot_def.name=nil
-			minetest.override_item(tdef.ingot_name,ingot_def)
-			minetest.register_alias(tdef.ingot_name,minerdream.modname..":"..ore_name.."_bar")
-			ingot_def.name=tdef.ingot_name
 		end
-	else -- not yet defined
-		ingot_def.name=minerdream.modname..":"..ore_name.."_ingot"
-		minetest.register_craftitem(ingot_def.name,ingot_def)
-	end
-	-- if lump is defined and cooking time is given then register cooking recipe
-	if minerdream.items[ore_name].lump_def and tdef.lump_cooking_time then
-		local lump_def=table.copy(minerdream.items[ore_name].lump_def)
-		lump_def.ingot_name=ingot_def.name
-		ingot_def.lump_name=lump_def.name
-		lump_def.cooking_time=tdef.lump_cooking_time
-		-- check, if cooking recipe already registered
-		local output, decremented_input = minetest.get_craft_result({ method = "cooking", width = 1, items = { ItemStack(lump_def.name) }})
-		if output.item:get_name() ~= ingot_def.name then
-			print(ingot_def.name)
-			print(lump_def.name)
-			minetest.register_craft({type="cooking",
-				cooktime=tdef.lump_cooking_time,
-				output=ingot_def.name,
-				recipe=lump_def.name,
-			})
-			minerdream.items[ore_name].lump_def=lump_def
+		-- if lump is defined and cooking time is given then register cooking recipe
+		if minerdream.items[ore_name].lump_def and tdef.lump.cooking_time then
+			local lump_def=table.copy(minerdream.items[ore_name].lump_def)
+			lump_def.ingot_name=ingot_def.name
+			ingot_def.lump_name=lump_def.name
+			lump_def.cooking_time=tdef.lump.cooking_time
+			-- check, if cooking recipe already registered
+			local output, decremented_input = minetest.get_craft_result({ method = "cooking", width = 1, items = { ItemStack(lump_def.name) }})
+			if output.item:get_name() ~= ingot_def.name then
+--				print(ingot_def.name)
+--				print(lump_def.name)
+				minetest.register_craft({type="cooking",
+					cooktime=tdef.lump.cooking_time,
+					output=ingot_def.name,
+					recipe=lump_def.name,
+				})
+				minerdream.items[ore_name].lump_def=lump_def
+			end
 		end
-	end
-	-- if technic loaded and dust registered than add recipes for dust
-	if tdef.groups.has_dust and minetest.get_modpath("technic") then
-		if minerdream.items[ore_name].dust_def then
-			local dust_def=table.copy(minerdream.items[ore_name].dust_def)
-			local cooking_time=tdef.cooking_time or 64
-			cooking_time=math.ceil(cooking_time/minerdream.dust_cooking_time_reduce)
-			dust_def.cooking_time=cooking_time
-			print(ingot_def.name)
-			print(dust_def.name)
-			  minetest.register_craft({type="cooking",
-				cooktime=cooking_time,
-				output=ingot_def.name,
-				recipe=dust_def.name,
-			  })
-			technic.register_grinder_recipe({input = {ingot_def.name}, output = dust_def.name,time=cooking_time})
-			local_item_insert(ore_name,"dust_def",dust_def)
+		-- if technic loaded and dust registered than add recipes for dust
+		if (tdef.dust~=nil) and minetest.get_modpath("technic") then
+			if minerdream.items[ore_name].dust_def then
+				local dust_def=table.copy(minerdream.items[ore_name].dust_def)
+				local cooking_time=tdef.dust.cooking_time or 64
+				dust_def.cooking_time=cooking_time
+				  minetest.register_craft({type="cooking",
+					cooktime=cooking_time,
+					output=ingot_def.name,
+					recipe=dust_def.name,
+				  })
+				technic.register_grinder_recipe({input = {ingot_def.name}, output = dust_def.name,time=cooking_time})
+				local_item_insert(ore_name,"dust_def",dust_def)
+			end
 		end
+		local_item_insert(ore_name,"ingot_def",ingot_def)
 	end
-	local_item_insert(ore_name,"ingot_def",ingot_def)
 end
 
 minerdream.register_brick=function(ore_name,tdef)
@@ -550,7 +536,7 @@ end
 minerdream.register_weapons=function(ore_name,tdef)
 	local ingot_name=minerdream.items[ore_name].ingot_def.name
 	for _,tool in ipairs(minerdream.tools_to_register) do
-		if tdef.groups["has_"..tool] ~= nil then
+		if tdef[tool] ~= nil then
 			local stick = "group:stick"
 			if tool == "bow" then -- for bows use stick for cotton or steel-wire
 				stick = "farming:cotton"
@@ -562,7 +548,7 @@ minerdream.register_weapons=function(ore_name,tdef)
 					end
 				end
 			else
-				if tdef.tool_stick ~= nil then
+				if tdef[tool].tool_stick ~= nil then
 					stick=tdef.tool_stick
 				end
 			end
@@ -575,34 +561,38 @@ minerdream.register_weapons=function(ore_name,tdef)
 end
 
 minerdream.register_dust=function(ore_name,tdef)
-	local dust_def=local_create_def(ore_name,"dust",tdef.groups.has_dust,tdef)
-	dust_def.tiles={minerdream.modname.."_"..ore_name.."_dust.png"}
-	dust_def.inventory_image=minerdream.modname.."_"..ore_name.."_dust.png"
-	local overridden = false
-	
-	-- check, if dust is already defined
-	if minerdream.items[ore_name].lump_def then
-		local lumpdef=minerdream.items[ore_name].lump_def
-		if lumpdef.override_mod ~= nil then
-			local override_dust=lumpdef.override_mod..":"..ore_name.."_dust"
-			if minetest.registered_items[override_dust] ~= nil then
-				-- override existing dust items
-				overridden = true
-				minetest.register_node(":"..override_dust,dust_def)
+	if tdef.dust~=nil then
+		local ddef=tdef.dust
+		local dust_def=local_create_def(ore_name,"dust",ddef.cracky or (tdef.ore.cracky-1),tdef)
+		local dustimg=ddef.inventory_image or minerdream.modname.."_"..ore_name.."_dust.png"
+		dust_def.tiles={dustimg}
+		dust_def.inventory_image=dustimg
+		local overridden = false
+		
+		-- check, if dust is already defined
+		if minerdream.items[ore_name].lump_def then
+			local lumpdef=minerdream.items[ore_name].lump_def
+			if lumpdef.override_mod ~= nil then
+				local override_dust=lumpdef.override_mod..":"..ore_name.."_dust"
+				if minetest.registered_items[override_dust] ~= nil then
+					-- override existing dust items
+					overridden = true
+					minetest.register_node(":"..override_dust,dust_def)
+				end
 			end
 		end
-	end
-	-- if not defined, register node and grinding recipe
-	if not overridden then
-		minetest.register_node(minerdream.modname..":"..ore_name.."_dust",dust_def)
-		if minerdream.items[ore_name].lump_def then
-			local lump_def=table.copy(minerdream.items[ore_name].lump_def)
-			local grind_time=math.ceil((tdef.lump_cooking_time or 64)/minerdream.dust_cooking_time_reduce)
-			lump_def.grind_time=grind_time
-			local_item_insert(ore_name,"lump_def",lump_def)
-			technic.register_grinder_recipe({input = {lump_def.name}, output = dust_def.name.." 2",time=grind_time})
-			dust_def.grind_source=lump_def.name
+		-- if not defined, register node and grinding recipe
+		if not overridden then
+			minetest.register_node(minerdream.modname..":"..ore_name.."_dust",dust_def)
+			if minerdream.items[ore_name].lump_def then
+				local lump_def=table.copy(minerdream.items[ore_name].lump_def)
+				local grind_time=ddef.cooking_time or math.ceil((tdef.lump.cooking_time or 64)/minerdream.dust_cooking_time_reduce)
+				lump_def.grind_time=grind_time
+				local_item_insert(ore_name,"lump_def",lump_def)
+				technic.register_grinder_recipe({input = {lump_def.name}, output = dust_def.name.." 2",time=grind_time})
+				dust_def.grind_source=lump_def.name
+			end
+			local_item_insert(ore_name,"dust_def",dust_def)
 		end
-		local_item_insert(ore_name,"dust_def",dust_def)
 	end
 end

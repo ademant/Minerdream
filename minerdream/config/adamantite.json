@@ -1,22 +1,46 @@
-{"clust_size":3,
-"color":"AA2435D0",
-"crack":5,
+{"color":"AA2435D0",
 "groups":{"drop_as_lump":1,
 "has_bar":1,
-"has_dust":1,
-"has_lump":1,
-"has_nugget":3,
 "in_desert":1,
 "is_metall":6},
-"lump":{
-	"inventory_image":"minerdream_adamantite_lump.png",
-	"stack_max":99
+"block":{
+	"inventory_image":"minerdream_adamantite_block.png"
+	},
+"ingot":{
+	"inventory_image":"minerdream_adamantite_ingot.png"
 },
-"lump_cooking_time":58,
+"ore":{
+	"crack":5,
+	"inventory_image":"minerdream_adamantite_ore.png"
+},
+"lump":{
+	"crack":5,
+	"inventory_image":"minerdream_adamantite_lump.png",
+	"stack_max":99,
+	"cooking_time":58
+},
+"dust":{
+	"cracky":3,
+	"grind_time":32,
+	"cooking_time":28,
+	"inventory_image":"minerdream_adamantite_dust.png"
+},
+"mapgen":{
+	"clust_size":3,
+	"num_ores":4,
+	"scarcity":15,
+	"y_max":-2300,
+	"y_min":-31000
+},
+"nugget":{
+	"inventory_image":"minerdream_adamantite_poorore.png",
+	"cracky":3,
+	"clust_size":3,
+	"num_ores":5,
+	"scarcity":13,
+	"y_max":-2000
+},
 "name":"adamantite",
-"num_ores":4,
 "ore_modname":"minerdream",
-"scarcity":14,
-"tier":6,
-"y_max":-2300,
-"y_min":-31000}
+"tier":6
+}

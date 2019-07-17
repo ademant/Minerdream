@@ -10,5 +10,9 @@ for i,oc in pairs(ore_configs) do
 	ore=string.split(oc,'.')[1]
 	local inconfig=basic_functions.read_file(minerdream.path..'/config/'..oc)
 	local json_conf=minetest.parse_json(inconfig)
-	minerdream.register_ore(ore,json_conf)
+	if json_conf==nil then
+		print("wrong config:"..i)
+	else
+		minerdream.register_ore(ore,json_conf)
+	end
 end
