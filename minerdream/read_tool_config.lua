@@ -19,6 +19,9 @@ for i,tdef in pairs(tool_definition) do
 		for col in pairs(tdef) do
 			tooldef=basic_functions.parse_tree(tooldef,col,tdef[col])
 		end
+		if minerdream.itemdef[i]==nil then
+			minerdream.itemdef[i]={}
+		end
 		-- check specific tools/weapons
 		for _,tool in pairs({"pick","axe","sword","shovel","spear"}) do
 			if tooldef[tool] ~= nil then

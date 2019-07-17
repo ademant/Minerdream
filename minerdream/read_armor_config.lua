@@ -9,7 +9,6 @@ local tool_cols={
 	as_numeric=1,
 }
 local tool_definition = basic_functions.import_csv(minerdream.path.."/armor.txt",tool_cols)
---print(dump2(tool_definition))
 
 for i,tdef in pairs(tool_definition) do
 	if (i ~= "default") then
@@ -17,9 +16,14 @@ for i,tdef in pairs(tool_definition) do
 		for col in pairs(tdef) do
 			tooldef=basic_functions.parse_tree(tooldef,col,tdef[col])
 		end
+		if minerdream.itemdef[i]==nil then
+			minerdream.itemdef[i]={}
+		end
+		
 		local tierd=tier_definition[tostring(tdef.tier)]
 		for _,tool in pairs({"helmet","chestplate","boots","leggings","shields"}) do
 			if tooldef[tool] ~= nil then
+				minerdream.itemdef[i][tool]=tooldef[tool]
 				local ttv=tooldef[tool]
 				tdesc=core.colorize("#"..tierd.color, S(i:gsub("^%l", string.upper)).." "..S(tool:gsub("^%l", string.upper)).."\n")..
 						core.colorize("#A0A0A0", "tier: "..tierd.name.." ("..tierd.desc..")")

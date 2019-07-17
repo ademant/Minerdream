@@ -12,6 +12,7 @@
 "lump_cooking_time":5,
 "name":"lithium",
 "num_ores":5,
+"ore_modname":"minerdream",
 "scarcity":14,
 "tier":2,
 "y_max":-100,

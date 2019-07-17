@@ -3,5 +3,7 @@
 "has_nugget":3,
 "is_metall":2},
 "name":"tin",
+"ore_modname":"minerdream",
 "orig_mod":"technic",
-"tier":2}
+"tier":2
+}

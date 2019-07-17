@@ -1,6 +1,10 @@
 {"groups":{"has_bow":1,
 "has_nugget":3,
-"has_spear":1,
 "is_metall":3},
 "name":"diamond",
-"tier":3}
+"ore_modname":"minerdream",
+"spear":{"fleshy":9,
+"range":6.3,
+"snappy":[1.65,0.8,0.15]},
+"tier":3
+}

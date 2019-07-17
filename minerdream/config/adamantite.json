@@ -8,9 +8,14 @@
 "has_nugget":3,
 "in_desert":1,
 "is_metall":6},
+"lump":{
+	"inventory_image":"minerdream_adamantite_lump.png",
+	"stack_max":99
+},
 "lump_cooking_time":58,
 "name":"adamantite",
 "num_ores":4,
+"ore_modname":"minerdream",
 "scarcity":14,
 "tier":6,
 "y_max":-2300,

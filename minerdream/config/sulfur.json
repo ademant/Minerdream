@@ -5,6 +5,9 @@
 "has_nugget":3,
 "in_desert":1,
 "is_mineral":2},
+"ingot_name":"",
 "name":"sulfur",
+"ore_modname":"minerdream",
 "overrides":"technic:mineral_sulfur",
-"tier":2}
+"tier":2
+}

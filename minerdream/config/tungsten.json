@@ -11,6 +11,7 @@
 "lump_cooking_time":42,
 "name":"tungsten",
 "num_ores":4,
+"ore_modname":"minerdream",
 "scarcity":14,
 "tier":5,
 "y_max":-750,

@@ -1,5 +1,7 @@
 {"groups":{"has_nugget":3,
 "is_metall":2},
 "name":"iron",
+"ore_modname":"minerdream",
 "orig_mod":"default",
-"tier":2}
+"tier":2
+}

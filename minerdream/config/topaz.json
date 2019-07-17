@@ -6,6 +6,7 @@
 "is_lump_gemstone":1},
 "name":"topaz",
 "num_ores":1,
+"ore_modname":"minerdream",
 "scarcity":15,
 "stackmax":"200",
 "tier":6,

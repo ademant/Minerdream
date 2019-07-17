@@ -2,6 +2,7 @@ minerdream  = {}
 minerdream.path = minetest.get_modpath("minerdream")
 minerdream.modname = minetest.get_current_modname()
 minerdream.items={}
+minerdream.itemdef={}
 local S = dofile(minerdream.path .. "/intllib.lua")
 minerdream.intllib = S
 
@@ -13,8 +14,8 @@ basic_functions.import_settingtype(minerdream.path .. "/settingtypes.txt")
 dofile(minerdream.path .. "/config.lua")
 dofile(minerdream.path .. "/api.lua")
 dofile(minerdream.path .. "/read_ore_config.lua")
-dofile(minerdream.path .. "/read_tool_config.lua")
-dofile(minerdream.path .. "/read_armor_config.lua")
+--dofile(minerdream.path .. "/read_tool_config.lua")
+--dofile(minerdream.path .. "/read_armor_config.lua")
 dofile(minerdream.path .. "/items.lua")
 dofile(minerdream.path .. "/overrides.lua")
 dofile(minerdream.path .. "/blocks.lua")
@@ -28,3 +29,10 @@ dofile(minerdream.path .. "/read_mobs_config.lua")
 
 
 minetest.log("action", "[MOD]"..minetest.get_current_modname().." -- loaded ")
+--for i,tdef in pairs(minerdream.itemdef) do
+--	local file=io.open(minerdream.path.."/config/"..i..".json","w")
+--	local jsonout=minetest.write_json(tdef)
+--	file:write(jsonout)
+--	file:close()
+----	print(dump(tdef))
+--end

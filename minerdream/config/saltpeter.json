@@ -9,6 +9,7 @@
 "is_mineral":2},
 "name":"saltpeter",
 "num_ores":5,
+"ore_modname":"minerdream",
 "scarcity":15,
 "stackmax":"200",
 "tier":2,

@@ -2,4 +2,6 @@
 "groups":{"has_bar_block":3,
 "has_block":3,
 "has_brick":3},
-"name":"brass"}
+"name":"brass",
+"ore_modname":"minerdream",
+"tier":3}

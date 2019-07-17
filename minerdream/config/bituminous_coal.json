@@ -3,6 +3,7 @@
 "groups":{"has_lump":1},
 "name":"bituminous_coal",
 "num_ores":10,
+"ore_modname":"minerdream",
 "scarcity":13,
 "tier":5,
 "y_max":-500,

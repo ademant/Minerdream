@@ -6,6 +6,7 @@
 "is_lump_gemstone":1},
 "name":"aquamarine",
 "num_ores":1,
+"ore_modname":"minerdream",
 "scarcity":16,
 "stackmax":"200",
 "tier":6,

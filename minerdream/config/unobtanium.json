@@ -11,6 +11,7 @@
 "lump_cooking_time":96,
 "name":"unobtanium",
 "num_ores":3,
+"ore_modname":"minerdream",
 "scarcity":17,
 "tier":8,
 "y_max":-8700,

@@ -121,6 +121,8 @@ end
 
 minerdream.register_ore=function(i,tdef)
 	minerdream.items[i]={}
+	minerdream.itemdef[i]=tdef
+	print(i)
 	tdef.ore_modname=minerdream.modname
 	if tdef.orig_modname then
 		tdef.ore_modname=tdef.orig_modname
@@ -134,6 +136,7 @@ minerdream.register_ore=function(i,tdef)
 		tdef.tier_string=core.colorize("#A0A0A0", "tier: "..tdef.tier.." ("..tdef.tierd.desc..")")
 		minerdream.items[i].tierdef=table.copy(tier_definition[tostring(tdef.tier)])
 	end
+--		local tierd=tier_definition[tostring(tdef.tier)]
 	-- register ores within stone
 	if tdef.crack ~= nil then
 		minerdream.register_ore_lump(i,tdef)
@@ -150,41 +153,133 @@ minerdream.register_ore=function(i,tdef)
 		minerdream.register_mapgen(i,tdef,mapgen_name)
 	end
 	
+	if tdef.groups then
 	-- define ore dust
 	-- only makes sense if it can be grinded
-	if tdef.groups.has_dust and minetest.get_modpath("technic") then
-		minerdream.register_dust(i,tdef)
-	end
-	
-	-- define ingot
-	if tdef.groups.has_bar then
-		minerdream.register_ingot(i,tdef)
-	end
+		if tdef.groups.has_dust and minetest.get_modpath("technic") then
+			minerdream.register_dust(i,tdef)
+		end
 
-	-- define ore bricks (ore + cobble)
-	if tdef.groups.has_brick then
-		minerdream.register_brick(i,tdef)
-	end
-	
-	-- define ore blocks (9 ores)
-	if tdef.groups.has_block then
-		minerdream.register_block(i,tdef)
-	end
-	
-	-- define bar stack
-	if tdef.groups.has_bar_block then
-		minerdream.register_bar_block(i,tdef)
+		-- define ingot
+		if tdef.groups.has_bar then
+			minerdream.register_ingot(i,tdef)
+		end
+		
+		-- define ore bricks (ore + cobble)
+		if tdef.groups.has_brick then
+			minerdream.register_brick(i,tdef)
+		end
+		
+		-- define ore blocks (9 ores)
+		if tdef.groups.has_block then
+			minerdream.register_block(i,tdef)
+		end
+		
+		-- define bar stack
+		if tdef.groups.has_bar_block then
+			minerdream.register_bar_block(i,tdef)
+		end
 	end
 	
 	-- define armor and weapons
 	if minerdream.items[i].ingot_def ~= nil then
 		minerdream.register_weapons(i,tdef)
 	end
+	
+	for _,tool in pairs({"pick","axe","sword","shovel","spear"}) do
+		if tdef[tool] ~= nil then
+			local ttv=tdef[tool]
+			local tdesc=core.colorize("#"..tdef.tierd.color, S(i:gsub("^%l", string.upper)).." "..S(tool:gsub("^%l", string.upper)).."\n")..
+					core.colorize("#A0A0A0", "tier: "..tdef.tierd.name.." ("..tdef.tierd.desc..")")
+			-- check special attributes of tool definition and use fallback definitions
+			if tdef.uses then
+				tdesc=tdesc.."\n"..core.colorize("#A0A0A0",S("Uses")..": "..tdef.uses)
+			end
+			if ttv.maxlevel then
+				tdesc=tdesc.."\n"..core.colorize("#A0A0A0",S("Max. Level")..": "..ttv.maxlevel)
+			end
+			if ttv.fleshy then
+				tdesc=tdesc.."\n"..core.colorize("#A0A0A0",S("Damage")..": "..ttv.fleshy)
+			end
+			tt_def={description=tdesc,
+				inventory_image=minerdream.modname.."_"..tool.."_"..i..".png",
+				range=tdef.range or 2,
+				groups={weapon=1},
+				tool_capabilities={max_drop_level = 1,groupcaps={},
+					damage_groups = {fleshy = ttv.fleshy or 4},},
+				}
+			-- check if values for capabitlites exist
+			for _,gc in pairs({"cracky","crumbly","choppy","snappy"}) do
+				if ttv[gc] ~= nil then
+					local ml = 1
+					if tdef.maxlevel ~=nil then
+						ml=tdef.maxlevel
+					end
+					if ttv.maxlevel ~= nil then
+						ml = ttv.maxlevel
+					end
+					tt_def.tool_capabilities.groupcaps[gc]={times=table.copy(ttv[gc]),
+						uses=tdef.uses,maxlevel=ml}
+				end
+			end
+			toolname=minerdream.modname..":"..tool.."_"..i
+			minetest.register_tool(toolname,tt_def)
+		end
+	end
+	for _,tool in pairs({"helmet","chestplate","boots","leggings","shields"}) do
+		if tdef[tool] ~= nil then
+			local ttv=tdef[tool]
+			tdesc=core.colorize("#"..tdef.tierd.color, S(i:gsub("^%l", string.upper)).." "..S(tool:gsub("^%l", string.upper)).."\n")..
+					core.colorize("#A0A0A0", "tier: "..tdef.tierd.name.." ("..tdef.tierd.desc..")")
+			if ttv.fleshy then
+				tdesc=tdesc.."\n"..core.colorize("#A0A0A0",S("Defense")..": "..ttv.fleshy)
+			end
+			if ttv.heal then
+				tdesc=tdesc.."\n"..core.colorize("#A0A0A0",S("Heal")..": "..ttv.heal)
+			end
+			if ttv.speed then
+				tdesc=tdesc.."\n"..core.colorize("#A0A0A0",S("Walking speed")..": "..(ttv.speed*100).."%")
+			end
+			if ttv.gravity then
+				tdesc=tdesc.."\n"..core.colorize("#A0A0A0",S("Gravity")..": "..(ttv.gravity*100).."%")
+			end
+			if ttv.jump then
+				tdesc=tdesc.."\n"..core.colorize("#A0A0A0",S("Jump force")..": "..(ttv.jump*100).."%")
+			end
+			tt_def={description=tdesc,
+				inventory_image=minerdream.modname.."_inv_"..tool.."_"..i..".png",
+				damage_groups = {level = ttv.level or 2},
+				armor_groups={fleshy=ttv.fleshy or 10},
+				groups={armor_heal=ttv.heal,armor_use=ttv.use,
+					physics_jump=ttv.jump,physics_speed=ttv.speed,physics_gravity=ttv.gravity}
+				}
+			for _,gc in pairs({"cracky","crumbly","choppy","snappy"}) do
+				tt_def.damage_groups[gc]=ttv[gc]
+			end
+			if tool == "helmet" then
+				tt_def.groups.armor_head=1
+			elseif tool == "chestplate" then
+				tt_def.groups.armor_torso=1
+			elseif tool == "leggings" then
+				tt_def.groups.armor_legs=1
+			elseif tool == "boots" then
+				tt_def.groups.armor_feet=1
+			elseif tool == "shields" then
+				tt_def.groups.armor_shield=1
+			end
+				
+			toolname=minerdream.modname..":"..tool.."_"..i
+			armor:register_armor(toolname,tt_def)
+		end
+	end
 end
 
 minerdream.register_ore_lump=function(ore_name,tdef)
 	-- base config of ore found in normal stone
 	local lump_name=tdef.ore_modname..":"..ore_name
+	if tdef.lump ~= nil then
+		lump_name=tdef.lump.name or lump_name
+	end
 	if tdef.groups.drop_as_lump ~= nil then
 		lump_name=lump_name.."_lump"
 	end
@@ -226,6 +321,10 @@ minerdream.register_ore_lump=function(ore_name,tdef)
 		inventory_image=lump_name:gsub(":","_")..".png",
 		stack_max=minerdream.lump_max_stack,
 		}
+	if tdef.lump ~= nil then
+		lump_def.inventory_image=tdef.lump.inventory_image or lump_def.inventory_image
+		lump_def.stack_max=tdef.lump.stack_max or lump_def.stack_max
+	end
 	if tdef.groups.is_lump_gemstone ~= nil then
 		lump_def.drawtype="mesh"
 		lump_def.mesh = ore_name..".obj"
@@ -245,7 +344,7 @@ minerdream.register_ore_lump=function(ore_name,tdef)
 	if tdef.overrides ~= nil then
 		if minetest.registered_nodes[tdef.overrides] ~= nil then
 			-- get drop item of defined ore
-			temp_def=minetest.registered_nodes[tdef.overrides]
+			local temp_def=minetest.registered_nodes[tdef.overrides]
 			ore_def.name=tdef.overrides
 			ore_def.drop=temp_def.drop
 			lump_def.name=temp_def.drop
@@ -263,6 +362,8 @@ minerdream.register_ore_lump=function(ore_name,tdef)
 	end
 	local orename=ore_def.name
 	local lump_name=lump_def.name
+	local needs_mapgen=false
+	local mapgen_name=""
 	if to_override then
 		ore_def.name=nil
 		lump_def.name=nil
@@ -297,7 +398,7 @@ minerdream.register_ore_lump=function(ore_name,tdef)
 --			end
 	-- define desert ores
 	if tdef.groups.in_desert then
-		desertore_def=table.copy(ore_def)
+		local desertore_def=table.copy(ore_def)
 		desertore_def.name=minerdream.modname..":desertstone_with_"..ore_name
 		desertore_def.tiles={"default_desert_stone.png^"..minerdream.modname.."_"..ore_name.."_ore.png"}
 		local_item_insert(ore_name,"desertore_def",desertore_def)
@@ -354,15 +455,19 @@ minerdream.register_ingot=function(ore_name,tdef)
 	ingot_def.inventory_image=minerdream.modname.."_"..ore_name.."_ingot.png"
 	ingot_def.stack_max = minerdream.ingot_max_stack
 	if tdef.ingot_name then --already defined and overridden with new image
-		ingot_def.name=nil
-		minetest.override_item(tdef.ingot_name,ingot_def)
-		minetest.register_alias(tdef.ingot_name,minerdream.modname..":"..ore_name.."_bar")
-		ingot_def.name=tdef.ingot_name
+		if tdef.ingot_name == "" then
+			ingot_def.name=minerdream.modname..":"..ore_name.."_ingot"
+			minetest.register_craftitem(ingot_def.name,ingot_def)
+		else
+			ingot_def.name=nil
+			minetest.override_item(tdef.ingot_name,ingot_def)
+			minetest.register_alias(tdef.ingot_name,minerdream.modname..":"..ore_name.."_bar")
+			ingot_def.name=tdef.ingot_name
+		end
 	else -- not yet defined
 		ingot_def.name=minerdream.modname..":"..ore_name.."_ingot"
 		minetest.register_craftitem(ingot_def.name,ingot_def)
 	end
-	
 	-- if lump is defined and cooking time is given then register cooking recipe
 	if minerdream.items[ore_name].lump_def and tdef.lump_cooking_time then
 		local lump_def=table.copy(minerdream.items[ore_name].lump_def)
@@ -372,6 +477,8 @@ minerdream.register_ingot=function(ore_name,tdef)
 		-- check, if cooking recipe already registered
 		local output, decremented_input = minetest.get_craft_result({ method = "cooking", width = 1, items = { ItemStack(lump_def.name) }})
 		if output.item:get_name() ~= ingot_def.name then
+			print(ingot_def.name)
+			print(lump_def.name)
 			minetest.register_craft({type="cooking",
 				cooktime=tdef.lump_cooking_time,
 				output=ingot_def.name,
@@ -387,6 +494,8 @@ minerdream.register_ingot=function(ore_name,tdef)
 			local cooking_time=tdef.cooking_time or 64
 			cooking_time=math.ceil(cooking_time/minerdream.dust_cooking_time_reduce)
 			dust_def.cooking_time=cooking_time
+			print(ingot_def.name)
+			print(dust_def.name)
 			  minetest.register_craft({type="cooking",
 				cooktime=cooking_time,
 				output=ingot_def.name,

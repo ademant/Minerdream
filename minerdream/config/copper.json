@@ -4,5 +4,6 @@
 "has_nugget":3,
 "is_metall":2},
 "name":"copper",
+"ore_modname":"minerdream",
 "orig_mod":"default",
 "tier":2}

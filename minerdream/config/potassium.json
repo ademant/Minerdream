@@ -15,6 +15,7 @@
 "lump_cooking_time":2,
 "name":"potassium",
 "num_ores":7,
+"ore_modname":"minerdream",
 "scarcity":12,
 "tier":1,
 "y_max":420,
