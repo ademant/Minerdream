@@ -1,10 +1,9 @@
 {"color":"835749D0",
-"groups":{"drop_as_lump":1,
+"groups":{
 "has_bow":1,
 "in_desert":1,
 "is_metall":5},
 "name":"ruthenium",
-"ore_modname":"minerdream",
 "block":{
 	"inventory_image":"minerdream_ruthenium_block.png"
 	},
@@ -12,8 +11,14 @@
 	"inventory_image":"minerdream_ruthenium_ingot.png"
 },
 "ore":{
+	"wherein":["stone","desert_stone"],
 	"crack":4,
-	"inventory_image":"minerdream_ruthenium_ore.png"
+	"inventory_image":"minerdream_ruthenium_ore.png",
+	"clust_size":3,
+	"num_ores":3,
+	"scarcity":15,
+	"y_max":-500,
+	"y_min":-31000
 },
 "lump":{
 	"crack":4,
@@ -27,14 +32,14 @@
 	"cooking_time":25,
 	"inventory_image":"minerdream_ruthenium_dust.png"
 },
-"mapgen":{
-	"clust_size":3,
-	"num_ores":3,
-	"scarcity":15,
-	"y_max":-500,
-	"y_min":-31000
-},
 "nugget":{
+	"crack":4,
+	"inventory_image":"minerdream_ruthenium_nugget.png",
+	"stack_max":99,
+	"cooking_time":32
+},
+"poorore":{
+	"wherein":["stone","desert_stone"],
 	"inventory_image":"minerdream_ruthenium_poorore.png",
 	"cracky":3,
 	"clust_size":3,
@@ -43,7 +48,6 @@
 	"y_max":-250
 },
 "tier":5,
-"tool_cotton":"steel_wire",
 "tools":{"range":6.9,"maxlevel":3,"tool_stick":"minerdream:steelstick",
 	"axe":{"choppy":[1.5,0.5,0.3],"fleshy":11},
 	"shovel":{"crumbly":[0.8,0.3,0.15],"fleshy":9},
@@ -51,7 +55,7 @@
 	"sword":{"fleshy":11,"snappy":[1.5,0.7,0.1]},
 	"pick":{"cracky":[1.5,0.7,0.25,3.5,5],"fleshy":10}
 },
-"3d_armor":{"cracky":2,"crumbly":1,"heal":8,"use":80,"snappy":3,"level":2,"choppy":2,
+"3d_armor":{"cracky":2,"crumbly":1,"heal":8,"use":80,"snappy":3,"level":2,"choppy":2,"tool_cotton":"steel_wire",
 "boots":{"fleshy":13.75,"gravity":-0.075,"jump":0.075,"speed":0.075},
 "chestplate":{"fleshy":18.75,"gravity":-0.08,"jump":0.08,"speed":0.08},
 "helmet":{"fleshy":13.75,"gravity":-0.08,"jump":0.08,"speed":0.08},
