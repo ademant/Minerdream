@@ -1,21 +1,45 @@
-{"clust_size":2,
-"color":"87A9AFD0",
-"crack":2,
+{"color":"87A9AFD0",
 "groups":{"drop_as_lump":1,
-"has_bar":1,
-"has_bar_block":3,
-"has_block":1,
-"has_brick":3,
-"has_dust":1,
-"has_lump":1,
-"has_nugget":3,
 "in_desert":1,
 "is_metall":1},
-"lump_cooking_time":2,
 "name":"calcium",
-"num_ores":5,
 "ore_modname":"minerdream",
-"scarcity":12,
 "tier":1,
-"y_max":420,
-"y_min":-31000}
+"block":{
+	"inventory_image":"minerdream_calcium_block.png"
+	},
+"ingot":{
+	"inventory_image":"minerdream_calcium_ingot.png"
+},
+"ore":{
+	"crack":2,
+	"inventory_image":"minerdream_calcium_ore.png"
+},
+"lump":{
+	"crack":2,
+	"inventory_image":"minerdream_calcium_lump.png",
+	"stack_max":99,
+	"cooking_time":2
+},
+"dust":{
+	"cracky":1,
+	"grind_time":1,
+	"cooking_time":1,
+	"inventory_image":"minerdream_calcium_dust.png"
+},
+"mapgen":{
+	"clust_size":2,
+	"num_ores":5,
+	"scarcity":12,
+	"y_max":120,
+	"y_min":-31000
+},
+"nugget":{
+	"inventory_image":"minerdream_calcium_poorore.png",
+	"cracky":1,
+	"clust_size":2,
+	"num_ores":5,
+	"scarcity":12,
+	"y_max":420
+}
+}
