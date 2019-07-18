@@ -181,90 +181,119 @@ minerdream.register_ore=function(i,tdef)
 		minerdream.register_weapons(i,tdef)
 	end
 	
-	for _,tool in pairs({"pick","axe","sword","shovel","spear"}) do
-		if tdef[tool] ~= nil then
-			local ttv=tdef[tool]
-			local tdesc=core.colorize("#"..tdef.tierd.color, S(i:gsub("^%l", string.upper)).." "..S(tool:gsub("^%l", string.upper)).."\n")..
-					core.colorize("#A0A0A0", "tier: "..tdef.tierd.name.." ("..tdef.tierd.desc..")")
-			-- check special attributes of tool definition and use fallback definitions
-			if tdef.uses then
-				tdesc=tdesc.."\n"..core.colorize("#A0A0A0",S("Uses")..": "..tdef.uses)
-			end
-			if ttv.maxlevel then
-				tdesc=tdesc.."\n"..core.colorize("#A0A0A0",S("Max. Level")..": "..ttv.maxlevel)
-			end
-			if ttv.fleshy then
-				tdesc=tdesc.."\n"..core.colorize("#A0A0A0",S("Damage")..": "..ttv.fleshy)
-			end
-			tt_def={description=tdesc,
-				inventory_image=minerdream.modname.."_"..tool.."_"..i..".png",
-				range=tdef.range or 2,
-				groups={weapon=1},
-				tool_capabilities={max_drop_level = 1,groupcaps={},
-					damage_groups = {fleshy = ttv.fleshy or 4},},
-				}
-			-- check if values for capabitlites exist
-			for _,gc in pairs({"cracky","crumbly","choppy","snappy"}) do
-				if ttv[gc] ~= nil then
-					local ml = 1
-					if tdef.maxlevel ~=nil then
-						ml=tdef.maxlevel
+	if tdef.tools~=nil then
+		local adef=tdef.tools
+		local ingot_name=minerdream.items[i].ingot_def.name
+		for _,tool in pairs({"pick","axe","sword","shovel","spear"}) do
+			if tdef.tools[tool] ~= nil then
+				local ttv=tdef.tools[tool]
+				for _,it in pairs({"range","maxlevel","tool_stick","fleshy","level","cracky","crumbly","choppy","snappy","use"}) do
+					if ttv[it] == nil and adef[it] ~= nil then
+						ttv[it] = adef[it]
 					end
-					if ttv.maxlevel ~= nil then
-						ml = ttv.maxlevel
-					end
-					tt_def.tool_capabilities.groupcaps[gc]={times=table.copy(ttv[gc]),
-						uses=tdef.uses,maxlevel=ml}
 				end
+				
+				local fleshy=ttv.fleshy or tdef.tools.fleshy or 4
+				local uses=ttv.use or tdef.tools.use
+				local tdesc=core.colorize("#"..tdef.tierd.color, S(i:gsub("^%l", string.upper)).." "..S(tool:gsub("^%l", string.upper)).."\n")..
+						core.colorize("#A0A0A0", "tier: "..tdef.tierd.name.." ("..tdef.tierd.desc..")")
+				-- check special attributes of tool definition and use fallback definitions
+				if uses then
+					tdesc=tdesc.."\n"..core.colorize("#A0A0A0",S("Uses")..": "..uses)
+				end
+				if ttv.maxlevel then
+					tdesc=tdesc.."\n"..core.colorize("#A0A0A0",S("Max. Level")..": "..ttv.maxlevel)
+				end
+				if ttv.fleshy then
+					tdesc=tdesc.."\n"..core.colorize("#A0A0A0",S("Damage")..": "..fleshy)
+				end
+				tt_def={description=tdesc,uses=uses,
+					inventory_image=ttv.inventory_image or minerdream.modname.."_"..tool.."_"..i..".png",
+					range=ttv.range or tdef.tools.range or 2,
+					groups={weapon=1},
+					tool_capabilities={max_drop_level = 1,groupcaps={},
+						damage_groups = {fleshy = fleshy},},
+					}
+				-- check if values for capabitlites exist
+				for _,gc in pairs({"cracky","crumbly","choppy","snappy"}) do
+					if ttv[gc] ~= nil then
+						local ml = ttv.maxlevel or tdef.tools.maxlevel or 1
+						tt_def.tool_capabilities.groupcaps[gc]={times=table.copy(ttv[gc]),
+							uses=tdef.uses,maxlevel=ml}
+					end
+				end
+				toolname=minerdream.modname..":"..tool.."_"..i
+				minetest.register_tool(toolname,tt_def)
+				
+				local stick = ttv.tool_stick or "group:stick"
+				minetest.register_craft({
+					output=toolname,
+					recipe=local_get_recipe(tool,ingot_name,stick)
+				})
+
 			end
-			toolname=minerdream.modname..":"..tool.."_"..i
-			minetest.register_tool(toolname,tt_def)
 		end
 	end
-	for _,tool in pairs({"helmet","chestplate","boots","leggings","shields"}) do
-		if tdef[tool] ~= nil then
-			local ttv=tdef[tool]
-			tdesc=core.colorize("#"..tdef.tierd.color, S(i:gsub("^%l", string.upper)).." "..S(tool:gsub("^%l", string.upper)).."\n")..
-					core.colorize("#A0A0A0", "tier: "..tdef.tierd.name.." ("..tdef.tierd.desc..")")
-			if ttv.fleshy then
-				tdesc=tdesc.."\n"..core.colorize("#A0A0A0",S("Defense")..": "..ttv.fleshy)
+	if tdef["3d_armor"] ~= nil then
+		local ingot_name=minerdream.items[i].ingot_def.name
+		local adef=tdef["3d_armor"]
+		for _,tool in pairs({"helmet","chestplate","boots","leggings","shield"}) do
+			if tdef["3d_armor"][tool] ~= nil then
+				local ttv=tdef["3d_armor"][tool]
+				for _,it in pairs({"fleshy","heal","speed","gravity","jump","level","cracky","crumbly","choppy","snappy","use"}) do
+					if ttv[it] == nil and adef[it] ~= nil then
+						ttv[it] = adef[it]
+					end
+				end
+				local tdesc=core.colorize("#"..tdef.tierd.color, S(i:gsub("^%l", string.upper)).." "..S(tool:gsub("^%l", string.upper)).."\n")..
+						core.colorize("#A0A0A0", "tier: "..tdef.tierd.name.." ("..tdef.tierd.desc..")")
+				if ttv.fleshy then
+					tdesc=tdesc.."\n"..core.colorize("#A0A0A0",S("Defense")..": "..ttv.fleshy)
+				end
+				if ttv.heal then
+					tdesc=tdesc.."\n"..core.colorize("#A0A0A0",S("Heal")..": "..ttv.heal)
+				end
+				if ttv.speed then
+					tdesc=tdesc.."\n"..core.colorize("#A0A0A0",S("Walking speed")..": "..(ttv.speed*100).."%")
+				end
+				if ttv.gravity then
+					tdesc=tdesc.."\n"..core.colorize("#A0A0A0",S("Gravity")..": "..(ttv.gravity*100).."%")
+				end
+				if ttv.jump then
+					tdesc=tdesc.."\n"..core.colorize("#A0A0A0",S("Jump force")..": "..(ttv.jump*100).."%")
+				end
+				tt_def={description=tdesc,
+					inventory_image=ttv.inventory_image or minerdream.modname.."_inv_"..tool.."_"..i..".png",
+					damage_groups = {level = ttv.level or 2},
+					armor_groups={fleshy=ttv.fleshy or 10},
+					groups={armor_heal=ttv.heal,armor_use=ttv.use,
+						physics_jump=ttv.jump,physics_speed=ttv.speed,physics_gravity=ttv.gravity}
+					}
+				for _,gc in pairs({"cracky","crumbly","choppy","snappy"}) do
+					tt_def.damage_groups[gc]=ttv[gc]
+				end
+				if tool == "helmet" then
+					tt_def.groups.armor_head=1
+				elseif tool == "chestplate" then
+					tt_def.groups.armor_torso=1
+				elseif tool == "leggings" then
+					tt_def.groups.armor_legs=1
+				elseif tool == "boots" then
+					tt_def.groups.armor_feet=1
+				elseif tool == "shield" then
+					tt_def.groups.armor_shield=1
+				end
+					
+				toolname=minerdream.modname..":"..tool.."_"..i
+				armor:register_armor(toolname,tt_def)
+
+				local stick = ttv.tool_stick or "group:stick"
+				minetest.register_craft({
+					output=toolname,
+					recipe=local_get_recipe(tool,ingot_name,stick)
+				})
+
 			end
-			if ttv.heal then
-				tdesc=tdesc.."\n"..core.colorize("#A0A0A0",S("Heal")..": "..ttv.heal)
-			end
-			if ttv.speed then
-				tdesc=tdesc.."\n"..core.colorize("#A0A0A0",S("Walking speed")..": "..(ttv.speed*100).."%")
-			end
-			if ttv.gravity then
-				tdesc=tdesc.."\n"..core.colorize("#A0A0A0",S("Gravity")..": "..(ttv.gravity*100).."%")
-			end
-			if ttv.jump then
-				tdesc=tdesc.."\n"..core.colorize("#A0A0A0",S("Jump force")..": "..(ttv.jump*100).."%")
-			end
-			tt_def={description=tdesc,
-				inventory_image=minerdream.modname.."_inv_"..tool.."_"..i..".png",
-				damage_groups = {level = ttv.level or 2},
-				armor_groups={fleshy=ttv.fleshy or 10},
-				groups={armor_heal=ttv.heal,armor_use=ttv.use,
-					physics_jump=ttv.jump,physics_speed=ttv.speed,physics_gravity=ttv.gravity}
-				}
-			for _,gc in pairs({"cracky","crumbly","choppy","snappy"}) do
-				tt_def.damage_groups[gc]=ttv[gc]
-			end
-			if tool == "helmet" then
-				tt_def.groups.armor_head=1
-			elseif tool == "chestplate" then
-				tt_def.groups.armor_torso=1
-			elseif tool == "leggings" then
-				tt_def.groups.armor_legs=1
-			elseif tool == "boots" then
-				tt_def.groups.armor_feet=1
-			elseif tool == "shields" then
-				tt_def.groups.armor_shield=1
-			end
-				
-			toolname=minerdream.modname..":"..tool.."_"..i
-			armor:register_armor(toolname,tt_def)
 		end
 	end
 end
