@@ -12,8 +12,24 @@
 	"inventory_image":"minerdream_calcium_ingot.png"
 },
 "ore":{
+	"wherein":["stone"],
 	"crack":2,
-	"inventory_image":"minerdream_calcium_ore.png"
+	"inventory_image":"minerdream_calcium_ore.png",
+	"clust_size":2,
+	"num_ores":5,
+	"scarcity":12,
+	"y_max":120,
+	"y_min":-31000
+},
+"poorore":{
+	"wherein":["stone"],
+	"crack":2,
+	"inventory_image":"minerdream_calcium_poorore.png",
+	"clust_size":2,
+	"num_ores":5,
+	"scarcity":12,
+	"y_max":200,
+	"y_min":-31000
 },
 "lump":{
 	"crack":2,
@@ -26,13 +42,6 @@
 	"grind_time":1,
 	"cooking_time":1,
 	"inventory_image":"minerdream_calcium_dust.png"
-},
-"mapgen":{
-	"clust_size":2,
-	"num_ores":5,
-	"scarcity":12,
-	"y_max":120,
-	"y_min":-31000
 },
 "nugget":{
 	"inventory_image":"minerdream_calcium_poorore.png",

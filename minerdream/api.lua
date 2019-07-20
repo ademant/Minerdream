@@ -1,5 +1,8 @@
 local S=minerdream.intllib
 
+local agroup={helmet="armor_head",chestplate="armor_torso",leggings="armor_legs",boots="armor_feet",shield="armor_shield"}
+local orelump={ore="lump",poorore="nugget"}
+
 local tier_definition = basic_functions.import_csv(minerdream.path.."/tiers.txt",{col_num={"name"},})
 local local_item_insert=function(name,ttype,def)
 	if minerdream.items[name] == nil then
@@ -133,8 +136,15 @@ minerdream.register_ore=function(i,tdef)
 		end
 		minerdream.items[ore_name]=tdef
 
-		local orelump={ore="lump",poorore="nugget"}
 		for o,l in pairs(orelump) do
+			-- register only ore
+			if tdef[o] ~= nil and tdef[l] == nil then
+				tdef[o].ore_name=ore_name
+				tdef[o].lump_name=ore_name
+				minerdream.register_node_ore(tdef,tdef[o],l)
+				minerdream.register_node_mapgen(tdef,tdef[o])
+			end
+			-- register if ore and lump is defined
 			if tdef[o] ~= nil and tdef[l] ~= nil then
 				-- register ore
 				if tdef[o] ~= nil then
@@ -186,8 +196,13 @@ minerdream.register_ore=function(i,tdef)
 		end
 		
 		if tdef["3d_armor"] ~= nil  then
-			print("test")
 			minerdream.register_3d_armor(tdef,tdef["3d_armor"])
+		end
+		
+		if tdef.fuel ~= nil then
+			if tdef.fuel.burntime ~= nil then
+				
+			end
 		end
 --		print(dump(tdef))
 	end
@@ -203,7 +218,12 @@ minerdream.register_node_lump=function(tdef,ldef)
 			inventory_image=ldef.inventory_image or node_name:gsub(":","_")..".png"
 			}
 		minetest.register_craftitem(lump_def.name,lump_def)
-		
+		if ldef.burntime ~= nil then
+			minetest.register_craft({
+				type = "fuel",
+				recipe = lump_def.name,
+				burntime = ldef.burntime})
+		end
 	end
 end
 
@@ -214,7 +234,7 @@ minerdream.register_node_ore=function(tdef,odef,ltype)
 		odef.lump_name=tdef.ore_name.."_"..ltype
 	end
 	if odef.lump_node_name == nil then
-		odef.lump_node_name=tdef.ore_modname..":"..tdef.ore_name.."_"..ltype
+		odef.lump_node_name=tdef.ore_modname..":"..odef.lump_name
 	end
 	-- check, if some kind of stone is defined, where the ore can appear
 	if odef.wherein == nil then
@@ -230,14 +250,16 @@ minerdream.register_node_ore=function(tdef,odef,ltype)
 	end
 	local ore_def={description=S(odef.ore_name:gsub("^%l", string.upper):gsub("_"," ")),
 		groups={cracky=odef.crack},
-		sound=default.node_sound_stone_defaults(),
-		drop=odef.lump_node_name
+		sound=default.node_sound_stone_defaults()
 		}
+	if odef.lump_name ~= odef.ore_name then
+		ore_def.drop=odef.lump_node_name
+	end
 	if tdef.groups.is_metall then
-		ore_def.groups["metall"..tdef.groups.is_metall]=tdef.groups.is_metall
+		ore_def.groups["metall"]=tdef.groups.is_metall
 	end
 	if tdef.groups.is_mineral then
-		ore_def.groups["mineral"..tdef.groups.is_mineral]=tdef.groups.is_mineral
+		ore_def.groups["mineral"]=tdef.groups.is_mineral
 	end
 	if odef.stackmax then
 		ore_def.stack_max=odef.stackmax
@@ -245,10 +267,24 @@ minerdream.register_node_ore=function(tdef,odef,ltype)
 	if tdef.tier then
 		ore_def.description=core.colorize("#00FF00", ore_def.description.."\n")..tdef.tier_string
 	end
+	
+	if tdef.groups.is_gemstone ~= nil then
+		ore_def.description=ore_name:gsub("^%l", string.upper)
+		ore_def.paramtype="light"
+		ore_def.drawtype = "mesh"
+		ore_def.mesh = "gemstone_cubic_pillars.obj"
+		ore_def.walkable = "true"
+		ore_def.tiles = {"minerdream_"..tdef.ore_name.."_rock.png"}
+		ore_def.selection_box = {type = "fixed",
+			fixed = {{-0.4, -0.5, -0.4, 0.4, 0.0, 0.4},},}
+		ore_def.node_box = {type = "fixed",
+			fixed = {{-0.4, -0.5, -0.4, 0.4, 0.0, 0.4},},}
+	end
+	
 	-- for each stone, where the node can appear, add the name
 	odef.node_name={}
 	if odef.wherein==nil then
-		odef.wherein="stone"
+		odef.wherein={"stone"}
 	end
 	-- for each stone create definition table and register node
 	for _,wi in ipairs(odef.wherein) do
@@ -528,12 +564,13 @@ minerdream.register_dust=function(tdef,ddef)
 			end
 		end
 		
-		minetest.register_craft({type="cooking",
-			cooktime=tdef.dust.cooking_time,
-			output=tdef.ingot.node_name,
-			recipe=tdef.dust.node_name,
-		})
-		
+		if tdef.ingot ~= nil then
+			minetest.register_craft({type="cooking",
+				cooktime=tdef.dust.cooking_time,
+				output=tdef.ingot.node_name,
+				recipe=tdef.dust.node_name,
+			})
+		end
 	end
 end
 
@@ -593,7 +630,6 @@ end
 
 minerdream.register_3d_armor=function(tdef,adef)
 	if adef ~= nil then
-		print("test2")
 		for _,tool in pairs({"helmet","chestplate","boots","leggings","shield"}) do
 			if adef[tool] ~= nil then
 				local ttv=adef[tool]
@@ -630,7 +666,6 @@ minerdream.register_3d_armor=function(tdef,adef)
 				for _,gc in pairs({"cracky","crumbly","choppy","snappy"}) do
 					tt_def.damage_groups[gc]=ttv[gc]
 				end
-				agroup={helmet="armor_head",chestplate="armor_torso",leggings="armor_legs",boots="armor_feet",shield="armorg_shield"}
 				print(tool)
 				print(agroup[tool])
 				tt_def.groups[agroup[tool]]=1

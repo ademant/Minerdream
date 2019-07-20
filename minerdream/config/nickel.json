@@ -52,7 +52,7 @@
 "tools":{"maxlevel":2,"tool_stick":"group:stick","use":80,
 	"axe":{"choppy":[2.275,1.2,0.75],"fleshy":6.75},
 	"shovel":{"crumbly":[1.3,0.75,0.325],"fleshy":3.75},
-	"spear":{"range":6.2,"fleshy":7.75,"snappy":[2.2,0.95,.0275]},
+	"spear":{"range":6.2,"fleshy":7.75,"snappy":[2.2,0.95,0.0275]},
 	"sword":{"fleshy":6.75,"snappy":[2.2,0.95,0.275]},
 	"pick":{"cracky":[3.4,1.3,0.65],"fleshy":5.25}
 },

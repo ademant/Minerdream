@@ -1,22 +1,46 @@
-{"clust_size":3,
-"color":"9b9b9bD0",
-"crack":3,
+{"color":"87A9AFD0",
 "groups":{"drop_as_lump":1,
-"has_bar":1,
-"has_bar_block":3,
-"has_block":1,
-"has_bow":1,
-"has_brick":3,
-"has_dust":1,
-"has_lump":1,
-"has_nugget":3,
 "in_desert":1,
-"is_mineral":1},
-"lump_cooking_time":2,
+"is_metall":1},
 "name":"potassium",
-"num_ores":7,
 "ore_modname":"minerdream",
-"scarcity":12,
 "tier":1,
-"y_max":420,
-"y_min":-31000}
+"ore":{
+	"wherein":["stone"],
+	"crack":2,
+	"inventory_image":"minerdream_potassium_ore.png",
+	"clust_size":3,
+	"num_ores":7,
+	"scarcity":12,
+	"y_max":420,
+	"y_min":-31000
+},
+"poorore":{
+	"wherein":["stone"],
+	"crack":2,
+	"inventory_image":"minerdream_potassium_poorore.png",
+	"clust_size":2,
+	"num_ores":5,
+	"scarcity":12,
+	"y_max":500,
+	"y_min":-31000
+},
+"lump":{
+	"crack":2,
+	"inventory_image":"minerdream_potassium_lump.png",
+	"stack_max":99
+},
+"dust":{
+	"cracky":1,
+	"grind_time":1,
+	"inventory_image":"minerdream_potassium_dust.png"
+},
+"nugget":{
+	"inventory_image":"minerdream_potassium_poorore.png",
+	"cracky":1,
+	"clust_size":2,
+	"num_ores":7,
+	"scarcity":12,
+	"y_max":420
+}
+}

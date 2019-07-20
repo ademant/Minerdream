@@ -52,9 +52,8 @@
 "tools":{"maxlevel":3,"tool_stick":"minerdream:expensivestick","use":80,
 	"axe":{"choppy":[1.1,0.35,0.225],"fleshy":12},
 	"spear":{"range":7.5,"fleshy":17,"snappy":[1.2,0.5,0.04]},
-	"sword":{"fleshy":14.5,"snappy":[1.25,0.55,0.05]},
-	"pick":{"cracky":[1.2,0.45,0.175,2.75,3,4,6],"fleshy":12,"crumbly":[0.55,0.225,0.1]}
-},
+	"sword":{"fleshy":14.5,"snappy":[1.25,0.55,0.05]}
+	},
 "3d_armor":{"cracky":2,"crumbly":1,"heal":8.35,"use":80,"snappy":3,"level":2,"choppy":2,"tool_cotton":"steel_wire",
 "boots":{"fleshy":15,"gravity":-0.08,"jump":0.09,"speed":0.12},
 "chestplate":{"fleshy":15,"gravity":-0.08,"jump":0.09,"speed":0.12},
