@@ -29,7 +29,7 @@
 	"grind_time":32
 },
 "dust":{
-	"cracky":3,
+	"crack":3,
 	"cooking_time":25,
 	"inventory_image":"minerdream_ruthenium_dust.png"
 },
@@ -42,17 +42,17 @@
 "poorore":{
 	"wherein":["stone","desert_stone"],
 	"inventory_image":"minerdream_ruthenium_poorore.png",
-	"cracky":3,
+	"crack":3,
 	"clust_size":3,
 	"num_ores":3,
 	"scarcity":13,
 	"y_max":-250
 },
 "tier":5,
-"tools":{"range":6.9,"maxlevel":3,"tool_stick":"minerdream:steelstick","use":80,
+"tools":{"maxlevel":3,"tool_stick":"minerdream:steelstick","use":80,
 	"axe":{"choppy":[1.5,0.5,0.3],"fleshy":11},
 	"shovel":{"crumbly":[0.8,0.3,0.15],"fleshy":9},
-	"spear":{"fleshy":12,"snappy":[1.5,0.7,0.1]},
+	"spear":{"range":6.9,"fleshy":12,"snappy":[1.5,0.7,0.1]},
 	"sword":{"fleshy":11,"snappy":[1.5,0.7,0.1]},
 	"pick":{"cracky":[1.5,0.7,0.25,3.5,5],"fleshy":10}
 },

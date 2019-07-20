@@ -1,19 +1,55 @@
-{"clust_size":3,
-"color":"c4b16ed0",
-"crack":1,
+{"color":"C4B16ED0",
 "groups":{"drop_as_lump":1,
 "has_bar":1,
-"has_block":1,
-"has_dust":1,
-"has_lump":1,
-"has_nugget":3,
 "in_desert":1,
-"is_metall":2},
-"lump_cooking_time":5,
+"is_metall":6},
+"block":{
+	"inventory_image":"minerdream_lithium_block.png"
+	},
+"ingot":{
+	"inventory_image":"minerdream_lithium_ingot.png"
+},
+"ore":{
+	"wherein":["stone"],
+	"crack":5,
+	"inventory_image":"minerdream_lithium_ore.png",
+	"clust_size":3,
+	"num_ores":5,
+	"scarcity":14,
+	"y_max":-100,
+	"y_min":-31000
+},
+"poorore":{
+	"wherein":["stone","desert_stone"],
+	"crack":4,
+	"inventory_image":"minerdream_lithium_poorore.png",
+	"clust_size":3,
+	"num_ores":5,
+	"scarcity":14,
+	"y_max":-50,
+	"y_min":-31000
+},
+"lump":{
+	"crack":5,
+	"inventory_image":"minerdream_lithium_lump.png",
+	"stack_max":99,
+	"cooking_time":5
+},
+"dust":{
+	"crack":3,
+	"grind_time":3,
+	"cooking_time":3,
+	"inventory_image":"minerdream_lithium_dust.png"
+},
+"nugget":{
+	"inventory_image":"minerdream_lithium_poorore.png",
+	"crack":3,
+	"clust_size":3,
+	"num_ores":5,
+	"scarcity":13,
+	"y_max":-2000
+},
 "name":"lithium",
-"num_ores":5,
 "ore_modname":"minerdream",
-"scarcity":14,
-"tier":2,
-"y_max":-100,
-"y_min":-31000}
+"tier":2
+}

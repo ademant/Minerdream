@@ -1,36 +1,45 @@
 {
 "block":{
-	"inventory_image":"minerdream_adamantite_block.png"
+	"inventory_image":"minerdream_cobalt_block.png"
 	},
 "ingot":{
-	"inventory_image":"minerdream_adamantite_ingot.png"
+	"inventory_image":"minerdream_cobalt_ingot.png"
 },
 "ore":{
+	"wherein":["stone"],
 	"crack":4,
-	"inventory_image":"minerdream_adamantite_ore.png"
-},
-"lump":{
-	"crack":4,
-	"inventory_image":"minerdream_adamantite_lump.png",
-	"stack_max":99,
-	"cooking_time":32
-},
-"dust":{
-	"cracky":2,
-	"grind_time":18,
-	"cooking_time":20,
-	"inventory_image":"minerdream_adamantite_dust.png"
-},
-"mapgen":{
+	"inventory_image":"minerdream_cobalt_ore.png",
 	"clust_size":3,
 	"num_ores":3,
 	"scarcity":15,
 	"y_max":-500,
 	"y_min":-31000
 },
+"poorore":{
+	"wherein":["stone","desert_stone"],
+	"crack":3,
+	"inventory_image":"minerdream_cobalt_poorore.png",
+	"clust_size":3,
+	"num_ores":3,
+	"scarcity":15,
+	"y_max":-350,
+	"y_min":-31000
+},
+"lump":{
+	"crack":4,
+	"inventory_image":"minerdream_cobalt_lump.png",
+	"stack_max":99,
+	"cooking_time":32
+},
+"dust":{
+	"crack":2,
+	"grind_time":18,
+	"cooking_time":20,
+	"inventory_image":"minerdream_cobalt_dust.png"
+},
 "nugget":{
-	"inventory_image":"minerdream_adamantite_poorore.png",
-	"cracky":2,
+	"inventory_image":"minerdream_cobalt_poorore.png",
+	"crack":2,
 	"clust_size":3,
 	"num_ores":3,
 	"scarcity":13,
@@ -38,9 +47,7 @@
 },
 	"color":"3F7390D0",
 	"groups":{"drop_as_lump":1,
-		"has_bar":1,
 		"has_bow":1,
-		"has_brick":3,
 		"in_desert":1,
 		"is_metall":5},
 	"name":"cobalt",

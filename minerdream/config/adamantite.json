@@ -10,8 +10,24 @@
 	"inventory_image":"minerdream_adamantite_ingot.png"
 },
 "ore":{
+	"wherein":["stone"],
 	"crack":5,
-	"inventory_image":"minerdream_adamantite_ore.png"
+	"inventory_image":"minerdream_adamantite_ore.png",
+	"clust_size":3,
+	"num_ores":4,
+	"scarcity":15,
+	"y_max":-2300,
+	"y_min":-31000
+},
+"poorore":{
+	"wherein":["stone","desert_stone"],
+	"crack":4,
+	"inventory_image":"minerdream_adamantite_poorore.png",
+	"clust_size":3,
+	"num_ores":4,
+	"scarcity":15,
+	"y_max":-200,
+	"y_min":-31000
 },
 "lump":{
 	"crack":5,
@@ -20,21 +36,14 @@
 	"cooking_time":58
 },
 "dust":{
-	"cracky":3,
+	"crack":3,
 	"grind_time":32,
 	"cooking_time":28,
 	"inventory_image":"minerdream_adamantite_dust.png"
 },
-"mapgen":{
-	"clust_size":3,
-	"num_ores":4,
-	"scarcity":15,
-	"y_max":-2300,
-	"y_min":-31000
-},
 "nugget":{
 	"inventory_image":"minerdream_adamantite_poorore.png",
-	"cracky":3,
+	"crack":3,
 	"clust_size":3,
 	"num_ores":5,
 	"scarcity":13,
