@@ -175,15 +175,6 @@ minetest.register_craft({
 		{'group:stick'},
 	}
 })
-----------fuels-------------
-
-minetest.register_craft({
-	type = "fuel",
-	recipe = "minerdream:bituminous_coal",
-	burntime = 125,
-})
-
-
 --------------lapis----------------
 
 minetest.register_craft({
@@ -461,54 +452,6 @@ minetest.register_craft({
 		{'', 'default:gold_ingot', ''},
 		{'default:gold_ingot', 'minerdream:amethyst', 'default:gold_ingot'},
 		{'', 'minerdream:shield_cobalt', ''},
-	}
-})
-
-minetest.register_craft({
-	output = 'minerdream:helmet_defender',
-	recipe = {
-		{'', 'minerdream:garnet', ''},
-		{'default:bronze_ingot', 'minerdream:helmet_ruthenium', 'default:bronze_ingot'},
-	}
-})
-
-minetest.register_craft({
-	output = 'minerdream:chestplate_defender',
-	recipe = {
-		{'minerdream:garnet', '', 'minerdream:garnet'},
-		{'default:bronze_ingot', 'minerdream:chestplate_ruthenium', 'default:bronze_ingot'},
-		{'default:bronze_ingot', 'default:bronze_ingot', 'default:bronze_ingot'},
-
-	}
-})
-
-minetest.register_craft({
-	output = 'minerdream:leggings_defender',
-	recipe = {
-		{'', 'default:bronze_ingot', ''},
-		{'minerdream:garnet', 'minerdream:leggings_ruthenium', 'minerdream:garnet'},
-		{'', '', ''},
-
-	}
-})
-
-minetest.register_craft({
-	output = 'minerdream:boots_defender',
-	recipe = {
-		{'', '', ''},
-		{'minerdream:garnet', 'minerdream:boots_ruthenium', 'minerdream:garnet'},
-		{'default:bronze_ingot', '', 'default:bronze_ingot'},
-
-	}
-})
-
-minetest.register_craft({
-	output = 'minerdream:shield_defender',
-	recipe = {
-		{'', 'default:bronze_ingot', ''},
-		{'default:bronze_ingot', 'minerdream:garnet', 'default:bronze_ingot'},
-		{'', 'minerdream:shield_ruthenium', ''},
-
 	}
 })
 

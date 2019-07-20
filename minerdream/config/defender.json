@@ -1,0 +1,21 @@
+{"tier":7,
+	"3d_armor":{"choppy":2,"cracky":2,"crumbly":1,"heal":8,"level":2,"snappy":3,"use":80,
+	"boots":{"fleshy":14.25,"gravity":-0.075,"jump":0.075,"speed":0.075,
+		"recipe":[["", "", ""],
+		["minerdream:garnet", "minerdream:boots_ruthenium", "minerdream:garnet"],
+		["default:bronze_ingot", "", "default:bronze_ingot"]]},
+	"chestplate":{"fleshy":19.25,"gravity":-0.08,"jump":0.08,"speed":0.08,
+		"recipe":[["minerdream:garnet", "", "minerdream:garnet"],
+		["default:bronze_ingot", "minerdream:chestplate_ruthenium", "default:bronze_ingot"],
+		["default:bronze_ingot", "default:bronze_ingot", "default:bronze_ingot"]]},
+	"helmet":{"fleshy":14.25,"gravity":-0.08,"jump":0.08,"speed":0.08,
+		"recipe":[["", "minerdream:garnet", ""],["default:bronze_ingot", "minerdream:helmet_ruthenium", "default:bronze_ingot"]]},
+	"leggings":{"fleshy":19.25,"gravity":-0.08,"jump":0.08,"speed":0.08,
+		"recipe":[["", "default:bronze_ingot", ""],
+		["minerdream:garnet", "minerdream:leggings_ruthenium", "minerdream:garnet"],["","",""]]},
+	"shields":{"fleshy":14.25,"gravity":-0.08,"jump":0.08,"speed":0.08,
+		"recipe":[["", "default:bronze_ingot", ""],
+		["default:bronze_ingot", "minerdream:garnet", "default:bronze_ingot"],
+		["", "minerdream:shield_ruthenium", ""]]
+		}
+}}
