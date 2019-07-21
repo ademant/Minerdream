@@ -17,7 +17,7 @@
 	"inventory_image":"minerdream_ruthenium_ore.png",
 	"clust_size":3,
 	"num_ores":3,
-	"scarcity":15,
+	"scarcity":16,
 	"y_max":-500,
 	"y_min":-31000
 },
@@ -44,8 +44,8 @@
 	"inventory_image":"minerdream_ruthenium_poorore.png",
 	"crack":3,
 	"clust_size":3,
-	"num_ores":3,
-	"scarcity":13,
+	"num_ores":4,
+	"scarcity":14,
 	"y_max":-250
 },
 "tier":5,

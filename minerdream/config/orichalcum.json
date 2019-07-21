@@ -17,7 +17,7 @@
 	"inventory_image":"minerdream_orichalcum_ore.png",
 	"clust_size":3,
 	"num_ores":3,
-	"scarcity":17,
+	"scarcity":18,
 	"y_max":-6500,
 	"y_min":-31000
 },

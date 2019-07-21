@@ -11,7 +11,7 @@
 	"inventory_image":"minerdream_potassium_ore.png",
 	"clust_size":3,
 	"num_ores":7,
-	"scarcity":12,
+	"scarcity":13,
 	"y_max":420,
 	"y_min":-31000
 },

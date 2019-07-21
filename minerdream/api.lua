@@ -127,6 +127,7 @@ minerdream.register_ore=function(i,tdef)
 		local ore_name=tdef.name or i
 		tdef.ore_name=ore_name
 		tdef.ore_modname=minerdream.modname
+		if tdef.name == nil then tdef.name = i end
 		tdef.tier_string=""
 		tdef.tierd={}
 		if tdef.tier then
@@ -199,10 +200,8 @@ minerdream.register_ore=function(i,tdef)
 			minerdream.register_3d_armor(tdef,tdef["3d_armor"])
 		end
 		
-		if tdef.fuel ~= nil then
-			if tdef.fuel.burntime ~= nil then
-				
-			end
+		if tdef.crafts ~= nil then
+			minerdream.register_crafts(tdef,tdef.crafts)
 		end
 --		print(dump(tdef))
 	end
@@ -293,6 +292,25 @@ minerdream.register_node_ore=function(tdef,odef,ltype)
 		oredef.tiles={"default_"..wi..".png^"..odef.inventory_image}
 		odef.node_name[wi]=oredef.name
 		minetest.register_node(oredef.name,oredef)
+	end
+end
+
+minerdream.register_crafts=function(tdef,cdef)
+	if cdef ~= nil then
+		print(dump(cdef))
+		for _,ccdef in pairs(cdef) do
+			if ccdef.output ~= nil and ccdef.recipe ~= nil then
+				-- analyse, if recipe refers to items in definition
+				for k,v in pairs(ccdef.recipe) do
+					if type(v) == "table" then
+						for l,w in pairs(v) do
+							if tdef[w] ~= nil then
+								if tdef[w].node_name ~= nil then
+									ccdef.recipe[k][l]=tdef[w].node_name
+				end end end end end
+				minetest.register_craft(ccdef)
+			end
+		end
 	end
 end
 
@@ -502,7 +520,7 @@ minerdream.register_block=function(tdef)
 		block_def.tiles={tdef.block.inventory_image}
 		block_def.inventory_image=tdef.block.inventory_image
 	end
-	print(dump(block_def))
+--	print(dump(block_def))
 	minetest.register_craftitem(tdef.block.node_name,block_def)
 	local_craft_block(tdef.ingot.node_name,tdef.block.node_name)
 end
@@ -666,18 +684,24 @@ minerdream.register_3d_armor=function(tdef,adef)
 				for _,gc in pairs({"cracky","crumbly","choppy","snappy"}) do
 					tt_def.damage_groups[gc]=ttv[gc]
 				end
-				print(tool)
-				print(agroup[tool])
+--				print(tool)
+--				print(agroup[tool])
 				tt_def.groups[agroup[tool]]=1
 					
 				armor:register_armor(ttv.item_name,tt_def)
-
+				
 				local stick = ttv.tool_stick or "group:stick"
-				minetest.register_craft({
-					output=ttv.item_name,
-					recipe=local_get_recipe(tool,tdef.ingot.node_name,stick)
-				})
 
+				local arm_rec = {output=ttv.item_name}
+				if tdef.ingot ~= nil then if tdef.ingot.node_name ~= nil then
+					arm_rec.recipe=local_get_recipe(tool,tdef.ingot.node_name,stick)
+				end end
+				if ttv.recipe ~= nil then
+					arm_rec.recipe=ttv.recipe
+				end
+				if arm_rec.recipe ~= nil then
+					minetest.register_craft(arm_rec)
+				end
 			end
 		end
 	end

@@ -17,7 +17,7 @@
 	"inventory_image":"minerdream_rhodium_ore.png",
 	"clust_size":3,
 	"num_ores":2,
-	"scarcity":17,
+	"scarcity":18,
 	"y_max":-1500,
 	"y_min":-31000
 },

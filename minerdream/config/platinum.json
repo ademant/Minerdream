@@ -17,7 +17,7 @@
 	"inventory_image":"minerdream_platinum_ore.png",
 	"clust_size":3,
 	"num_ores":4,
-	"scarcity":16,
+	"scarcity":17,
 	"y_max":-300,
 	"y_min":-31000
 },

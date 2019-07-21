@@ -15,7 +15,7 @@
 	"inventory_image":"minerdream_lithium_ore.png",
 	"clust_size":3,
 	"num_ores":5,
-	"scarcity":14,
+	"scarcity":15,
 	"y_max":-100,
 	"y_min":-31000
 },

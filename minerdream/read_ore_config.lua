@@ -6,7 +6,7 @@ local tier_cols={
 local tier_definition = basic_functions.import_csv(minerdream.path.."/tiers.txt",tier_cols)
 
 local ore_configs=minetest.get_dir_list(minerdream.path..'/config')
-print(dump(ore_configs))
+--print(dump(ore_configs))
 for i,oc in pairs(ore_configs) do
 	ore=string.split(oc,'.')[1]
 	local inconfig=basic_functions.read_file(minerdream.path..'/config/'..oc)

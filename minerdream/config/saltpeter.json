@@ -11,7 +11,7 @@
 	"inventory_image":"minerdream_saltpeter_ore.png",
 	"clust_size":3,
 	"num_ores":5,
-	"scarcity":15,
+	"scarcity":16,
 	"y_max":420,
 	"y_min":-31000
 },
@@ -20,7 +20,7 @@
 	"crack":2,
 	"inventory_image":"minerdream_saltpeter_poorore.png",
 	"clust_size":3,
-	"num_ores":5,
+	"num_ores":6,
 	"scarcity":15,
 	"y_max":500,
 	"y_min":-31000

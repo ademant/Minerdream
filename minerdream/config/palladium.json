@@ -17,7 +17,7 @@
 	"inventory_image":"minerdream_palladium_ore.png",
 	"clust_size":3,
 	"num_ores":5,
-	"scarcity":16,
+	"scarcity":17,
 	"y_max":-3700,
 	"y_min":-31000
 },

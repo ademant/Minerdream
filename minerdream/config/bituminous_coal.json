@@ -34,4 +34,14 @@
 	"inventory_image":"minerdream_bituminous_coal_nugget.png",
 	"stack_max":99,
 	"burntime":30
-}}
+},
+"crafts":{
+	"torch":{"output":"default:torch 8",
+		"recipe":[["lump"],
+		["group:stick"]]
+	},
+		"torch_nugget":{"output":"default:torch 2",
+		"recipe":[["nugget"],
+		["group:stick"]]
+	}}
+}

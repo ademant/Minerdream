@@ -15,9 +15,9 @@
 	"wherein":["stone","desert_stone"],
 	"crack":6,
 	"inventory_image":"minerdream_osmium_ore.png",
-	"clust_size":3,
+	"clust_size":4,
 	"num_ores":3,
-	"scarcity":16,
+	"scarcity":17,
 	"y_max":-2500,
 	"y_min":-31000
 },
@@ -25,8 +25,8 @@
 	"wherein":["stone","desert_stone"],
 	"inventory_image":"minerdream_osmium_poorore.png",
 	"crack":4,
-	"clust_size":3,
-	"num_ores":3,
+	"clust_size":4,
+	"num_ores":5,
 	"scarcity":16,
 	"y_max":-2050
 },

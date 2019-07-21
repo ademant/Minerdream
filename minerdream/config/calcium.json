@@ -15,9 +15,9 @@
 	"wherein":["stone"],
 	"crack":2,
 	"inventory_image":"minerdream_calcium_ore.png",
-	"clust_size":2,
+	"clust_size":3,
 	"num_ores":5,
-	"scarcity":12,
+	"scarcity":13,
 	"y_max":120,
 	"y_min":-31000
 },

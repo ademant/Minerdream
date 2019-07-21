@@ -17,7 +17,7 @@
 	"inventory_image":"minerdream_tantalum_ore.png",
 	"clust_size":3,
 	"num_ores":2,
-	"scarcity":16,
+	"scarcity":17,
 	"y_max":-1500,
 	"y_min":-31000
 },
@@ -44,7 +44,7 @@
 	"inventory_image":"minerdream_tantalum_poorore.png",
 	"crack":5,
 	"clust_size":3,
-	"num_ores":2,
+	"num_ores":4,
 	"scarcity":16,
 	"y_max":-1250
 },

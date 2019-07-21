@@ -13,9 +13,9 @@
 	"wherein":["stone"],
 	"crack":5,
 	"inventory_image":"minerdream_adamantite_ore.png",
-	"clust_size":3,
+	"clust_size":5,
 	"num_ores":4,
-	"scarcity":15,
+	"scarcity":16,
 	"y_max":-2300,
 	"y_min":-31000
 },
