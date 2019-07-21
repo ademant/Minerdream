@@ -1,7 +1,8 @@
 local S=minerdream.intllib
 
 local agroup={helmet="armor_head",chestplate="armor_torso",leggings="armor_legs",boots="armor_feet",shield="armor_shield"}
-local orelump={ore="lump",poorore="nugget"}
+--local orelump={ore="lump",poorore="nugget"}
+local orelump={lump="ore",nugget="poorore",gem="ore"}
 
 local tier_definition = basic_functions.import_csv(minerdream.path.."/tiers.txt",{col_num={"name"},})
 local local_item_insert=function(name,ttype,def)
@@ -123,11 +124,15 @@ end
 
 
 minerdream.register_ore=function(i,tdef)
+	-- only register, if not already defined
 	if minerdream.items[i] == nil then
+		-- generate ore name if not already given
 		local ore_name=tdef.name or i
 		tdef.ore_name=ore_name
 		tdef.ore_modname=minerdream.modname
 		if tdef.name == nil then tdef.name = i end
+		
+		-- generate tier description
 		tdef.tier_string=""
 		tdef.tierd={}
 		if tdef.tier then
@@ -135,16 +140,9 @@ minerdream.register_ore=function(i,tdef)
 			tdef.tier_string=core.colorize("#A0A0A0", "tier: "..tdef.tier.." ("..tdef.tierd.desc..")")
 			tdef.tierdef=table.copy(tier_definition[tostring(tdef.tier)])
 		end
-		minerdream.items[ore_name]=tdef
 
-		for o,l in pairs(orelump) do
-			-- register only ore
-			if tdef[o] ~= nil and tdef[l] == nil then
-				tdef[o].ore_name=ore_name
-				tdef[o].lump_name=ore_name
-				minerdream.register_node_ore(tdef,tdef[o],l)
-				minerdream.register_node_mapgen(tdef,tdef[o])
-			end
+		-- generate ore and lump for pairs given in orelump (e.g. ore <-> lump and poorore <-> nugget)
+		for l,o in pairs(orelump) do
 			-- register if ore and lump is defined
 			if tdef[o] ~= nil and tdef[l] ~= nil then
 				-- register ore
@@ -175,14 +173,17 @@ minerdream.register_ore=function(i,tdef)
 				end
 			end
 		end
+		-- if lump and nugget defined, register craft recipe between them
 		if tdef.nugget ~= nil and tdef.lump ~= nil then
 			local_craft_stack(tdef.nugget.lump_node_name,tdef.lump.lump_node_name)
 		end
 		
+		-- define ingot
 		if tdef.ingot ~= nil then
 			minerdream.register_ingot(tdef,tdef.ingot)
 		end
 		
+		-- register block (9 ingot)
 		if tdef.block ~= nil then
 			minerdream.register_block(tdef)
 		end
@@ -192,18 +193,24 @@ minerdream.register_ore=function(i,tdef)
 			minerdream.register_dust(tdef,tdef.dust)
 		end
 		
+		-- register tools like shovel
 		if tdef.tools ~= nil then
 			minerdream.register_tools(tdef,tdef.tools)
 		end
 		
+		-- register armor
 		if tdef["3d_armor"] ~= nil  then
 			minerdream.register_3d_armor(tdef,tdef["3d_armor"])
 		end
 		
+		-- register additional crafts if given in json file
 		if tdef.crafts ~= nil then
 			minerdream.register_crafts(tdef,tdef.crafts)
 		end
---		print(dump(tdef))
+
+		-- save definition to minerdream.items
+		minerdream.items[ore_name]=tdef
+
 	end
 end
 
@@ -216,6 +223,26 @@ minerdream.register_node_lump=function(tdef,ldef)
 			name=node_name,
 			inventory_image=ldef.inventory_image or node_name:gsub(":","_")..".png"
 			}
+		for _,def_item in pairs({"mesh"}) do
+			if ldef[def_item] ~= nil and lump_def[def_item] == nil then
+				lump_def[def_item]=ldef[def_item]
+			end
+		end
+		if lump_def.mesh ~= nil then
+			lump_def.drawtype = "mesh"
+		end
+		if ldef.is_lump_gemstone ~= nil then
+			lump_def.paramtype="light"
+			lump_def.walkable = "true"
+			lump_def.tiles = {lump_def.inventory_image}
+			lump_def.is_ground_content = true
+			lump_def.groups={snappy=3,dig_immidiate=3}
+			lump_def.selection_box = {type = "fixed",
+				fixed = {{-0.2, -0.5, -0.2, 0.2, -0.25, 0.2},},}
+			lump_def.node_box = {type = "fixed",
+				fixed = {{-0.2, -0.5, -0.2, 0.2, -0.25, 0.2},},}
+		end
+
 		minetest.register_craftitem(lump_def.name,lump_def)
 		if ldef.burntime ~= nil then
 			minetest.register_craft({
@@ -268,7 +295,6 @@ minerdream.register_node_ore=function(tdef,odef,ltype)
 	end
 	
 	if tdef.groups.is_gemstone ~= nil then
-		ore_def.description=ore_name:gsub("^%l", string.upper)
 		ore_def.paramtype="light"
 		ore_def.drawtype = "mesh"
 		ore_def.mesh = "gemstone_cubic_pillars.obj"
@@ -300,6 +326,7 @@ minerdream.register_crafts=function(tdef,cdef)
 		print(dump(cdef))
 		for _,ccdef in pairs(cdef) do
 			if ccdef.output ~= nil and ccdef.recipe ~= nil then
+				local bcraft=true
 				-- analyse, if recipe refers to items in definition
 				for k,v in pairs(ccdef.recipe) do
 					if type(v) == "table" then
@@ -307,8 +334,28 @@ minerdream.register_crafts=function(tdef,cdef)
 							if tdef[w] ~= nil then
 								if tdef[w].node_name ~= nil then
 									ccdef.recipe[k][l]=tdef[w].node_name
-				end end end end end
-				minetest.register_craft(ccdef)
+								end
+							end
+							if string.match(w,"@") then
+								local sw=string.split(w,"@")
+								if minerdream.items[sw[1]] ~= nil then
+									local ti=minerdream.items[sw[1]]
+									if ti[sw[2]] ~= nil then
+										local ni=ti[sw[2]].node_name or ti[sw[2]].item_name
+										if ni ~= nil then
+											ccdef.recipe[k][l]=ni
+										end
+									end
+								else
+									bcraft = false
+									table.insert(minerdream.delayed_crafts,cdef)
+								end
+				end end end end
+				if bcraft then
+					minetest.register_craft(ccdef)
+				else
+					print("craft not yet defined",dump(ccdef))
+				end
 			end
 		end
 	end

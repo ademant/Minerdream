@@ -1,0 +1,26 @@
+{"groups":{"has_block":1,
+"has_brick":3,
+"is_lump_gemstone":1,
+"is_gemstone":1,
+"is_mineral":5},
+"name":"lapislazuli",
+"ore_modname":"minerdream",
+"stackmax":"200",
+"tier":2,
+"ore":{
+	"wherein":["stone","desert_stone"],
+	"crack":3,
+	"inventory_image":"minerdream_lapislazuli_ore.png",
+	"clust_size":1,
+	"num_ores":1,
+	"scarcity":15,
+	"y_max":-50,
+	"y_min":-31000
+},
+"gem":{
+	"crack":3,
+	"inventory_image":"minerdream_lapislazuli_gem.png",
+	"stack_max":200,
+	"mesh":"lapislazuli.obj"
+}
+}

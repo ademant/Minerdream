@@ -1,0 +1,33 @@
+{"groups":{"is_lump_gemstone":1,
+"is_gemstone":1,
+"is_mineral":5},
+"name":"topaz",
+"ore_modname":"minerdream",
+"stackmax":"200",
+"tier":6,
+"ore":{
+	"wherein":["desert_stone"],
+	"crack":4,
+	"inventory_image":"minerdream_topaz_ore.png",
+	"clust_size":1,
+	"num_ores":1,
+	"scarcity":15,
+	"y_max":-1750,
+	"y_min":-31000
+},
+"gem":{
+	"crack":3,
+	"inventory_image":"minerdream_topaz_gem.png",
+	"stack_max":99,
+	"mesh":"topaz.obj"
+},
+"crafts":{
+"staff":{
+	"output":"minerdream:golden_crystal_trisword",
+	"recipe":[
+		["", "gem", "gem"],
+		["rhodium@ingot", "default:mese", "gem"],
+		["rhodium@ingot", "rhodium@ingot", ""]]
+}
+}
+}

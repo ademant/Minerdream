@@ -3,14 +3,14 @@
 "is_lump_gemstone":1,
 "is_gemstone":1,
 "is_mineral":5},
-"name":"amethyst",
+"name":"garnet",
 "ore_modname":"minerdream",
 "stackmax":"200",
 "tier":5,
 "ore":{
 	"wherein":["stone","desert_stone"],
 	"crack":4,
-	"inventory_image":"minerdream_amethyst_ore.png",
+	"inventory_image":"minerdream_garnet_ore.png",
 	"clust_size":1,
 	"num_ores":1,
 	"scarcity":15,
@@ -19,17 +19,17 @@
 },
 "gem":{
 	"crack":3,
-	"inventory_image":"minerdream_amethyst_gem.png",
+	"inventory_image":"minerdream_garnet_gem.png",
 	"stack_max":99,
-	"mesh":"amethyst.obj"
+	"mesh":"garnet.obj"
 },
 "crafts":{
 "staff":{
-	"output":"minerdream:amethyst_staff",
+	"output":"minerdream:accessory_protectionring",
 	"recipe":[
-		["", "gem", "cobalt@ingot"],
-		["", "cobalt@ingot", "cobalt@ingot"],
-		["gem", "", ""]]
+		["", "gem", "gem"],
+		["default:gold_ingot", "", "gem"],
+		["default:gold_ingot", "default:gold_ingot", ""]]
 }
 }
 }

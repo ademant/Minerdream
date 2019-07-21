@@ -5,6 +5,7 @@ minerdream.ingot_stack_max =  tonumber(minetest.settings:get("minerdream.ingot_s
 minerdream.lump_stack_max =  tonumber(minetest.settings:get("minerdream.lump_stack_max")) or 999
 minerdream.dust_cooking_time_reduce =  tonumber(minetest.settings:get("minerdream.dust_cooking_time_reduce")) or 2
 minerdream.tools_to_register = {"spear","pick","axe","sword","shovel","helmet","chestplate","leggings","boots","shield","bow"}
+minerdream.delayed_crafts={}
 
 minerdream.steel_wire="minerdream:steel_wire"
 if minetest.get_modpath("basic_materials") == nil then

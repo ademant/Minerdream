@@ -3,14 +3,14 @@
 "is_lump_gemstone":1,
 "is_gemstone":1,
 "is_mineral":5},
-"name":"amethyst",
+"name":"jade",
 "ore_modname":"minerdream",
 "stackmax":"200",
 "tier":5,
 "ore":{
 	"wherein":["stone","desert_stone"],
 	"crack":4,
-	"inventory_image":"minerdream_amethyst_ore.png",
+	"inventory_image":"minerdream_jade_ore.png",
 	"clust_size":1,
 	"num_ores":1,
 	"scarcity":15,
@@ -19,17 +19,17 @@
 },
 "gem":{
 	"crack":3,
-	"inventory_image":"minerdream_amethyst_gem.png",
+	"inventory_image":"minerdream_jade_gem.png",
 	"stack_max":99,
-	"mesh":"amethyst.obj"
+	"mesh":"jade.obj"
 },
 "crafts":{
 "staff":{
-	"output":"minerdream:amethyst_staff",
+	"output":"minerdream:accessory_speedring",
 	"recipe":[
-		["", "gem", "cobalt@ingot"],
-		["", "cobalt@ingot", "cobalt@ingot"],
-		["gem", "", ""]]
+		["", "gem", "gem"],
+		["default:silver_ingot", "", "gem"],
+		["default:silver_ingot", "default:silver_ingot", ""]]
 }
 }
 }

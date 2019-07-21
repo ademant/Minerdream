@@ -298,39 +298,11 @@ minetest.register_craft({
 ------------unusualweapons and ammo------------
 
 minetest.register_craft({
-	output = 'minerdream:pink_blaster',
-	recipe = {
-		{'', 'minerdream:spinel', ''},
-		{'minerdream:spinel', 'minerdream:rhodium_bar', 'minerdream:rhodium_bar'},
-		{'', '', 'minerdream:rhodium_bar'},
-
-	}
-})
-
-minetest.register_craft({
 	output = 'minerdream:dark_shuriken 50',
 	recipe = {
 		{'minerdream:shuriken', 'minerdream:shuriken', 'minerdream:shuriken'},
 		{'minerdream:shuriken', 'minerdream:onyx', 'minerdream:shuriken'},
 		{'minerdream:shuriken', 'minerdream:shuriken', 'minerdream:shuriken'},
-	}
-})
-
-minetest.register_craft({
-	output = 'minerdream:amethyst_staff',
-	recipe = {
-		{'', 'minerdream:amethyst', 'minerdream:cobalt_bar'},
-		{'', 'minerdream:cobalt_bar', 'minerdream:cobalt_bar'},
-		{'minerdream:amethyst', '', ''},
-	}
-})
-
-minetest.register_craft({
-	output = 'minerdream:ocean_staff',
-	recipe = {
-		{'', 'default:gold_ingot', 'minerdream:aquamarine'},
-		{'', 'minerdream:tantalum_bar', 'default:gold_ingot'},
-		{'minerdream:tantalum_bar', '', ''},
 	}
 })
 
@@ -390,36 +362,5 @@ minetest.register_craft({
 		{'default:steel_ingot', 'default:steel_ingot', 'default:steel_ingot'},
 		{'', 'default:mese_crystal_fragment', 'minerdream:lead_bar'},
 		{'', '', 'minerdream:lead_bar'},
-	}
-})
-
-minetest.register_craft({
-	output = 'minerdream:golden_crystal_trisword',
-	recipe = {
-		{'', 'minerdream:topaz', 'minerdream:topaz'},
-		{'minerdream:rhodium_bar', 'default:mese', 'minerdream:topaz'},
-		{'minerdream:rhodium_bar', 'minerdream:rhodium_bar', ''},
-	}
-})
-
-----------------------accessories---------------
-
-minetest.register_craft({
-	output = 'minerdream:accessory_speedring',
-	recipe = {
-		{'', 'minerdream:jade', 'minerdream:jade'},
-		{'minerdream:silver_bar', '', 'minerdream:jade'},
-		{'minerdream:silver_bar', 'minerdream:silver_bar', ''},
-
-	}
-})
-
-minetest.register_craft({
-	output = 'minerdream:accessory_protectionring',
-	recipe = {
-		{'', 'minerdream:garnet', 'minerdream:garnet'},
-		{'default:gold_ingot', '', 'minerdream:garnet'},
-		{'default:gold_ingot', 'default:gold_ingot', ''},
-
 	}
 })

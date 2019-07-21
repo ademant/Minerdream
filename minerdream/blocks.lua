@@ -42,64 +42,6 @@ minetest.register_node("minerdream:slimeblock_brown", {
 	sounds = default.node_sound_sand_defaults(),
 })
 
--------------ores--------------
-
-minetest.register_node("minerdream:stone_with_onyx", {
-	description = "Onyx ore",
-	tiles = {"default_stone.png^minerdream_onyx_ore.png"},
-	groups = {cracky = 5},
-	drop = 'minerdream:onyx',
-	sounds = default.node_sound_stone_defaults(),
-})
-
-minetest.register_node("minerdream:stone_with_aquamarine", {
-	description = "Aquamarine ore",
-	tiles = {"minerdream_aquamarine_rock.png"},
-	groups = {cracky = 5},
-	drawtype = "mesh",
-	paramtype = "light",
-	sunlight_propagates = true,
-	mesh = "gemstone_cubic_pillars.obj",
-	drop = 'minerdream:aquamarine',
-	sounds = default.node_sound_stone_defaults(),
-	selection_box = {
-		type = "fixed",
-		fixed = {
-			{-0.4, -0.5, -0.4, 0.4, 0.0, 0.4},
-		},
-	},
-	node_box = {
-		type = "fixed",
-		fixed = {
-			{-0.4, -0.5, -0.4, 0.4, 0.0, 0.4},
-		},
-	},
-})
-
-minetest.register_node("minerdream:stone_with_topaz", {
-	description = "Topaz ore",
-	tiles = {"minerdream_topaz_rock.png"},
-	groups = {cracky = 5},
-	drawtype = "mesh",
-	paramtype = "light",
-	sunlight_propagates = true,
-	mesh = "gemstone_cubic.obj",
-	drop = 'minerdream:topaz',
-	sounds = default.node_sound_stone_defaults(),
-	selection_box = {
-		type = "fixed",
-		fixed = {
-			{-0.4, -0.5, -0.4, 0.4, 0.0, 0.4},
-		},
-	},
-	node_box = {
-		type = "fixed",
-		fixed = {
-			{-0.4, -0.5, -0.4, 0.4, 0.0, 0.4},
-		},
-	},
-})
-
 
 -----------------desert ores-----------------
 minetest.register_node("minerdream:desertstone_with_richiron", {
@@ -107,14 +49,6 @@ minetest.register_node("minerdream:desertstone_with_richiron", {
 	tiles = {"default_desert_stone.png^minerdream_richiron_ore.png"},
 	groups = {cracky = 2},
 	drop = 'default:iron_lump 2',
-	sounds = default.node_sound_stone_defaults(),
-})
-
-minetest.register_node("minerdream:desertstone_with_poorgold", {
-	description = "Poor desert gold ore",
-	tiles = {"default_desert_stone.png^minerdream_poorgold_ore.png"},
-	groups = {cracky = 3},
-	drop = 'minerdream:gold_nugget 1',
 	sounds = default.node_sound_stone_defaults(),
 })
 

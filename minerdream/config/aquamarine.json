@@ -1,0 +1,35 @@
+{"groups":{"has_block":1,
+"has_brick":3,
+"is_lump_gemstone":1,
+"is_gemstone":1,
+"is_mineral":5},
+"name":"aquamarine",
+"ore_modname":"minerdream",
+"stackmax":"200",
+"tier":6,
+"ore":{
+	"wherein":["stone","desert_stone"],
+	"crack":5,
+	"inventory_image":"minerdream_aquamarine_ore.png",
+	"clust_size":1,
+	"num_ores":1,
+	"scarcity":16,
+	"y_max":-1700,
+	"y_min":-31000
+},
+"gem":{
+	"crack":4,
+	"inventory_image":"minerdream_aquamarine_gem.png",
+	"stack_max":200,
+	"mesh":"aquamarine.obj"
+},
+"crafts":{
+"staff":{
+	"output":"minerdream:ocean_staff",
+	"recipe":[
+		["", "default:gold_ingot", "gem"],
+		["", "tantalum@ingot", "default:gold_ingot"],
+		["tantalum@ingot", "", ""]]
+}
+}
+}

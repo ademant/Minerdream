@@ -1,0 +1,33 @@
+{"groups":{"is_lump_gemstone":1,
+"is_gemstone":1,
+"is_mineral":5},
+"name":"spinel",
+"ore_modname":"minerdream",
+"stackmax":"200",
+"tier":6,
+"ore":{
+	"wherein":["stone","desert_stone"],
+	"crack":5,
+	"inventory_image":"minerdream_spinel_ore.png",
+	"clust_size":1,
+	"num_ores":1,
+	"scarcity":16,
+	"y_max":-1750,
+	"y_min":-31000
+},
+"gem":{
+	"crack":4,
+	"inventory_image":"minerdream_spinel_gem.png",
+	"stack_max":200,
+	"mesh":"spinel.obj"
+},
+"crafts":{
+"staff":{
+	"output":"minerdream:pink_blaster",
+	"recipe":[
+		["", "gem", ""],
+		["gem", "rhodium@ingot", "rhodium@ingot"],
+		["", "", "rhodium@ingot"]]
+}
+}
+}
