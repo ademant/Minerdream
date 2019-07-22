@@ -352,6 +352,7 @@ minerdream.register_crafts=function(tdef,cdef)
 								end
 				end end end end
 				if bcraft then
+					print(dump(ccdef))
 					minetest.register_craft(ccdef)
 				else
 					print("craft not yet defined",dump(ccdef))
